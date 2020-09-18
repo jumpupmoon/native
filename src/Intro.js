@@ -20,9 +20,9 @@ export default function Intro({navigation}) {
       <ImageBackground source={require('./img/2.jpg')}>
         <Text>123</Text>
         <Button
-        title="시작하기"
-        onPress={() => navigation.navigate('Home')}
-      />
+          title="시작하기"
+          onPress={() => navigation.navigate('Home')}
+        />
       </ImageBackground>
     </Container>
   );

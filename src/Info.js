@@ -1,12 +1,14 @@
 import React from 'react';
-import {Container, Content, Text} from 'native-base';
+import {Container, Content, Button, Text} from 'native-base';
 import Footer from './Footer';
 
 export default function Course({navigation}) {
   return (
     <Container>
         <Content>
-            <Text>탐험 정보</Text>
+          <Button onPress={() => navigation.navigate('InfoDetail')}> 
+            <Text>어리목 코스</Text>
+          </Button>
         </Content>
         
         <Footer navigation={navigation} />
