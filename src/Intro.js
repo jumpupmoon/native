@@ -10,6 +10,10 @@ const ImageBackground = Styled.ImageBackground`
 export default function Intro({navigation}) {
   const [includeFontPadding, setIncludeFontPadding] = useState(false);
 
+  const starting = () => {
+    navigation.reset({routes: [{ name: 'Home' }]})
+  }
+
   return (
     <View style={styles.container}>
       <ImageBackground source={require('./img/2.jpg')} style={styles.bg}>
@@ -23,7 +27,7 @@ export default function Intro({navigation}) {
               한라산에 좀 더 쉽고 재밌게 다가갈 수 있기를{"\n"}
               바라는 뜻에서 출발했습니다.</Text>
         </View>
-        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Home')}>
+        <TouchableOpacity style={styles.button} onPress={starting}>
         <Text style={styles.buttonTitle}>시작하기</Text>
       </TouchableOpacity>
       </ImageBackground>
