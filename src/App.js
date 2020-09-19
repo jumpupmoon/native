@@ -12,6 +12,7 @@ import CourseNFC from './CourseNFC';
 import CourseSuccess from './CourseSuccess';
 import Prepare from './Prepare';
 import Guide from './Guide';
+import Test from './Test';
 
 const Stack = createStackNavigator();
 
@@ -27,7 +28,7 @@ function App() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator headerMode="none" initialRouteName="Intro">
+      <Stack.Navigator headerMode="none" initialRouteName="Test">
         <Stack.Screen name="Intro" component={Intro} />
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="Info" component={Info} />
@@ -38,6 +39,7 @@ function App() {
         <Stack.Screen name="CourseSuccess" component={CourseSuccess} />
         <Stack.Screen name="Prepare" component={Prepare} />
         <Stack.Screen name="Guide" component={Guide} />
+        <Stack.Screen name="Test" component={Test} />
       </Stack.Navigator>
     </NavigationContainer>
   );

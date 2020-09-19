@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: '#969FAA',
     marginBottom: 20,
-    marginTop: 40,
+    marginTop: 30,
   },
   Title: {
     fontSize: 36,
@@ -67,7 +67,11 @@ const styles = StyleSheet.create({
   },
   List: {
     paddingTop: 0,
-    paddingBottom: 0,
+    paddingBottom: 10,
+    borderColor: '#181817',
+    borderTopWidth: 2,
+    borderRadius: 1,
+    borderStyle: 'dotted',
   },
   ListText: {
     fontSize: 24,
@@ -98,8 +102,11 @@ const styles = StyleSheet.create({
     elevation: 1,
   },
   borderBox: {
-    borderRadius: 5,
-    backgroundColor: '#f4d03f',
-    height: '90%',
+    borderRadius: 1,
+    borderColor: '#181817',
+    margin: 20,
+    //borderTopWidth: 1,
+    borderWidth: 2,
+    borderStyle: 'dotted',
   },
 });

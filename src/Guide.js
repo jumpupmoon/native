@@ -7,7 +7,7 @@ export default function Prepare({navigation}) {
   return (
     <Container>
       <Content>
-        <Text style={styles.Title}>성판악 코스1</Text>
+        <Text style={styles.Title}>성판악 코스</Text>
         <View style={styles.List}>
           <Text style={styles.ListText}>예상시간 : 4시간 30분</Text>
         </View>
