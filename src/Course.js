@@ -3,6 +3,8 @@ import {Container, Content, Text, Button} from 'native-base';
 import axios from 'axios';
 import AsyncStorage from '@react-native-community/async-storage';
 import Footer from './Footer';
+import {StyleSheet, View} from 'react-native';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 export default function Course({navigation}) {
   const [count, setCount] = useState(0);
@@ -13,9 +15,11 @@ export default function Course({navigation}) {
 
     for(let i=0; i<num; i++) {
       result.push(
-        <Button key={i} onPress={() => navigation.navigate('CourseDetail', i)}> 
-          <Text>등산 기록 {i}</Text>
+        <View style={styles.buttonView}>
+        <Button style={styles.button} key={i} onPress={() => navigation.navigate('CourseDetail', i)}> 
+          <Text style={styles.buttonTitle}>등산 기록 {i}</Text>
         </Button>
+        </View>
       )
     }
     return result;
@@ -36,7 +40,7 @@ export default function Course({navigation}) {
   return (
     <Container>
         <Content>
-            <Text>현재 등산 수 : {count}</Text>
+            <Text style={styles.Title}>현재 등산 수 : {count}</Text>
 
             {forButton(count)}
         </Content>
@@ -45,3 +49,32 @@ export default function Course({navigation}) {
     </Container>
   );
 };
+
+const styles = StyleSheet.create({
+  Title: {
+    fontSize: 20,
+    fontFamily: 'DungGeunMo',
+    textAlign:'right',
+    color: '#181717',
+    marginRight:20,
+    marginVertical: 20,
+  },
+  buttonView:{
+    alignSelf:'center',
+    alignContent:'center',
+    alignItems:'center',
+    margin:10,
+    backgroundColor:'#1E824C',
+    height: hp('20%'),
+    width: wp('90%'),
+  },
+  button:{
+    backgroundColor:'#26A65B'
+  },
+  buttonTitle:{
+    fontSize: 26,
+    fontFamily: 'DungGeunMo', 
+    textAlign: 'center', 
+    color: '#FFF',
+  }
+});

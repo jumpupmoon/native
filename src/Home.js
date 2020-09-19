@@ -64,7 +64,7 @@ export default function Layout({navigation}) {
           <Text style={styles.trail1}>Weather</Text>
         </View>
         <View style={styles.ranking}>
-        <TouchableOpacity style={{backgroundColor:"#1E824C",left:150, width: wp('6%'), }} onPress={() => navigation.navigate('Info')}>
+        <TouchableOpacity style={{backgroundColor:"#1E824C",left:150, width: wp('6%'), }} onPress={() => navigation.navigate('Arrival')}>
                     <Icon name="plus" size={30} color='#fff'/>
                     
          </TouchableOpacity>
