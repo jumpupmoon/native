@@ -1,11 +1,13 @@
 import React, {useEffect} from 'react';
 import SplashScreen from 'react-native-splash-screen';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import {NavigationContainer} from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/stack';
 import Intro from './Intro';
 import Home from './Home';
 import Info from './Info';
 import Course from './Course';
+import Prepare from './Prepare';
+import Guide from './Guide';
 
 const Stack = createStackNavigator();
 
@@ -19,11 +21,13 @@ function App() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator headerMode='none' initialRouteName="Intro">
+      <Stack.Navigator headerMode="none" initialRouteName="Intro">
         <Stack.Screen name="Intro" component={Intro} />
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="Info" component={Info} />
         <Stack.Screen name="Course" component={Course} />
+        <Stack.Screen name="Prepare" component={Prepare} />
+        <Stack.Screen name="Guide" component={Guide} />
       </Stack.Navigator>
     </NavigationContainer>
   );
