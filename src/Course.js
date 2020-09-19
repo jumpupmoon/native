@@ -25,9 +25,9 @@ export default function Course({navigation}) {
   useEffect(() => {
     AsyncStorage.getItem('address')
     .then(address => {
-      axios.get(`https://whitedeer.herokuapp.com/count/${address}`)
+      axios.get(`https://whitedeer.herokuapp.com/list/${address}`)
       .then(({data}) => {
-        setCount(data);
+        setCount(data.result);
       })
       .catch(err => console.log(err));
     })
