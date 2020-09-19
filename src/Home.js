@@ -1,10 +1,12 @@
 import React, {useState, useEffect} from 'react';
-import {Platform,Text,View, StyleSheet,TouchableOpacity} from 'react-native';
-import {Container, Content} from 'native-base';
+import {Image, Platform,Text,View, StyleSheet,TouchableOpacity} from 'react-native';
+import {Container, Button} from 'native-base';
 import { SliderBox } from 'react-native-image-slider-box';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import Footer from './Footer';
 import LottieView from 'lottie-react-native';
+import Icon from 'react-native-vector-icons/Foundation';
+import WeatherInfo from './WeatherInfo';
 
 export default function Layout({navigation}) {
   const [currentIndex, setCurrentIndex] = useState(1);
@@ -44,10 +46,22 @@ export default function Layout({navigation}) {
         <Text style={styles.trail1}>My Trail</Text>
         <LottieView autoPlay loop  source={require('./svg/run.json')}
       />
+        <View  style={styles.trailLine} />
+        <Icon name="flag" size={35} color='#1E824C'style={styles.icon}/>
         </View>
+
         <View style={{flex: 1, flexDirection: 'row', marginTop: 10}}>
-        <View style={styles.weather}></View>
-        <View style={styles.ranking}></View>
+        <View style={styles.weather}>
+          <WeatherInfo />
+        </View>
+        <View style={styles.ranking}>
+        <TouchableOpacity style={{backgroundColor:"#1E824C",left:150, width: wp('6%'), }} onPress={() => navigation.navigate('Info')}>
+                    <Icon name="plus" size={30} color='#fff'/>
+                    
+         </TouchableOpacity>
+         <Image source={require('./img/rank.png')} style={styles.rankImage}></Image>
+         <Text style={styles.trail1}>Ranking</Text>
+        </View>
         </View>
       </View>
 
@@ -101,18 +115,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     
   },
-  trail: {
-    
-    padding: 3,
-    marginTop: 280,
-    fontSize: 24,
-    color: '#404040',
-    fontWeight: 'bold',
-  },
+ 
   trail1: {
     position: 'absolute',
     padding: 3,
-    marginTop: 10,
+    margin: 2,
     fontSize: 24,
     color: '#FFF',
     fontWeight: 'bold',
@@ -122,6 +129,21 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     backgroundColor:'#f4d03f',
     height: hp('20%'), 
+  },
+  trailLine:{
+    borderBottomColor: '#1E824C',
+    borderBottomWidth: 3,
+    marginHorizontal: 10,
+    borderStyle: 'dashed',
+    marginTop: 90,
+    borderRadius: 1
+  },
+  icon:{
+    position: 'absolute',
+    
+    padding: 0,
+    left: 340,
+    top: 60
   },
   weather:{    
     borderRadius: 5,
@@ -137,4 +159,12 @@ const styles = StyleSheet.create({
     width: wp('46%'),
     marginLeft: 5
   },
+  rankImage:{
+   left: 56,
+   top: 20,
+   width: wp('20%'),
+   height: hp('20%'),
+    //width: 150,
+    //height: 'auto'
+  }
 })
