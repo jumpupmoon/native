@@ -1,9 +1,10 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {Platform,Text,View, StyleSheet,TouchableOpacity} from 'react-native';
 import {Container, Content} from 'native-base';
 import { SliderBox } from 'react-native-image-slider-box';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import Footer from './Footer';
+import LottieView from 'lottie-react-native';
 
 export default function Layout({navigation}) {
   const [currentIndex, setCurrentIndex] = useState(1);
@@ -11,6 +12,12 @@ export default function Layout({navigation}) {
   function increment() {
     setCurrentIndex(currentIndex => currentIndex + 1);
   }
+  // useEffect(() => {
+  //   // 컴포넌트가 마운트 되고 함수를실행합니다.
+  //     this.animation.play();
+      
+  // }, []);
+
   return (
     <Container>
     <View style={styles.container}>
@@ -32,10 +39,11 @@ export default function Layout({navigation}) {
         <Text style={styles.buttonTitle}>▶탐방로 정보 확인하기</Text>
       </TouchableOpacity>
 
-      <View style={styles.trailBar}>
-        <Text style={styles.trail}>My Trail</Text>
+      <View style={styles.trailBar}>        
         <View style={styles.trailContent}>
-        <Text>현재 트레일 정보</Text>
+        <Text style={styles.trail1}>My Trail</Text>
+        <LottieView autoPlay loop  source={require('./svg/run.json')}
+      />
         </View>
         <View style={{flex: 1, flexDirection: 'row', marginTop: 10}}>
         <View style={styles.weather}></View>
@@ -90,33 +98,43 @@ const styles = StyleSheet.create({
   },
   trailBar:{
     position: 'relative',
-    paddingHorizontal: 20,
+    paddingHorizontal: 10,
     
   },
   trail: {
+    
     padding: 3,
     marginTop: 280,
     fontSize: 24,
     color: '#404040',
     fontWeight: 'bold',
   },
-  trailContent:{    
+  trail1: {
+    position: 'absolute',
+    padding: 3,
+    marginTop: 10,
+    fontSize: 24,
+    color: '#FFF',
+    fontWeight: 'bold',
+  },
+  trailContent:{  
+    marginTop: 280, 
     borderRadius: 5,
-    backgroundColor:'#87D37C',
-    height: hp('15%'), 
+    backgroundColor:'#f4d03f',
+    height: hp('20%'), 
   },
   weather:{    
     borderRadius: 5,
-    backgroundColor:'#87D37C',
+    backgroundColor:'#26A65B',
     height: hp('30%'),
-    width: wp('44%'),
+    width: wp('46%'),
     marginRight: 5
   },
   ranking:{    
     borderRadius: 5,
-    backgroundColor:'#87D37C',
+    backgroundColor:'#1E824C',
     height: hp('30%'),
-    width: wp('44%'),
+    width: wp('46%'),
     marginLeft: 5
   },
 })
