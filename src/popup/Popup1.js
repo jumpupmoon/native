@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   openButton: {
-    backgroundColor: '#404040',
+    backgroundColor: '#1E824C',
     borderRadius: 0,
     padding: 32,
     paddingTop: 12,
@@ -88,8 +88,9 @@ const styles = StyleSheet.create({
   },
   textStyle: {
     color: 'white',
-    fontWeight: 'bold',
+    fontFamily: 'DungGeunMo',
     textAlign: 'center',
+    fontSize:24
   },
   modalText1: {
     fontSize: 20,
