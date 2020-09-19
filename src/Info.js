@@ -14,4 +14,4 @@ export default function Course({navigation}) {
         <Footer navigation={navigation} />
     </Container>
   );
-};
+}
