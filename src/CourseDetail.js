@@ -3,6 +3,7 @@ import {Container, Content, Text, Button} from 'native-base';
 import axios from 'axios';
 import Footer from './Footer';
 import Popup1 from './popup/Popup1';
+import AsyncStorage from '@react-native-community/async-storage';
 
 export default function CourseDetail({navigation, route}) {
   const [score, setScore] = useState([]);
@@ -27,11 +28,15 @@ export default function CourseDetail({navigation, route}) {
   }
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/score/${route.params}`)
-    .then(({data}) => {
-      setScore(data);
+    AsyncStorage.getItem('address')
+    .then(address => {
+      axios.get(`https://whitedeer.herokuapp.com/score?address=${address}&idx=${route.params}`)
+      .then(({data}) => {
+        setScore(data);
+        console.log(data)
+      })
+      .catch(err => console.log(err));
     })
-    .catch(err => console.log(err));
   }, [])
 
   return (
@@ -45,16 +50,16 @@ export default function CourseDetail({navigation, route}) {
                 <Text>선택코스 : {score[0]}</Text>
                 <Text>시작시간 : {dateFormat(score[1])}</Text>
 
-                {score[2] != 0 &&
+                {score[2] != 0 ?
                   <>
                     <Text>종료지점 : {score[2]}</Text>
                     <Text>종료시간 : {dateFormat(score[3])}</Text>
                   </>
+                  :
+                    <Popup1 idx={route.params} />
                 }
               </>
             }
-
-          <Popup1 />
         </Content>
         
         <Footer navigation={navigation} value='3' />

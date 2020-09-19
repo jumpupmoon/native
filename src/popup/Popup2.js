@@ -9,14 +9,15 @@ import {
   Image,
 } from 'react-native';
 
-const Popup2 = () => {
-  const [modalVisible, setModalVisible] = useState(false);
+const Popup2 = ({nfcSuccess, setNfcSuccess}) => {
+  // const [modalVisible, setModalVisible] = useState(nfcSuccess);
+
   return (
     <View style={styles.centeredView}>
       <Modal
         animationType="slide"
         transparent={true}
-        visible={modalVisible}
+        visible={nfcSuccess}
         onRequestClose={() => {
           Alert.alert('Modal has been closed.');
         }}>
@@ -56,7 +57,7 @@ const Popup2 = () => {
             <TouchableHighlight
               style={{...styles.openButton2, backgroundColor: '#D9D9D9'}}
               onPress={() => {
-                setModalVisible(!modalVisible);
+                setNfcSuccess(false);
               }}>
               <Text style={styles.textStyle}>확 인</Text>
             </TouchableHighlight>
@@ -64,13 +65,13 @@ const Popup2 = () => {
         </View>
       </Modal>
 
-      <TouchableHighlight
+      {/* <TouchableHighlight
         style={styles.openButton}
         onPress={() => {
           setModalVisible(true);
         }}>
         <Text style={(styles.textStyle, {color: 'white'})}>확인</Text>
-      </TouchableHighlight>
+      </TouchableHighlight> */}
     </View>
   );
 };

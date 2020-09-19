@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   Alert,
   Modal,
@@ -8,9 +8,41 @@ import {
   View,
   Image,
 } from 'react-native';
+import NfcManager, {NfcEvents} from 'react-native-nfc-manager';
+import Popup2 from './Popup2';
+import axios from 'axios';
+import AsyncStorage from '@react-native-community/async-storage';
 
-const Popup = () => {
+const Popup = ({idx}) => {
   const [modalVisible, setModalVisible] = useState(false);
+  const [nfcSuccess, setNfcSuccess] = useState(false)
+
+  // nfc
+  useEffect(() => {
+    NfcManager.start();
+    NfcManager.setEventListener(NfcEvents.DiscoverTag, tag => {
+      setModalVisible(false);
+      setNfcSuccess(true);
+      console.log(123);
+
+      AsyncStorage.getItem('address')
+      .then(address => {
+        axios.get(`https://whitedeer.herokuapp.com/end?address=${address}&idx=${idx}`)
+        .then(({data}) => {
+          console.log(data);
+        })
+      })
+
+      NfcManager.unregisterTagEvent().catch(() => 0);
+    });
+
+    return () => {
+      NfcManager.setEventListener(NfcEvents.DiscoverTag, null);
+      NfcManager.unregisterTagEvent().catch(() => 0);
+    }
+  }, [])
+  // nfc
+
   return (
     <View style={styles.centeredView}>
       <Modal
@@ -37,7 +69,7 @@ const Popup = () => {
             <TouchableHighlight
               style={{...styles.openButton, backgroundColor: '#2196F3'}}
               onPress={() => {
-                setModalVisible(!modalVisible);
+                setModalVisible(false);
               }}>
               <Text style={styles.textStyle}>닫기</Text>
             </TouchableHighlight>
@@ -52,6 +84,8 @@ const Popup = () => {
         }}>
         <Text style={styles.textStyle}>확인</Text>
       </TouchableHighlight>
+
+      <Popup2 nfcSuccess={nfcSuccess} setNfcSuccess={setNfcSuccess} />
     </View>
   );
 };
@@ -79,7 +113,7 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   openButton: {
-    backgroundColor: '#404040',
+    backgroundColor: '#1E824C',
     borderRadius: 0,
     padding: 32,
     paddingTop: 12,
@@ -88,8 +122,9 @@ const styles = StyleSheet.create({
   },
   textStyle: {
     color: 'white',
-    fontWeight: 'bold',
+    fontFamily: 'DungGeunMo',
     textAlign: 'center',
+    fontSize:24
   },
   modalText1: {
     fontSize: 20,

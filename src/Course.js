@@ -31,7 +31,7 @@ export default function Course({navigation}) {
       })
       .catch(err => console.log(err));
     })
-  }, [navigation])
+  }, [])
 
   return (
     <Container>
