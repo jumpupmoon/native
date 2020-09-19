@@ -1,6 +1,8 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Platform,Text,View, StyleSheet,TouchableOpacity} from 'react-native';
 import Styled from 'styled-components';
+import axios from 'axios';
+import AsyncStorage from '@react-native-community/async-storage';
 
 const ImageBackground = Styled.ImageBackground`
   flex: 1;
@@ -11,7 +13,19 @@ export default function Intro({navigation}) {
   const [includeFontPadding, setIncludeFontPadding] = useState(false);
 
   const starting = () => {
-    navigation.reset({routes: [{ name: 'Home' }]})
+    // 계정이 없을 경우 새 계정 받아오기
+    AsyncStorage.getItem('address')
+    .then(data => {
+      if(!data) {
+        axios.get('http://localhost:5000/new')
+        .then(({data}) => {
+          AsyncStorage.setItem('address', data);
+        })
+        .catch(err => alert(err));
+      }
+      
+      navigation.reset({routes: [{ name: 'Home' }]})
+    })
   }
 
   return (

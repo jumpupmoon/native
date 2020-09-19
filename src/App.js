@@ -23,6 +23,8 @@ function App() {
     }, 1000);
   }, []);
 
+  const first = 'Home';
+
   return (
     <NavigationContainer>
       <Stack.Navigator headerMode="none" initialRouteName="Intro">

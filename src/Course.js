@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import {Container, Content, Text, Button} from 'native-base';
 import axios from 'axios';
+import AsyncStorage from '@react-native-community/async-storage';
 import Footer from './Footer';
 
 export default function Course({navigation}) {
@@ -20,13 +21,16 @@ export default function Course({navigation}) {
     return result;
   }
 
-  // 등산 횟수 찾아오기
+  // 저장된 지갑 주소로 등산 횟수 찾아오기
   useEffect(() => {
-    axios.get('http://localhost:5000/count')
-    .then(({data}) => {
-      setCount(data);
+    AsyncStorage.getItem('address')
+    .then(address => {
+      axios.get(`http://localhost:5000/count/${address}`)
+      .then(({data}) => {
+        setCount(data);
+      })
+      .catch(err => console.log(err));
     })
-    .catch(err => console.log(err));
   }, [navigation])
 
   return (

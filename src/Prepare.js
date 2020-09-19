@@ -2,14 +2,19 @@ import React from 'react';
 import {Container, Content, Text, Button, View} from 'native-base';
 import {StyleSheet, TouchableHighlight} from 'react-native';
 import axios from 'axios';
+import AsyncStorage from '@react-native-community/async-storage';
 import Footer from './Footer';
 
 export default function Prepare({navigation}) {
   // 코스 등록
   const startCourse = () => {
-    axios.get('http://localhost:5000/start')
-    .then(({data}) => {
-      if(data == 1) navigation.navigate('Course');
+    AsyncStorage.getItem('address')
+    .then(address => {
+      axios.get(`http://localhost:5000/start?address=${address}`)
+      .then(({data}) => {
+        if(data == 1) navigation.navigate('Course');
+        else alert('error!');
+      })
     })
   }
 
@@ -67,6 +72,7 @@ const styles = StyleSheet.create({
   ListText: {
     fontSize: 24,
     textAlign: 'left',
+    textAlignVertical: 'center',
     marginLeft: 20,
   },
   button: {
@@ -90,5 +96,10 @@ const styles = StyleSheet.create({
     paddingTop: 12,
     paddingBottom: 12,
     elevation: 1,
+  },
+  borderBox: {
+    borderRadius: 5,
+    backgroundColor: '#f4d03f',
+    height: '90%',
   },
 });
