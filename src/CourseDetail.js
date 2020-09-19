@@ -1,7 +1,8 @@
-import React, { useLayoutEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {Container, Content, Text, Button} from 'native-base';
 import axios from 'axios';
 import Footer from './Footer';
+import Popup1 from './popup/Popup1';
 
 export default function CourseDetail({navigation, route}) {
   const [score, setScore] = useState([]);
@@ -25,7 +26,7 @@ export default function CourseDetail({navigation, route}) {
     return str;
   }
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     axios.get(`http://localhost:5000/score/${route.params}`)
     .then(({data}) => {
       setScore(data);
@@ -36,9 +37,9 @@ export default function CourseDetail({navigation, route}) {
   return (
     <Container>
         <Content>
-            <Button onPress={() => navigation.navigate('CourseNFC')}>
+            {/* <Button onPress={() => navigation.navigate('CourseNFC')}>
                 <Text>태깅하기</Text>
-            </Button>
+            </Button> */}
             {score[0] &&
               <>
                 <Text>선택코스 : {score[0]}</Text>
@@ -52,9 +53,11 @@ export default function CourseDetail({navigation, route}) {
                 }
               </>
             }
+
+          <Popup1 />
         </Content>
         
-        <Footer navigation={navigation} />
+        <Footer navigation={navigation} value='3' />
     </Container>
   );
 };

@@ -6,6 +6,7 @@ import Footer from './Footer';
 export default function Course({navigation}) {
   const [count, setCount] = useState(0);
 
+  // 등산횟수만큼 버튼 반복
   const forButton = num => {
     let result = [];
 
@@ -16,17 +17,17 @@ export default function Course({navigation}) {
         </Button>
       )
     }
-
     return result;
   }
 
+  // 등산 횟수 찾아오기
   useEffect(() => {
     axios.get('http://localhost:5000/count')
     .then(({data}) => {
       setCount(data);
     })
     .catch(err => console.log(err));
-  }, [])
+  }, [navigation])
 
   return (
     <Container>
@@ -40,7 +41,7 @@ export default function Course({navigation}) {
             {forButton(count)}
         </Content>
         
-        <Footer navigation={navigation} />
+        <Footer navigation={navigation} value='3' />
     </Container>
   );
 };

@@ -6,12 +6,12 @@ export default function Course({navigation}) {
   return (
     <Container>
         <Content>
-          <Button onPress={() => navigation.navigate('InfoDetail')}> 
+          <Button onPress={() => navigation.navigate('Guide')}> 
             <Text>어리목 코스</Text>
           </Button>
         </Content>
         
-        <Footer navigation={navigation} />
+        <Footer navigation={navigation} value='2' />
     </Container>
   );
 }

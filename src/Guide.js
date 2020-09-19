@@ -2,8 +2,6 @@ import React from 'react';
 import {Container, Content, Text, Button, View} from 'native-base';
 import {StyleSheet, TouchableHighlight} from 'react-native';
 import Footer from './Footer';
-import Popup1 from './popup/Popup1';
-//import Popup2 from './popup/Popup2';
 
 export default function Prepare({navigation}) {
   return (
@@ -42,9 +40,13 @@ export default function Prepare({navigation}) {
           <Text style={styles.ListText}>성판악 코스 평균 : 4시간 22분</Text>
           <Text style={styles.ListText}>성판악 코스 1등 : 4시간 10분</Text>
         </View>
+
+        <Button onPress={() => navigation.navigate('Prepare')}>
+          <Text>시작하기</Text>
+        </Button>
       </Content>
-      <Popup1></Popup1>
-      <Footer navigation={navigation} />
+
+      <Footer navigation={navigation} value='2' />
     </Container>
   );
 }

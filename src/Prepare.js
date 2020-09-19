@@ -1,9 +1,18 @@
 import React from 'react';
 import {Container, Content, Text, Button, View} from 'native-base';
 import {StyleSheet, TouchableHighlight} from 'react-native';
+import axios from 'axios';
 import Footer from './Footer';
 
 export default function Prepare({navigation}) {
+  // 코스 등록
+  const startCourse = () => {
+    axios.get('http://localhost:5000/start')
+    .then(({data}) => {
+      if(data == 1) navigation.navigate('Course');
+    })
+  }
+
   return (
     <Container>
       <Content>
@@ -29,11 +38,11 @@ export default function Prepare({navigation}) {
       <View style={styles.centeredView}>
         <TouchableHighlight
           style={styles.openButton}
-          onPress={() => navigation.navigate('Guide')}>
+          onPress={startCourse}>
           <Text style={{color: 'white', fontWeight: 'bold'}}>확인</Text>
         </TouchableHighlight>
       </View>
-      <Footer navigation={navigation} />
+      <Footer navigation={navigation} value='2' />
     </Container>
   );
 }

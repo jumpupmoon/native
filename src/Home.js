@@ -53,7 +53,7 @@ export default function Layout({navigation}) {
 
      
      </View>
-     <Footer navigation={navigation} />
+     <Footer navigation={navigation} value='1' />
      </Container>
   );
 };
