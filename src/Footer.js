@@ -1,26 +1,34 @@
 import React from 'react';
 import {Footer, FooterTab, Button, Text} from 'native-base';
-
+import {StyleSheet} from 'react-native';
+import Icon from 'react-native-vector-icons/Foundation';
 export default function Layout({navigation}) {
   return (
         <Footer>
-            <FooterTab>
-                <Button onPress={() => navigation.navigate('Home')}>
-                    <Text>홈</Text>
+             <FooterTab style={{backgroundColor:"#87D37C"}}>
+                <Button  onPress={() => navigation.navigate('Home')}>
+                    <Icon name="mountains" size={30} color='#fff'/>
+                    
                 </Button>
                 <Button onPress={() => navigation.navigate('Info')}>
-                    <Text>탐험 정보</Text>
+                    <Icon name="trees" size={30} color='#fff'/>
                 </Button>
                 <Button onPress={() => navigation.navigate('Course')}>
-                    <Text>내 탐방</Text>
+                <Icon name="marker" size={30} color='#fff'/>
                 </Button>
                 <Button>
-                    <Text>랭킹</Text>
+                    <Icon name="trophy" size={30} color='#fff'/>
                 </Button>
                 <Button>
-                    <Text>마이페이지</Text>
+                 <Icon name="torso" size={30} color='#fff'/>
                 </Button>
             </FooterTab>
         </Footer>
   );
 };
+
+const styles = StyleSheet.create({
+    text:{
+        color: '#FFFFFF',
+    }
+});
