@@ -87,8 +87,7 @@ const styles = StyleSheet.create({
   },
   image:{
     position: 'absolute',
-    width: wp('100%'), 
-    height: hp('30%'), 
+   
     flex: 1, 
     marginTop: 40,
     

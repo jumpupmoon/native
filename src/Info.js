@@ -1,5 +1,6 @@
 import React from 'react';
 import {Container, Content, Text, TextInput} from 'native-base';
+
 import Footer from './Footer';
 import {
   StyleSheet,
@@ -11,6 +12,9 @@ import {
   ScrollView,
 } from 'react-native';
 
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import Icon2 from 'react-native-vector-icons/Fontisto';
 export default function Course({navigation}) {
   return (
     <Container>
@@ -18,49 +22,49 @@ export default function Course({navigation}) {
         <View style={styles.header}>
           <Text
             style={{
-              fontSize: 40,
-              fontWeight: 'bold',
+              fontSize: 30,              
               textAlign: 'center',
-              color: '#FFFFFF',
+              color: '#FFF',
+              fontFamily: 'DungGeunMo'
             }}>
             코스 선택하기
           </Text>
         </View>
+        {/* 코스 아이템 시작 */}
         <ScrollView>
-          <TouchableOpacity onPress={() => navigation.navigate('Prepare')}>
+          <TouchableOpacity style={styles.courses} onPress={() => navigation.navigate('Prepare')}>
             <Image
               style={styles.img}
-              source={require('./img/성판악탐방로.jpg')}></Image>
+              source={require('./img/어승생악.jpg')}>                
+              </Image>
+              <Text style={styles.title}>어승생악</Text>
+              <Text style={styles.info}>약 30분 소요(1.3km)</Text>
+              <Text style={styles.info2}>가벼운 등산을 원하는 탐방객이 즐겨찾는 오름</Text>
           </TouchableOpacity>
-          <ImageBackground
-            source={require('./img/성판악탐방로.jpg')}
-            style={styles.img}>
-            <View
-              style={{
-                position: 'absolute',
-                top: 0,
-                left: 0,
-                right: 0,
-                bottom: 0,
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
-              <Text style={styles.text}>>성판악 코스 시작</Text>
-            </View>
-          </ImageBackground>
-          <TouchableHighlight>
+          <TouchableOpacity style={styles.courses} onPress={() => navigation.navigate('Prepare')}>
             <Image
               style={styles.img}
-              source={require('./img/관음사탐방로.jpg')}
-            />
-          </TouchableHighlight>
-          <TouchableHighlight>
+              source={require('./img/성판악.jpg')}></Image>
+              <Text style={styles.title}>성판악</Text>
+              <Text style={styles.info}>약 4시간 30분 소요(9.6km)</Text>
+              <Text style={styles.info2}>삼림욕을 즐기며 탐방하기에 최적의 장소</Text>
+              
+                <Icon name="flag" size={35} color='#181717'style={styles.icon}/>
+                <Text style={styles.iconInfo}>정상 등반</Text>     
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.courses} onPress={() => navigation.navigate('Prepare')}>
             <Image
               style={styles.img}
-              source={require('./img/어리목탐방로.jpg')}
-            />
-          </TouchableHighlight>
+              source={require('./img/어리목.jpg')}>                
+              </Image>
+              <Text style={styles.title}>어리목</Text>
+              <Text style={styles.info}>약 3시간 소요(6.8km)</Text>
+              <Text style={styles.info2}>한라산을 찾는 탐방객들이 가장 많이 이용하는 곳</Text>
+              <Icon2 name="wind" size={35} color='#181717'style={styles.icon}/>
+                <Text style={styles.iconInfo}>날씨 주의</Text>  
+          </TouchableOpacity>
         </ScrollView>
+        {/* 코스 아이템 끝 */}
       </Content>
 
       <Footer navigation={navigation} />
@@ -75,18 +79,91 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'white',
   },
-  img: {
-    height: 250,
-    width: 350,
+  courses:{
     alignItems: 'center',
-    borderRadius: 3,
-    resizeMode: 'contain',
-    marginLeft: 30,
+    
+    marginHorizontal: 20,
+    width: wp('91%'), 
+    height: hp('25.5%'),
+    
+    marginTop:20,
+    // borderStyle: 'dotted',
+    borderColor: '#404040',
+    borderWidth: 3,
+    borderRadius: 10,   
+  },
+  img: {   
+    width: wp('90%'), 
+    height: hp('25%'),
+    alignItems: 'center',
+    padding: 0,
+    resizeMode: 'stretch',
+    alignItems: 'center',
+    
+    opacity: 0.6,
+   
+    
+  },
+  title:{
+    marginTop:40,
+    alignItems: 'center',   
+    position: 'absolute',
+    padding: 0,
+    fontFamily: 'DungGeunMo',
+    fontSize: 30,
+    color: '#181717',  
+      
+  },
+  info:{
+    marginTop:75,
+    position: 'absolute',
+   
+    padding: 0,
+    fontFamily: 'DungGeunMo',
+    fontSize: 20,
+    color: '#47525E',
+  },
+  info2:{
+    marginTop:110,
+    position: 'absolute',
+   
+    padding: 0,
+    fontFamily: 'DungGeunMo',
+    fontSize: 14,
+    color: 'black',
+  },
+  iconCircle:{
+    backgroundColor:'rgba(0,0,0,0)',
+    position: 'absolute',
+    marginTop:130,  
+    borderStyle: 'solid',
+    borderColor: 'black',
+    borderWidth: 3, 
+    height : 50 ,
+  width :50,
+ borderRadius: 1000, 
+  },
+  icon:{
+    position: 'absolute',    
+    padding: 0,
+    marginTop:130,
+    marginLeft:90
+  },
+  iconInfo:{
+    marginTop:165,
+    position: 'absolute',
+   
+    padding: 0,
+    fontFamily: 'DungGeunMo',
+    fontSize: 16,
+    color: '#181717',
+    marginLeft:90
   },
   header: {
-    padding: 30,
-    marginBottom: 20,
-    backgroundColor: '#87D37C',
+    marginTop: 20,
+    
+    padding: 10,
+    backgroundColor: '#1E824C',
   },
   text: {
     color: '#FFFFFF',
