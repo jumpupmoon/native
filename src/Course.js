@@ -11,7 +11,7 @@ export default function Course({navigation}) {
 
     for(let i=0; i<num; i++) {
       result.push(
-        <Button onPress={() => navigation.navigate('CourseDetail', i)}> 
+        <Button key={i} onPress={() => navigation.navigate('CourseDetail', i)}> 
           <Text>등산 기록 {i}</Text>
         </Button>
       )

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useLayoutEffect, useState } from 'react';
 import {Container, Content, Text, Button} from 'native-base';
 import axios from 'axios';
 import Footer from './Footer';
@@ -25,7 +25,7 @@ export default function CourseDetail({navigation, route}) {
     return str;
   }
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     axios.get(`http://localhost:5000/score/${route.params}`)
     .then(({data}) => {
       setScore(data);
@@ -39,13 +39,17 @@ export default function CourseDetail({navigation, route}) {
             <Button onPress={() => navigation.navigate('CourseNFC')}>
                 <Text>태깅하기</Text>
             </Button>
-            <Text>선택코스 : {score[0]}</Text>
-            <Text>시작시간 : {dateFormat(score[1])}</Text>
-
-            {score[2] != 0 &&
+            {score[0] &&
               <>
-                <Text>종료지점 : {score[2]}</Text>
-                <Text>종료시간 : {dateFormat(score[3])}</Text>
+                <Text>선택코스 : {score[0]}</Text>
+                <Text>시작시간 : {dateFormat(score[1])}</Text>
+
+                {score[2] != 0 &&
+                  <>
+                    <Text>종료지점 : {score[2]}</Text>
+                    <Text>종료시간 : {dateFormat(score[3])}</Text>
+                  </>
+                }
               </>
             }
         </Content>
