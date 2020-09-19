@@ -6,11 +6,7 @@ import Intro from './Intro';
 import Home from './Home';
 import Info from './Info';
 import Course from './Course';
-import CourseDetail from './CourseDetail';
-import InfoDetail from './InfoDetail';
-import CourseNFC from './CourseNFC';
-import CourseSuccess from './CourseSuccess';
-import Prepare from './Prepare';
+import SelectCourse from './SelectCourse';
 import Guide from './Guide';
 
 const Stack = createStackNavigator();
@@ -30,11 +26,7 @@ function App() {
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="Info" component={Info} />
         <Stack.Screen name="Course" component={Course} />
-        <Stack.Screen name="CourseDetail" component={CourseDetail} />
-        <Stack.Screen name="InfoDetail" component={InfoDetail} />
-        <Stack.Screen name="CourseNFC" component={CourseNFC} />
-        <Stack.Screen name="CourseSuccess" component={CourseSuccess} />
-        <Stack.Screen name="Prepare" component={Prepare} />
+        <Stack.Screen name="SelectCourse" component={SelectCourse} />
         <Stack.Screen name="Guide" component={Guide} />
       </Stack.Navigator>
     </NavigationContainer>
