@@ -35,31 +35,6 @@ export default function Course({navigation}) {
           <TouchableOpacity style={styles.courses} onPress={() => navigation.navigate('Guide')}>
             <Image
               style={styles.img}
-              source={require('./img/어승생악.jpg')}>                
-              </Image>
-              <Text style={styles.title}>어승생악</Text>
-              <Text style={styles.info}>약 30분 소요(1.3km)</Text>
-              <Text style={styles.info2}>가벼운 등산을 원하는 탐방객이 즐겨찾는 오름</Text>
-          </TouchableOpacity>
-          <ImageBackground
-            source={require('./img/성판악탐방로.jpg')}
-            style={styles.img}>
-            <View
-              style={{
-                position: 'absolute',
-                top: 0,
-                left: 0,
-                right: 0,
-                bottom: 0,
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
-              <Text style={styles.text}>성판악 코스 시작</Text>
-            </View>
-          </ImageBackground>
-          <TouchableHighlight>
-            <Image
-              style={styles.img}
               source={require('./img/성판악.jpg')}></Image>
               <Text style={styles.title}>성판악</Text>
               <Text style={styles.info}>약 4시간 30분 소요(9.6km)</Text>
@@ -67,7 +42,18 @@ export default function Course({navigation}) {
               
                 <Icon name="flag" size={35} color='#181717'style={styles.icon}/>
                 <Text style={styles.iconInfo}>정상 등반</Text>     
-          </TouchableHighlight>
+          </TouchableOpacity>
+          
+          <TouchableOpacity style={styles.courses} onPress={() => navigation.navigate('Guide')}>
+            <Image
+              style={styles.img}
+              source={require('./img/어승생악.jpg')}>                
+              </Image>
+              <Text style={styles.title}>어승생악</Text>
+              <Text style={styles.info}>약 30분 소요(1.3km)</Text>
+              <Text style={styles.info2}>가벼운 등산을 원하는 탐방객이 즐겨찾는 오름</Text>
+          </TouchableOpacity>
+          
           <TouchableOpacity style={styles.courses} onPress={() => navigation.navigate('Prepare')}>
             <Image
               style={styles.img}
@@ -83,7 +69,7 @@ export default function Course({navigation}) {
         {/* 코스 아이템 끝 */}
       </Content>
 
-      <Footer navigation={navigation} />
+      <Footer navigation={navigation} value='2' />
     </Container>
   );
 }

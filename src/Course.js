@@ -25,7 +25,7 @@ export default function Course({navigation}) {
   useEffect(() => {
     AsyncStorage.getItem('address')
     .then(address => {
-      axios.get(`http://localhost:5000/count/${address}`)
+      axios.get(`https://whitedeer.herokuapp.com/count/${address}`)
       .then(({data}) => {
         setCount(data);
       })
@@ -36,10 +36,6 @@ export default function Course({navigation}) {
   return (
     <Container>
         <Content>
-            {/* <Button onPress={() => navigation.navigate('CourseDetail')}> 
-                <Text>성판악 코스</Text>
-            </Button> */}
-
             <Text>현재 등산 수 : {count}</Text>
 
             {forButton(count)}

@@ -17,7 +17,7 @@ export default function Intro({navigation}) {
     AsyncStorage.getItem('address')
     .then(data => {
       if(!data) {
-        axios.get('http://localhost:5000/new')
+        axios.get('https://whitedeer.herokuapp.com/new')
         .then(({data}) => {
           AsyncStorage.setItem('address', data);
         })

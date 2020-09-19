@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {Image, Platform,Text,View, StyleSheet,TouchableOpacity} from 'react-native';
-import {Container, Button} from 'native-base';
+import {Container, Content} from 'native-base';
 import { SliderBox } from 'react-native-image-slider-box';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import Footer from './Footer';
@@ -22,7 +22,12 @@ export default function Layout({navigation}) {
 
   return (
     <Container>
+      <Content>
     <View style={styles.container}>
+      {/* 상단바 */}
+      <View style={styles.header}>
+        <Text style={styles.headerText}>산오쿠과</Text>
+      </View>
       {/* 이미지 슬라이더 */}
     <View style={styles.image}>
               <SliderBox
@@ -32,7 +37,7 @@ export default function Layout({navigation}) {
                 images={imageList} // 이미지 주소 리스트 
                 dotColor="rgba(0,0,0,0)" // 아래 점 투명으로 안보이게 가림
                 inactiveDotColor="rgba(0,0,0,0)" 
-                ImageComponentStyle={{ width: wp('100%'), height: hp('30%') }} // 이미지 Style 적용
+                ImageComponentStyle={{ width: wp('100%')-20, height: hp('30%'), borderRadius: 5}} // 이미지 Style 적용
                 currentImageEmitter={increment}
               />              
             </View>
@@ -51,8 +56,12 @@ export default function Layout({navigation}) {
         </View>
 
         <View style={{flex: 1, flexDirection: 'row', marginTop: 10}}>
+        {/* <View style={styles.weather}>
+          <WeatherInfo />
+        </View> */}
         <View style={styles.weather}>
-          {/* <WeatherInfo /> */}
+          <Image source={require('./img/weather.png')} style={styles.weatherImage}></Image>
+          <Text style={styles.trail1}>Weather</Text>
         </View>
         <View style={styles.ranking}>
         <TouchableOpacity style={{backgroundColor:"#1E824C",left:150, width: wp('6%'), }} onPress={() => navigation.navigate('Info')}>
@@ -67,6 +76,7 @@ export default function Layout({navigation}) {
 
      
      </View>
+     </Content>
      <Footer navigation={navigation} value='1' />
      </Container>
   );
@@ -85,12 +95,21 @@ const styles = StyleSheet.create({
       }
     }),    
   },
+  header: {
+    position: 'absolute',
+    height: 40,
+    justifyContent: 'center',
+    left: '43%',
+  },
+  headerText: {
+    fontFamily: 'DungGeunMo',
+    fontSize: 18,
+    color: 'black',
+  },
   image:{
     position: 'absolute',
-   
-    flex: 1, 
+    flex: 1,
     marginTop: 40,
-    
   },
   button: {    
     position: 'absolute',
@@ -163,6 +182,14 @@ const styles = StyleSheet.create({
    top: 20,
    width: wp('20%'),
    height: hp('20%'),
+    //width: 150,
+    //height: 'auto'
+  },
+  weatherImage:{
+   left: 40,
+   top: 65,
+   width: wp('25%'),
+   height: hp('15%'),
     //width: 150,
     //height: 'auto'
   }

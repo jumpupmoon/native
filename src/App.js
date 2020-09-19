@@ -28,7 +28,7 @@ function App() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator headerMode="none" initialRouteName="Test">
+      <Stack.Navigator headerMode="none" initialRouteName="Intro">
         <Stack.Screen name="Intro" component={Intro} />
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="Info" component={Info} />
