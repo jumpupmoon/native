@@ -1,15 +1,122 @@
-import React from 'react';
-import {Container, Content, Text} from 'native-base';
+import React, {useState} from 'react';
+import {Platform,Text,View, StyleSheet,TouchableOpacity} from 'react-native';
+import {Container, Content} from 'native-base';
+import { SliderBox } from 'react-native-image-slider-box';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import Footer from './Footer';
 
 export default function Layout({navigation}) {
+  const [currentIndex, setCurrentIndex] = useState(1);
+  const [imageList, setImageList] =useState([ require('./img/1.jpg'),require('./img/2.jpg'),require('./img/3.jpg') ]);
+  function increment() {
+    setCurrentIndex(currentIndex => currentIndex + 1);
+  }
   return (
     <Container>
-        <Content>
-            <Text>홈 화면</Text>
-        </Content>
-        
-        <Footer navigation={navigation} />
-    </Container>
+    <View style={styles.container}>
+      {/* 이미지 슬라이더 */}
+    <View style={styles.image}>
+              <SliderBox
+                autoplay={true}  //자동 슬라이드 넘김
+                circleLoop={true} //맨끝 슬라이드에서 다시 첫슬라이드로
+                resizeMode="cover"  // 이미지 사이즈 조절값
+                images={imageList} // 이미지 주소 리스트 
+                dotColor="rgba(0,0,0,0)" // 아래 점 투명으로 안보이게 가림
+                inactiveDotColor="rgba(0,0,0,0)" 
+                ImageComponentStyle={{ width: wp('100%'), height: hp('30%') }} // 이미지 Style 적용
+                currentImageEmitter={increment}
+              />              
+            </View>
+            {/* 이미지 슬라이더 */}
+      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Info')}>
+        <Text style={styles.buttonTitle}>▶탐방로 정보 확인하기</Text>
+      </TouchableOpacity>
+
+      <View style={styles.trailBar}>
+        <Text style={styles.trail}>My Trail</Text>
+        <View style={styles.trailContent}>
+        <Text>현재 트레일 정보</Text>
+        </View>
+        <View style={{flex: 1, flexDirection: 'row', marginTop: 10}}>
+        <View style={styles.weather}></View>
+        <View style={styles.ranking}></View>
+        </View>
+      </View>
+
+     
+     </View>
+     <Footer navigation={navigation} />
+     </Container>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    
+    ...Platform.select({
+      ios: { fontFamily: 'AppleSDGothicNeo-Regular' },
+      android: {
+        fontFamily: 'NotoSansKR-Bold',
+        fontWeight: 'bold',
+        includeFontPadding: false
+      }
+    }),    
+  },
+  image:{
+    position: 'absolute',
+    width: wp('100%'), 
+    height: hp('30%'), 
+    flex: 1, 
+    marginTop: 40,
+    
+  },
+  button: {    
+    position: 'absolute',
+    alignItems: "center",
+    backgroundColor: 'transparent',
+    borderStyle: 'solid',
+    borderColor: '#FFFFFF',
+    borderWidth: 1,   
+    padding: 5,
+    marginHorizontal: 100,
+    marginTop: 120
+    
+  },
+  buttonTitle: {
+    padding: 3,
+    fontSize: 16,
+    color: '#FFFFFF',    
+  },
+  trailBar:{
+    position: 'relative',
+    paddingHorizontal: 20,
+    
+  },
+  trail: {
+    padding: 3,
+    marginTop: 280,
+    fontSize: 24,
+    color: '#404040',
+    fontWeight: 'bold',
+  },
+  trailContent:{    
+    borderRadius: 5,
+    backgroundColor:'#87D37C',
+    height: hp('15%'), 
+  },
+  weather:{    
+    borderRadius: 5,
+    backgroundColor:'#87D37C',
+    height: hp('30%'),
+    width: wp('44%'),
+    marginRight: 5
+  },
+  ranking:{    
+    borderRadius: 5,
+    backgroundColor:'#87D37C',
+    height: hp('30%'),
+    width: wp('44%'),
+    marginLeft: 5
+  },
+})
