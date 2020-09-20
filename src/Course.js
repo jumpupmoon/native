@@ -37,7 +37,7 @@ export default function Course({navigation}) {
       })
       .catch(err => console.log(err));
     })
-  }, [])
+  }, [navigation])
 
   return (
     <Container>
@@ -45,22 +45,11 @@ export default function Course({navigation}) {
             <Text style={styles.Title}>현재 등산 수 : {count}</Text>
             {score.map(s => (
               <View style={styles.buttonView} key={s.idx}>
-                <Button style={styles.button} onPress={() => navigation.navigate('CourseDetail', s.idx)}> 
+                <Button style={styles.button} onPress={() => navigation.navigate('Map', s.idx)}> 
                   <Text style={styles.buttonTitle}>등산 기록</Text>
                 </Button>
               </View>
             ))}
-            {/* 
-            
-            0 시작시간
-            1 선택 코스
-            2 종료 지점(코스에서 몇 번째)
-            3 끝난 시간 
-
-            최근 기준 4개만 출력 됨
-            
-            */}
-            {/* {forButton(count)} */}
         </Content>
         
         <Footer navigation={navigation} value='3' />

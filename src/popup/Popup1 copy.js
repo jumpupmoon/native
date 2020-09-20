@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {
   Alert,
   Modal,
@@ -7,43 +7,10 @@ import {
   TouchableHighlight,
   View,
   Image,
-  TouchableOpacity,
 } from 'react-native';
-import NfcManager, {NfcEvents} from 'react-native-nfc-manager';
-import Popup2 from './Popup2';
-import axios from 'axios';
-import AsyncStorage from '@react-native-community/async-storage';
 
-export default function Popup({idx}) {
+const Popup1 = () => {
   const [modalVisible, setModalVisible] = useState(false);
-  const [nfcSuccess, setNfcSuccess] = useState(false)
-
-  // nfc
-  useEffect(() => {
-    NfcManager.start();
-    NfcManager.setEventListener(NfcEvents.DiscoverTag, tag => {
-      setModalVisible(false);
-      setNfcSuccess(true);
-      console.log(123);
-
-      AsyncStorage.getItem('address')
-      .then(address => {
-        axios.get(`https://whitedeer.herokuapp.com/end?address=${address}&idx=${idx}`)
-        .then(({data}) => {
-          console.log(data);
-        })
-      })
-
-      NfcManager.unregisterTagEvent().catch(() => 0);
-    });
-
-    return () => {
-      NfcManager.setEventListener(NfcEvents.DiscoverTag, null);
-      NfcManager.unregisterTagEvent().catch(() => 0);
-    }
-  }, [])
-  // nfc
-
   return (
     <View style={styles.centeredView}>
       <Modal
@@ -68,22 +35,23 @@ export default function Popup({idx}) {
             </Text>
 
             <TouchableHighlight
-              style={{...styles.openButton, backgroundColor: '#1E824C'}}
+              style={{...styles.openButton, backgroundColor: '#2196F3'}}
               onPress={() => {
-                setModalVisible(false);
+                setModalVisible(!modalVisible);
               }}>
               <Text style={styles.textStyle}>닫기</Text>
             </TouchableHighlight>
           </View>
         </View>
       </Modal>
-      <TouchableOpacity
-        style={styles.circle}
+
+      <TouchableHighlight
+        style={styles.openButton}
         onPress={() => {
           setModalVisible(true);
-        }}></TouchableOpacity>
-
-        <Popup2 nfcSuccess={nfcSuccess} setNfcSuccess={setNfcSuccess} />
+        }}>
+        <Text style={styles.textStyle}>확인</Text>
+      </TouchableHighlight>
     </View>
   );
 };
@@ -119,7 +87,7 @@ const styles = StyleSheet.create({
     elevation: 1,
   },
   textStyle: {
-    color: '#FFFFFF',
+    color: 'white',
     fontFamily: 'DungGeunMo',
     textAlign: 'center',
     fontSize: 24,
@@ -141,12 +109,6 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     textAlign: 'center',
   },
-  circle: {
-    width: 24,
-    height: 24,
-    borderRadius: 30,
-    backgroundColor: '#969FAA',
-    marginBottom: 48,
-    marginLeft: 228,
-  },
 });
+
+export default Popup1;

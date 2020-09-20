@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {Container, Content, Text, Button} from 'native-base';
+import {Container, Content, Text} from 'native-base';
 import axios from 'axios';
 import Footer from './Footer';
 import Popup1 from './popup/Popup1';
