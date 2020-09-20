@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import Popup1 from './popup/Popup1';
 
-export default function Map({navigation}) {
+export default function Map({navigation, route}) {
   return (
     <Container>
       <Content>
@@ -18,7 +18,7 @@ export default function Map({navigation}) {
           <View>
             <View style={styles.centeredView}>
               <TouchableOpacity>
-                <Popup1 style={styles.circle}></Popup1>
+                <Popup1 style={styles.circle} idx={route.params} />
               </TouchableOpacity>
               <View style={styles.circle2} />
               <View style={styles.circle3} />
@@ -74,8 +74,8 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     backgroundColor: '#969FAA',
     position: 'absolute',
-    left: 309,
-    top: -11,
+    left: 306,
+    top: -18,
   },
   circle2: {
     width: 24,

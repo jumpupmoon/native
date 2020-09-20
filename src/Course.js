@@ -10,22 +10,6 @@ export default function Course({navigation}) {
   const [score, setScore] = useState([]);
   const [count, setCount] = useState(0);
 
-  // 등산횟수만큼 버튼 반복
-  const forButton = num => {
-    let result = [];
-
-    for(let i=0; i<num; i++) {
-      result.push(
-        <View style={styles.buttonView}>
-        <Button style={styles.button} key={i} onPress={() => navigation.navigate('CourseDetail', i)}> 
-          <Text style={styles.buttonTitle}>등산 기록 {i}</Text>
-        </Button>
-        </View>
-      )
-    }
-    return result;
-  }
-
   // 저장된 지갑 주소로 등산 횟수 찾아오기
   useEffect(() => {
     AsyncStorage.getItem('address')

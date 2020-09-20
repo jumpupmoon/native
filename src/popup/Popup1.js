@@ -146,7 +146,7 @@ const styles = StyleSheet.create({
     height: 24,
     borderRadius: 30,
     backgroundColor: '#969FAA',
-    marginBottom: 48,
+    marginBottom: 40,
     marginLeft: 228,
   },
 });
