@@ -3,6 +3,8 @@ import {Container, Content, Text, Button, View} from 'native-base';
 import {StyleSheet, TouchableHighlight} from 'react-native';
 import Footer from './Footer';
 
+//import Popup2 from './popup/Popup2';
+
 export default function Prepare({navigation}) {
   return (
     <Container style={styles.container}>
@@ -70,17 +72,21 @@ export default function Prepare({navigation}) {
           <Text style={styles.itemText}>성판악 코스 평균 : 4시간 22분</Text>
           <Text style={styles.itemText}>성판악 코스 1 등 : 4시간 10분</Text>
         </View>
-
-        <Button onPress={() => navigation.navigate('Prepare')}>
-          <Text>시작하기</Text>
+       
+        <Button onPress={() => navigation.navigate('Prepare')} 
+        style={{
+    textAlign: 'center',
+    backgroundColor: '#1E824C',alignSelf:'center',marginTop:30}}>
+          <Text style={{fontSize: 26,fontFamily: 'DungGeunMo', textAlign: 'center', color: '#FFF',}}>시작하기</Text>
         </Button>
+        
         </View>
       </Content>
 
       <Footer navigation={navigation} value='2' />
     </Container>
-  );
-}
+  )};
+
 
 const styles = StyleSheet.create({
   container: {

@@ -13,6 +13,7 @@ import CourseSuccess from './CourseSuccess';
 import Prepare from './Prepare';
 import Guide from './Guide';
 import Test from './Test';
+import Arrival from './Arrival';
 
 const Stack = createStackNavigator();
 
@@ -40,6 +41,7 @@ function App() {
         <Stack.Screen name="Prepare" component={Prepare} />
         <Stack.Screen name="Guide" component={Guide} />
         <Stack.Screen name="Test" component={Test} />
+        <Stack.Screen name="Arrival" component={Arrival} />
       </Stack.Navigator>
     </NavigationContainer>
   );

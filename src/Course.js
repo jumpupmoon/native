@@ -3,8 +3,11 @@ import {Container, Content, Text, Button} from 'native-base';
 import axios from 'axios';
 import AsyncStorage from '@react-native-community/async-storage';
 import Footer from './Footer';
+import {StyleSheet, View} from 'react-native';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 export default function Course({navigation}) {
+  const [score, setScore] = useState([]);
   const [count, setCount] = useState(0);
 
   // 등산횟수만큼 버튼 반복
@@ -13,9 +16,11 @@ export default function Course({navigation}) {
 
     for(let i=0; i<num; i++) {
       result.push(
-        <Button key={i} onPress={() => navigation.navigate('CourseDetail', i)}> 
-          <Text>등산 기록 {i}</Text>
+        <View style={styles.buttonView}>
+        <Button style={styles.button} key={i} onPress={() => navigation.navigate('CourseDetail', i)}> 
+          <Text style={styles.buttonTitle}>등산 기록 {i}</Text>
         </Button>
+        </View>
       )
     }
     return result;
@@ -27,7 +32,8 @@ export default function Course({navigation}) {
     .then(address => {
       axios.get(`https://whitedeer.herokuapp.com/list/${address}`)
       .then(({data}) => {
-        setCount(data.result);
+        setCount(data.count)
+        setScore(data.score);
       })
       .catch(err => console.log(err));
     })
@@ -36,12 +42,57 @@ export default function Course({navigation}) {
   return (
     <Container>
         <Content>
-            <Text>현재 등산 수 : {count}</Text>
+            <Text style={styles.Title}>현재 등산 수 : {count}</Text>
+            {score.map(s => (
+              <View style={styles.buttonView} key={s.idx}>
+                <Button style={styles.button} onPress={() => navigation.navigate('CourseDetail', s.idx)}> 
+                  <Text style={styles.buttonTitle}>등산 기록</Text>
+                </Button>
+              </View>
+            ))}
+            {/* 
+            
+            0 시작시간
+            1 선택 코스
+            2 종료 지점(코스에서 몇 번째)
+            3 끝난 시간 
 
-            {forButton(count)}
+            최근 기준 4개만 출력 됨
+            
+            */}
+            {/* {forButton(count)} */}
         </Content>
         
         <Footer navigation={navigation} value='3' />
     </Container>
   );
 };
+
+const styles = StyleSheet.create({
+  Title: {
+    fontSize: 20,
+    fontFamily: 'DungGeunMo',
+    textAlign:'right',
+    color: '#181717',
+    marginRight:20,
+    marginVertical: 20,
+  },
+  buttonView:{
+    alignSelf:'center',
+    alignContent:'center',
+    alignItems:'center',
+    margin:10,
+    backgroundColor:'#1E824C',
+    height: hp('20%'),
+    width: wp('90%'),
+  },
+  button:{
+    backgroundColor:'#26A65B'
+  },
+  buttonTitle:{
+    fontSize: 26,
+    fontFamily: 'DungGeunMo', 
+    textAlign: 'center', 
+    color: '#FFF',
+  }
+});
