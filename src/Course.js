@@ -3,8 +3,9 @@ import {Container, Content, Text, Button} from 'native-base';
 import axios from 'axios';
 import AsyncStorage from '@react-native-community/async-storage';
 import Footer from './Footer';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, View, ImageBackground} from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import data from './Mountain.json';
 
 export default function Course({navigation}) {
   const [score, setScore] = useState([]);
@@ -28,11 +29,11 @@ export default function Course({navigation}) {
         <Content>
             <Text style={styles.Title}>현재 등산 수 : {count}</Text>
             {score.map(s => (
-              <View style={styles.buttonView} key={s.idx}>
+              <ImageBackground style={styles.buttonView} key={s.idx} source={require('./img/성판악.jpg')}>
                 <Button style={styles.button} onPress={() => navigation.navigate('Map', s.idx)}> 
-                  <Text style={styles.buttonTitle}>등산 기록</Text>
+                  <Text style={styles.buttonTitle}>등산 기록 {s.idx}</Text>
                 </Button>
-              </View>
+              </ImageBackground>
             ))}
         </Content>
         
@@ -55,7 +56,6 @@ const styles = StyleSheet.create({
     alignContent:'center',
     alignItems:'center',
     margin:10,
-    backgroundColor:'#1E824C',
     height: hp('20%'),
     width: wp('90%'),
   },

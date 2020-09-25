@@ -35,10 +35,10 @@ function App() {
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="Info" component={Info} />
         <Stack.Screen name="Course" component={Course} />
-        <Stack.Screen name="CourseDetail" component={CourseDetail} />
-        <Stack.Screen name="InfoDetail" component={InfoDetail} />
-        <Stack.Screen name="CourseNFC" component={CourseNFC} />
-        <Stack.Screen name="CourseSuccess" component={CourseSuccess} />
+        {/* <Stack.Screen name="CourseDetail" component={CourseDetail} /> */}
+        {/* <Stack.Screen name="InfoDetail" component={InfoDetail} /> */}
+        {/* <Stack.Screen name="CourseNFC" component={CourseNFC} /> */}
+        {/* <Stack.Screen name="CourseSuccess" component={CourseSuccess} /> */}
         <Stack.Screen name="Prepare" component={Prepare} />
         <Stack.Screen name="Guide" component={Guide} />
         <Stack.Screen name="Test" component={Test} />

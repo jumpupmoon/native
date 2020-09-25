@@ -70,7 +70,7 @@ export default function Prepare({navigation, route}) {
           </View>
 
           <Button
-            onPress={() => navigation.navigate('Prepare')}
+            onPress={() => navigation.navigate('Prepare', route.params)}
             style={{
               textAlign: 'center',
               backgroundColor: '#1E824C',

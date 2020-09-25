@@ -9,12 +9,12 @@ import {
 import AsyncStorage from '@react-native-community/async-storage';
 import axios from 'axios';
 
-export default function Prepare({navigation}) {
+export default function Prepare({navigation, route}) {
   // 코스 등록
   const Preapare = () => {
     AsyncStorage.getItem('address')
     .then(address => {
-      axios.get(`https://whitedeer.herokuapp.com/start?address=${address}`)
+      axios.get(`https://whitedeer.herokuapp.com/start?address=${address}&course=${route.parmas}`)
       .then(({data}) => {
         console.log(address);
         if(data == 1) navigation.reset({routes: [{ name: 'Course' }]});
