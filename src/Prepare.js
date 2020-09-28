@@ -25,7 +25,7 @@ export default function Prepare({navigation}) {
 
   return (
     <Container style={{backgroundColor: '#1E824C'}}>
-      <Content style={{borderWidth: 3, margin: 20, borderColor: '#87D37C'}}>
+      <Content style={{borderWidth: 3,paddingTop:20, margin: 20, borderColor: '#87D37C'}}>
         <View style={styles.Header}>
           <Text style={styles.Title}>산행 준비물</Text>
           <Text style={styles.detail}>
@@ -42,9 +42,9 @@ export default function Prepare({navigation}) {
                 fontSize: 30,
                 fontFamily: 'DungGeunMo',
                 textAlignVertical: 'center',
-                marginLeft: 80,
+                marginLeft: 60,
                 color: '#FFF',
-                textDecorationLine: 'line-through',
+                
               }}>
               간식
             </Text>
@@ -131,21 +131,21 @@ const styles = StyleSheet.create({
     width: wp('10%'),
     height: hp('5%'),
     padding: 10,
-    marginLeft: 30,
+    marginLeft: 20,
   },
   imgTitle: {
     fontSize: 30,
     fontFamily: 'DungGeunMo',
     textAlignVertical: 'center',
-    marginLeft: 80,
+    marginLeft: 60,
     color: '#FFF',
-    textDecorationLine: 'line-through',
+    
   },
   button: {
     backgroundColor: '#87D37C',
     borderRadius: 3,
     borderColor: '#87D37C',
     marginHorizontal: 40,
-    marginTop: 40,
+    marginBottom: 60,
   },
 });
