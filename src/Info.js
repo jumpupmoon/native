@@ -22,6 +22,7 @@ export default function Course({navigation}) {
         <View style={styles.header}>
           <Text
             style={{
+              
               fontSize: 30,
               textAlign: 'center',
               color: '#FFF',
@@ -31,21 +32,21 @@ export default function Course({navigation}) {
           </Text>
         </View>
         {/* 코스 아이템 시작 */}
-        <ScrollView>
+        <ScrollView style={{paddingBottom:20}}>
           <TouchableOpacity
             style={styles.courses}
             onPress={() => navigation.navigate('Guide', 3)}>
             <Image
               style={styles.img}
               source={require('./img/성판악.jpg')}></Image>
-            <Text style={styles.title}>성판악</Text>
+            <Text style={styles.title}>성판악 탐방로</Text>
             <Text style={styles.info}>약 4시간 30분 소요(9.6km)</Text>
             <Text style={styles.info2}>
               삼림욕을 즐기며 탐방하기에 최적의 장소
             </Text>
 
-            <Icon name="flag" size={35} color="#181717" style={styles.icon} />
-            <Text style={styles.iconInfo}>정상 등반</Text>
+            {/* <Icon name="flag" size={35} color="#181717" style={styles.icon} />
+            <Text style={styles.iconInfo}>정상 등반</Text> */}
           </TouchableOpacity>
 
           <TouchableOpacity
@@ -54,7 +55,59 @@ export default function Course({navigation}) {
             <Image
               style={styles.img}
               source={require('./img/영실.jpg')}></Image>
-            <Text style={styles.title}>영실탐방로</Text>
+            <Text style={styles.title}>영실 탐방로</Text>
+            <Text style={styles.info}>약 2시간 30분 소요(5.8km)</Text>
+            <Text style={styles.info2}>
+              대부분 평탄지형으로 탐방이 쉬운 편
+            </Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={styles.courses}
+            onPress={() => navigation.navigate('Guide', 4)}>
+            <Image
+              style={styles.img}
+              source={require('./img/어리목.jpg')}></Image>
+            <Text style={styles.title}>어리목 탐방로</Text>
+            <Text style={styles.info}>약 2시간 30분 소요(5.8km)</Text>
+            <Text style={styles.info2}>
+              대부분 평탄지형으로 탐방이 쉬운 편
+            </Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={styles.courses}
+            onPress={() => navigation.navigate('Guide', 5)}>
+            <Image
+              style={styles.img}
+              source={require('./img/돈내코.jpg')}></Image>
+            <Text style={styles.title}>돈내코 탐방로</Text>
+            <Text style={styles.info}>약 2시간 30분 소요(5.8km)</Text>
+            <Text style={styles.info2}>
+              대부분 평탄지형으로 탐방이 쉬운 편
+            </Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={styles.courses}
+            onPress={() => navigation.navigate('Guide', 6)}>
+            <Image
+              style={styles.img}
+              source={require('./img/석굴암.png')}></Image>
+            <Text style={styles.title}>석굴암 탐방로</Text>
+            <Text style={styles.info}>약 2시간 30분 소요(5.8km)</Text>
+            <Text style={styles.info2}>
+              대부분 평탄지형으로 탐방이 쉬운 편
+            </Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={styles.courses}
+            onPress={() => navigation.navigate('Guide', 7)}>
+            <Image
+              style={styles.img}
+              source={require('./img/어승생악.jpg')}></Image>
+            <Text style={styles.title}>어승생악 탐방로</Text>
             <Text style={styles.info}>약 2시간 30분 소요(5.8km)</Text>
             <Text style={styles.info2}>
               대부분 평탄지형으로 탐방이 쉬운 편
@@ -67,7 +120,7 @@ export default function Course({navigation}) {
             <Image
               style={styles.img}
               source={require('./img/관음사.jpg')}></Image>
-            <Text style={styles.title}>관음사탐방로</Text>
+            <Text style={styles.title}>관음사 탐방로</Text>
             <Text style={styles.info}>약 5시간 소요(8.7km)</Text>
             <Text style={styles.info2}>
             계곡이 깊고 산세가 웅장, 한라산의 진면목
@@ -93,7 +146,7 @@ const styles = StyleSheet.create({
   },
   courses: {
     alignItems: 'center',
-
+    marginRight: 20,
     marginHorizontal: 20,
     width: wp('91%'),
     height: hp('25.5%'),
@@ -108,14 +161,14 @@ const styles = StyleSheet.create({
     width: wp('90%'),
     height: hp('25%'),
     alignItems: 'center',
-    padding: 0,
+    padding: 10,
     resizeMode: 'stretch',
     alignItems: 'center',
 
     opacity: 0.6,
   },
   title: {
-    marginTop: 30,
+    marginTop: 25,
     alignItems: 'center',
     position: 'absolute',
     padding: 0,
@@ -124,7 +177,7 @@ const styles = StyleSheet.create({
     color: '#181717',
   },
   info: {
-    marginTop: 65,
+    marginTop: 70,
     position: 'absolute',
 
     padding: 0,
@@ -133,12 +186,12 @@ const styles = StyleSheet.create({
     color: '#47525E',
   },
   info2: {
-    marginTop: 95,
+    marginTop: 110,
     position: 'absolute',
 
     padding: 0,
     fontFamily: 'DungGeunMo',
-    fontSize: 14,
+    fontSize: 16,
     color: 'black',
   },
   iconCircle: {
@@ -169,9 +222,7 @@ const styles = StyleSheet.create({
     marginLeft: 90,
   },
   header: {
-    marginTop: 20,
-
-    padding: 10,
+    padding: 20,
     backgroundColor: '#1E824C',
   },
   text: {
