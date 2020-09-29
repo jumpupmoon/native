@@ -26,8 +26,6 @@ function App() {
     }, 1000);
   }, []);
 
-  const first = 'Home';
-
   return (
     <NavigationContainer>
       <Stack.Navigator headerMode="none" initialRouteName="Intro">
@@ -43,7 +41,7 @@ function App() {
         <Stack.Screen name="Guide" component={Guide} />
         <Stack.Screen name="Test" component={Test} />
         <Stack.Screen name="Arrival" component={Arrival} />
-        <Stack.Screen name="Map" component={Map} />
+        <Stack.Screen name="Map" component={CourseDetail} />
       </Stack.Navigator>
     </NavigationContainer>
   );

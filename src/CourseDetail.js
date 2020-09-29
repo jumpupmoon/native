@@ -4,27 +4,17 @@ import axios from 'axios';
 import Footer from './Footer';
 import Popup1 from './popup/Popup1';
 import AsyncStorage from '@react-native-community/async-storage';
+import data from './Mountain.json';
+import Moment from 'react-moment';
+import 'moment-timezone';
 
 export default function CourseDetail({navigation, route}) {
   const [score, setScore] = useState([]);
 
-  const dateFormat = date => {
-    let res = new Date(Number(date) * 1000)
-    var yyyy = res.getFullYear().toString();
-    var MM = pad(res.getMonth() + 1,2);
-    var dd = pad(res.getDate(), 2);
-    var hh = pad(res.getHours(), 2);
-    var mm = pad(res.getMinutes(), 2)
-
-    return `${yyyy}.${MM}.${dd} ${hh}:${mm}`;
-  }
-
-  const pad = (number, length) => {
-    let str = '' + number;
-    while (str.length < length) {
-        str = '0' + str;
-    }
-    return str;
+  const timeText = date => {
+    return (
+      <Moment element={Text} date={new Date(Number(date) * 1000)} format='YY.MM.DD hh:mm' tz='Asia/Seoul' />
+    )
   }
 
   useEffect(() => {
@@ -33,7 +23,6 @@ export default function CourseDetail({navigation, route}) {
       axios.get(`https://whitedeer.herokuapp.com/score?address=${address}&idx=${route.params}`)
       .then(({data}) => {
         setScore(data);
-        console.log(data)
       })
       .catch(err => console.log(err));
     })
@@ -42,18 +31,15 @@ export default function CourseDetail({navigation, route}) {
   return (
     <Container>
         <Content>
-            {/* <Button onPress={() => navigation.navigate('CourseNFC')}>
-                <Text>태깅하기</Text>
-            </Button> */}
             {score[0] &&
               <>
-                <Text>선택코스 : {score[0]}</Text>
-                <Text>시작시간 : {dateFormat(score[1])}</Text>
-
+                <Text>선택코스 : {data[score[0]].name}</Text>
+                <Text>시작시간 : {timeText(score[1])}</Text>
+                
                 {score[2] != 0 ?
                   <>
                     <Text>종료지점 : {score[2]}</Text>
-                    <Text>종료시간 : {dateFormat(score[3])}</Text>
+                    <Text>종료시간 : {timeText(score[3])}</Text>
                   </>
                   :
                     <Popup1 idx={route.params} />

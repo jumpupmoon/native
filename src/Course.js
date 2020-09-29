@@ -9,7 +9,7 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 export default function Course({navigation, route}) {
   const [score, setScore] = useState([]);
   const [count, setCount] = useState(0);
-  console.log(route)
+
   const imgList = [
     '',
     require('./img/영실.jpg'),
