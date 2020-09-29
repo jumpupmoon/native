@@ -14,7 +14,7 @@ export default function Prepare({navigation, route}) {
   const Preapare = () => {
     AsyncStorage.getItem('address')
     .then(address => {
-      axios.get(`https://whitedeer.herokuapp.com/start?address=${address}&course=${route.parmas}`)
+      axios.get(`https://whitedeer.herokuapp.com/start?address=${address}&course=${route.params}`)
       .then(({data}) => {
         console.log(address);
         if(data == 1) navigation.reset({routes: [{ name: 'Course' }]});

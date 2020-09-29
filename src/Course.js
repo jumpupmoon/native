@@ -5,11 +5,17 @@ import AsyncStorage from '@react-native-community/async-storage';
 import Footer from './Footer';
 import {StyleSheet, View, ImageBackground} from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import data from './Mountain.json';
 
 export default function Course({navigation}) {
   const [score, setScore] = useState([]);
   const [count, setCount] = useState(0);
+  
+  const imgList = [
+    '',
+    require('./img/영실.jpg'),
+    require('./img/관음사.jpg'),
+    require('./img/성판악.jpg')
+  ]
 
   // 저장된 지갑 주소로 등산 횟수 찾아오기
   useEffect(() => {
@@ -17,8 +23,20 @@ export default function Course({navigation}) {
     .then(address => {
       axios.get(`https://whitedeer.herokuapp.com/list/${address}`)
       .then(({data}) => {
-        setCount(data.count)
-        setScore(data.score);
+        setCount(data.score[0]);
+
+        let output = [];
+        for(let i=0; i<5; i++) {
+          if(data.score[1][i] == 0) break;
+          output.push([
+            data.score[0]-(1+i), // 인덱스 번호
+            data.score[1][i], // 선택한 코스 번호
+            data.score[2][i], // 마지막 지점
+            data.score[3][i], // 시작 시간
+            data.score[4][i] // 마지막 시간
+          ]);
+        }
+        setScore(output);
       })
       .catch(err => console.log(err));
     })
@@ -29,9 +47,9 @@ export default function Course({navigation}) {
         <Content>
             <Text style={styles.Title}>현재 등산 수 : {count}</Text>
             {score.map(s => (
-              <ImageBackground style={styles.buttonView} key={s.idx} source={require('./img/성판악.jpg')}>
-                <Button style={styles.button} onPress={() => navigation.navigate('Map', s.idx)}> 
-                  <Text style={styles.buttonTitle}>등산 기록 {s.idx}</Text>
+              <ImageBackground style={styles.buttonView} key={s[0]} source={imgList[s[1]]}>
+                <Button style={styles.button} onPress={() => navigation.navigate('Map', s[0])}> 
+                  <Text style={styles.buttonTitle}>등산 기록 {s[0]+1}</Text>
                 </Button>
               </ImageBackground>
             ))}
