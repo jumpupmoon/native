@@ -13,7 +13,7 @@ export default function CourseDetail({navigation, route}) {
 
   const timeText = date => {
     return (
-      <Moment element={Text} date={new Date(Number(date) * 1000)} format='YY.MM.DD hh:mm' tz='Asia/Seoul' />
+      <Moment element={Text} date={new Date(Number(date) * 1000)} format='YY.MM.DD HH:mm' tz='Asia/Seoul' />
     )
   }
 

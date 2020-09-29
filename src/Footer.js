@@ -9,10 +9,10 @@ export default function Layout({navigation, value}) {
                 <Button  onPress={() => navigation.navigate('Home')} active={value == 1 && true}>
                     <Icon name="mountains" size={30} color='#fff' />
                 </Button>
-                <Button onPress={() => navigation.navigate('Info')} active={value == 2 && true}>
+                <Button onPress={() => navigation.reset({routes: [{ name: 'Info' }]})} active={value == 2 && true}>
                     <Icon name="trees" size={30} color='#fff'/>
                 </Button>
-                <Button onPress={() => navigation.navigate('Course')} active={value == 3 && true}>
+                <Button onPress={() => navigation.reset({routes: [{ name: 'Course' }]})} active={value == 3 && true}>
                     <Icon name="marker" size={30} color='#fff'/>
                 </Button>
                 <Button>

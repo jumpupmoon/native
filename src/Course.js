@@ -11,10 +11,13 @@ export default function Course({navigation, route}) {
   const [count, setCount] = useState(0);
 
   const imgList = [
-    '',
+    require('./img/돈내코.jpg'),
     require('./img/영실.jpg'),
     require('./img/관음사.jpg'),
-    require('./img/성판악.jpg')
+    require('./img/성판악.jpg'),
+    require('./img/어리목.jpg'),
+    require('./img/석굴암.png'),
+    require('./img/어승생악.jpg'),
   ]
 
   // 저장된 지갑 주소로 등산 횟수 찾아오기
@@ -24,10 +27,10 @@ export default function Course({navigation, route}) {
       axios.get(`https://whitedeer.herokuapp.com/list/${address}`)
       .then(({data}) => {
         setCount(data.score[0]);
-
+        
         let output = [];
         for(let i=0; i<5; i++) {
-          if(data.score[1][i] == 0) break;
+          if(i == data.score[0]) break;
           output.push([
             data.score[0]-(1+i), // 인덱스 번호
             data.score[1][i], // 선택한 코스 번호

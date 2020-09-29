@@ -77,7 +77,7 @@ export default function Course({navigation}) {
 
           <TouchableOpacity
             style={styles.courses}
-            onPress={() => navigation.navigate('Guide', 5)}>
+            onPress={() => navigation.navigate('Guide', 0)}>
             <Image
               style={styles.img}
               source={require('./img/돈내코.jpg')}></Image>
@@ -90,7 +90,7 @@ export default function Course({navigation}) {
 
           <TouchableOpacity
             style={styles.courses}
-            onPress={() => navigation.navigate('Guide', 6)}>
+            onPress={() => navigation.navigate('Guide', 5)}>
             <Image
               style={styles.img}
               source={require('./img/석굴암.png')}></Image>
@@ -103,7 +103,7 @@ export default function Course({navigation}) {
 
           <TouchableOpacity
             style={styles.courses}
-            onPress={() => navigation.navigate('Guide', 7)}>
+            onPress={() => navigation.navigate('Guide', 6)}>
             <Image
               style={styles.img}
               source={require('./img/어승생악.jpg')}></Image>
