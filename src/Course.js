@@ -6,10 +6,10 @@ import Footer from './Footer';
 import {StyleSheet, View, ImageBackground} from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
-export default function Course({navigation}) {
+export default function Course({navigation, route}) {
   const [score, setScore] = useState([]);
   const [count, setCount] = useState(0);
-  
+  console.log(route)
   const imgList = [
     '',
     require('./img/영실.jpg'),

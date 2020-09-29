@@ -16,8 +16,7 @@ export default function Prepare({navigation, route}) {
     .then(address => {
       axios.get(`https://whitedeer.herokuapp.com/start?address=${address}&course=${route.params}`)
       .then(({data}) => {
-        console.log(address);
-        if(data == 1) navigation.reset({routes: [{ name: 'Course' }]});
+        if(data > 0) navigation.reset({routes: [{ name: 'Map', params: data-1 }]});
         else alert('error!');
       })
     })
