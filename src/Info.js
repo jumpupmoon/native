@@ -71,33 +71,7 @@ export default function Course({navigation}) {
             <Text style={styles.title}>어리목 탐방로</Text>
             <Text style={styles.info}>약 2시간 30분 소요(5.8km)</Text>
             <Text style={styles.info2}>
-              대부분 평탄지형으로 탐방이 쉬운 편
-            </Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            style={styles.courses}
-            onPress={() => navigation.navigate('Guide', 5)}>
-            <Image
-              style={styles.img}
-              source={require('./img/돈내코.jpg')}></Image>
-            <Text style={styles.title}>돈내코 탐방로</Text>
-            <Text style={styles.info}>약 2시간 30분 소요(5.8km)</Text>
-            <Text style={styles.info2}>
-              대부분 평탄지형으로 탐방이 쉬운 편
-            </Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            style={styles.courses}
-            onPress={() => navigation.navigate('Guide', 6)}>
-            <Image
-              style={styles.img}
-              source={require('./img/석굴암.png')}></Image>
-            <Text style={styles.title}>석굴암 탐방로</Text>
-            <Text style={styles.info}>약 2시간 30분 소요(5.8km)</Text>
-            <Text style={styles.info2}>
-              대부분 평탄지형으로 탐방이 쉬운 편
+              백록담 남쪽 화구벽과 한라산의 아름다운 풍광을 마음껏 즐길 수 있다.
             </Text>
           </TouchableOpacity>
 
@@ -106,11 +80,37 @@ export default function Course({navigation}) {
             onPress={() => navigation.navigate('Guide', 7)}>
             <Image
               style={styles.img}
+              source={require('./img/돈내코.jpg')}></Image>
+            <Text style={styles.title}>돈내코 탐방로</Text>
+            <Text style={styles.info}>약 2시간 30분 소요(5.8km)</Text>
+            <Text style={styles.info2}>
+              한라산백록담조면암의 라바돔을 가장 멋있게 조망할 수 있다.
+            </Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={styles.courses}
+            onPress={() => navigation.navigate('Guide', 5)}>
+            <Image
+              style={styles.img}
+              source={require('./img/석굴암.png')}></Image>
+            <Text style={styles.title}>석굴암 탐방로</Text>
+            <Text style={styles.info}>약 2시간 30분 소요(5.8km)</Text>
+            <Text style={styles.info2}>
+              골짜기와 산세가 뛰어난 아흔아홉골에 위치한 석굴암
+            </Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={styles.courses}
+            onPress={() => navigation.navigate('Guide', 6)}>
+            <Image
+              style={styles.img}
               source={require('./img/어승생악.jpg')}></Image>
             <Text style={styles.title}>어승생악 탐방로</Text>
             <Text style={styles.info}>약 2시간 30분 소요(5.8km)</Text>
             <Text style={styles.info2}>
-              대부분 평탄지형으로 탐방이 쉬운 편
+              탐방객이 즐겨찾는 오름으로서 자연생태가 잘 보존되어 있음
             </Text>
           </TouchableOpacity>
 
@@ -123,7 +123,7 @@ export default function Course({navigation}) {
             <Text style={styles.title}>관음사 탐방로</Text>
             <Text style={styles.info}>약 5시간 소요(8.7km)</Text>
             <Text style={styles.info2}>
-            계곡이 깊고 산세가 웅장, 한라산의 진면목
+              자연생태계를 관찰하면서 삼림욕
             </Text>
             {/* <Icon2 name="wind" size={35} color="#181717" style={styles.icon} /> */}
             {/* <Text style={styles.iconInfo}>날씨 주의</Text> */}
