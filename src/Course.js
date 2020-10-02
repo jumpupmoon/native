@@ -26,7 +26,7 @@ export default function Course({navigation}) {
   return (
     <Container>
         <Content>
-            <Text style={styles.Title}>현재 등산 수 : {count}</Text>
+          <Text style={styles.Title}>현재 등산 수 : {count}</Text>
             {score.map(s => (
               <View style={styles.buttonView} key={s.idx}>
                 <Button style={styles.button} onPress={() => navigation.navigate('Map', s.idx)}> 
