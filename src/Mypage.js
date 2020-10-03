@@ -17,15 +17,15 @@ export default function Mypage({navigation}){
         <View style={styles.profile}><Text>hi</Text></View>
         <View style={styles.header}><Text>개인 정보 관리</Text></View>
         <View style={styles.lineT} />
-        <TouchableHighlight style={styles.header} onPressOut={() => navigation.navigate('PointCharge')} underlayColor="green"><Text>프로필 사진 변경</Text></TouchableHighlight>
+        <TouchableHighlight style={styles.header} onPressOut={() => navigation.navigate('Camera')} underlayColor="green"><Text>프로필 사진 변경</Text></TouchableHighlight>
         <View style={styles.lineT} />
-        <TouchableHighlight style={styles.header} onPressOut={() => navigation.navigate('PointCharge')} underlayColor="green"><Text>프로필 정보 수정</Text></TouchableHighlight>
+        <TouchableHighlight style={styles.header} onPressOut={() => navigation.navigate('Profile')} underlayColor="green"><Text>프로필 정보 수정</Text></TouchableHighlight>
         <View style={styles.lineB}/>
         <View style={styles.header}><Text>포인트 관리</Text></View>
         <View style={styles.lineT} />
         <TouchableHighlight style={styles.header} onPressOut={() => navigation.navigate('PointCharge')} underlayColor="green"><Text>포인트 충전</Text></TouchableHighlight>
         <View style={styles.lineT} />
-        <TouchableHighlight style={styles.header} onPressOut={() => navigation.navigate('PointCharge')} underlayColor="green"><Text>포인트 내역 확인</Text></TouchableHighlight>
+        <TouchableHighlight style={styles.header} onPressOut={() => navigation.navigate('PointHistory')} underlayColor="green"><Text>포인트 내역</Text></TouchableHighlight>
         <View style={styles.lineB} />
       </Content>
       <Footer navigation={navigation} value="5" />

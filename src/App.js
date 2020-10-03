@@ -17,6 +17,9 @@ import Arrival from './Arrival';
 import Map from './Map';
 import Mypage from './Mypage';
 import PointCharge from './PointCharge';
+import Profile from './Profile';
+import PointHistory from './PointHistory';
+import Camera from './Camera';
 
 const Stack = createStackNavigator();
 
@@ -48,6 +51,9 @@ function App() {
         <Stack.Screen name="Map" component={Map} />
         <Stack.Screen name="Mypage" component={Mypage} />
         <Stack.Screen name="PointCharge" component={PointCharge} />
+        <Stack.Screen name="Profile" component={Profile} />
+        <Stack.Screen name="PointHistory" component={PointHistory} />
+        <Stack.Screen name="Camera" component={Camera} />
       </Stack.Navigator>
     </NavigationContainer>
   );
