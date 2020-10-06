@@ -8,7 +8,7 @@ import {
   View,
 } from 'react-native';
 
-const Popup = () => {
+const PopupC = () => {
   const [modalVisible, setModalVisible] = useState(false);
   return (
     <View style={styles.centeredView}>
@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 22,
+    marginTop: 0,
   },
   modalView: {
     margin: 20,
@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
   openButton: {
     backgroundColor: '#404040',
     borderRadius: 0,
-    padding: 10,
+    padding: 3,
     elevation: 2,
   },
   textStyle: {
@@ -84,4 +84,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Popup;
+export default PopupC;

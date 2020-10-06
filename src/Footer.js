@@ -18,7 +18,7 @@ export default function Layout({navigation, value}) {
                 <Button>
                     <Icon name="trophy" size={30} color='#fff'/>
                 </Button>
-                <Button>
+                <Button onPress={() => navigation.navigate('Mypage')} active={value == 5 && true}>
                     <Icon name="torso" size={30} color='#fff'/>
                 </Button>
             </FooterTab>

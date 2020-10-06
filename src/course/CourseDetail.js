@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import {Container, Content, Text} from 'native-base';
 import axios from 'axios';
-import Footer from './Footer';
-import Popup1 from './popup/Popup1';
+import Footer from '../Footer';
+import Popup1 from '../popup/Popup1';
 import AsyncStorage from '@react-native-community/async-storage';
-import data from './Mountain.json';
+import data from '../Mountain.json';
 import Moment from 'react-moment';
 import 'moment-timezone';
 

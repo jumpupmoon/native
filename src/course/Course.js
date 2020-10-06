@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import {Container, Content, Text, Button} from 'native-base';
 import axios from 'axios';
 import AsyncStorage from '@react-native-community/async-storage';
-import Footer from './Footer';
+import Footer from '../Footer';
 import {StyleSheet, View, ImageBackground} from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
@@ -11,13 +11,13 @@ export default function Course({navigation, route}) {
   const [count, setCount] = useState(0);
 
   const imgList = [
-    require('./img/돈내코.jpg'),
-    require('./img/영실.jpg'),
-    require('./img/관음사.jpg'),
-    require('./img/성판악.jpg'),
-    require('./img/어리목.jpg'),
-    require('./img/석굴암.png'),
-    require('./img/어승생악.jpg'),
+    require('../img/돈내코.jpg'),
+    require('../img/영실.jpg'),
+    require('../img/관음사.jpg'),
+    require('../img/성판악.jpg'),
+    require('../img/어리목.jpg'),
+    require('../img/석굴암.png'),
+    require('../img/어승생악.jpg'),
   ]
 
   // 저장된 지갑 주소로 등산 횟수 찾아오기
@@ -48,7 +48,7 @@ export default function Course({navigation, route}) {
   return (
     <Container>
         <Content>
-            <Text style={styles.Title}>현재 등산 수 : {count}</Text>
+          <Text style={styles.Title}>현재 등산 수 : {count}</Text>
             {score.map(s => (
               <ImageBackground style={styles.buttonView} key={s[0]} source={imgList[s[1]]}>
                 <Button style={styles.button} onPress={() => navigation.navigate('Map', s[0])}> 
