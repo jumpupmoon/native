@@ -67,7 +67,6 @@ export default function Layout({navigation}) {
               <View style={styles.circle5}></View>
               <Icon name="flag" size={35} color="#1E824C" style={styles.icon} />
             </View>
-
             <View style={{flex: 1, flexDirection: 'row', marginTop: 10}}>
               {/* <View style={styles.weather}>
           <WeatherInfo />

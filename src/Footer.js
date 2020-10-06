@@ -15,7 +15,7 @@ export default function Layout({navigation, value}) {
                 <Button onPress={() => navigation.navigate('Course')} active={value == 3 && true}>
                     <Icon name="marker" size={30} color='#fff'/>
                 </Button>
-                <Button>
+                <Button onPress={() => navigation.navigate('Rank')} active={value == 4 && true}>
                     <Icon name="trophy" size={30} color='#fff'/>
                 </Button>
                 <Button>

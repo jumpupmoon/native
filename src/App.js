@@ -15,6 +15,8 @@ import Guide from './Guide';
 import Test from './Test';
 import Arrival from './Arrival';
 import Map from './Map';
+import Rank from './Rank';
+
 
 const Stack = createStackNavigator();
 
@@ -28,7 +30,7 @@ function App() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator headerMode="none" initialRouteName="Intro">
+      <Stack.Navigator headerMode="none" initialRouteName=",">
         <Stack.Screen name="Intro" component={Intro} />
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="Info" component={Info} />
@@ -42,6 +44,7 @@ function App() {
         <Stack.Screen name="Test" component={Test} />
         <Stack.Screen name="Arrival" component={Arrival} />
         <Stack.Screen name="Map" component={CourseDetail} />
+        <Stack.Screen name="Rank" component={Rank} />
       </Stack.Navigator>
     </NavigationContainer>
   );
