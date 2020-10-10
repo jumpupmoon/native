@@ -69,7 +69,7 @@ export default function Course({navigation}) {
               style={styles.img}
               source={require('../img/어리목.jpg')}></Image>
             <Text style={styles.title}>어리목 탐방로</Text>
-            <Text style={styles.info}>약 2시간 30분 소요(5.8km)</Text>
+            <Text style={styles.info}>약 3시간 소요6.8km</Text>
             <Text style={styles.info2}>
               백록담 남쪽 화구벽과 한라산의 아름다운 풍광을 마음껏 즐길 수 있다.
             </Text>
@@ -82,7 +82,7 @@ export default function Course({navigation}) {
               style={styles.img}
               source={require('../img/돈내코.jpg')}></Image>
             <Text style={styles.title}>돈내코 탐방로</Text>
-            <Text style={styles.info}>약 2시간 30분 소요(5.8km)</Text>
+            <Text style={styles.info}>약 3시간 30분 소요(7km)</Text>
             <Text style={styles.info2}>
               한라산백록담조면암의 라바돔을 가장 멋있게 조망할 수 있다.
             </Text>
@@ -95,7 +95,7 @@ export default function Course({navigation}) {
               style={styles.img}
               source={require('../img/석굴암.png')}></Image>
             <Text style={styles.title}>석굴암 탐방로</Text>
-            <Text style={styles.info}>약 2시간 30분 소요(5.8km)</Text>
+            <Text style={styles.info}>약 50분 소요(1.5km)</Text>
             <Text style={styles.info2}>
               골짜기와 산세가 뛰어난 아흔아홉골에 위치한 석굴암
             </Text>
@@ -108,7 +108,7 @@ export default function Course({navigation}) {
               style={styles.img}
               source={require('../img/어승생악.jpg')}></Image>
             <Text style={styles.title}>어승생악 탐방로</Text>
-            <Text style={styles.info}>약 2시간 30분 소요(5.8km)</Text>
+            <Text style={styles.info}>약 30분 소요(1.3km)</Text>
             <Text style={styles.info2}>
               탐방객이 즐겨찾는 오름으로서 자연생태가 잘 보존되어 있음
             </Text>

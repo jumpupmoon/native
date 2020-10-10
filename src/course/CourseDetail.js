@@ -51,6 +51,7 @@ export default function CourseDetail({navigation, route}) {
   }
 
   useEffect(() => {
+    console.log(data[0].courseDetail)
     AsyncStorage.getItem('address')
     .then(address => {
       axios.get(`https://whitedeer.herokuapp.com/score?address=${address}&idx=${route.params}`)

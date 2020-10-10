@@ -16,6 +16,8 @@ import PointCharge from './mypage/PointCharge';
 import Profile from './mypage/Profile';
 import PointHistory from './mypage/PointHistory';
 import Camera from './mypage/Camera';
+import Rank from './Rank';
+
 
 const Stack = createStackNavigator();
 
@@ -29,7 +31,7 @@ function App() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator headerMode="none" initialRouteName="Intro">
+      <Stack.Navigator headerMode="none" initialRouteName=",">
         <Stack.Screen name="Intro" component={Intro} />
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="Info" component={Info} />
@@ -44,6 +46,7 @@ function App() {
         <Stack.Screen name="Profile" component={Profile} />
         <Stack.Screen name="PointHistory" component={PointHistory} />
         <Stack.Screen name="Camera" component={Camera} />
+        <Stack.Screen name="Rank" component={Rank} />
       </Stack.Navigator>
     </NavigationContainer>
   );
