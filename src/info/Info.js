@@ -1,7 +1,7 @@
 import React from 'react';
 import {Container, Content, Text, TextInput} from 'native-base';
 
-import Footer from './Footer';
+import Footer from '../Footer';
 import {
   StyleSheet,
   View,
@@ -38,7 +38,7 @@ export default function Course({navigation}) {
             onPress={() => navigation.navigate('Guide', 3)}>
             <Image
               style={styles.img}
-              source={require('./img/성판악.jpg')}></Image>
+              source={require('../img/성판악.jpg')}></Image>
             <Text style={styles.title}>성판악 탐방로</Text>
             <Text style={styles.info}>약 4시간 30분 소요(9.6km)</Text>
             <Text style={styles.info2}>
@@ -54,7 +54,7 @@ export default function Course({navigation}) {
             onPress={() => navigation.navigate('Guide', 1)}>
             <Image
               style={styles.img}
-              source={require('./img/영실.jpg')}></Image>
+              source={require('../img/영실.jpg')}></Image>
             <Text style={styles.title}>영실 탐방로</Text>
             <Text style={styles.info}>약 2시간 30분 소요(5.8km)</Text>
             <Text style={styles.info2}>
@@ -67,7 +67,7 @@ export default function Course({navigation}) {
             onPress={() => navigation.navigate('Guide', 4)}>
             <Image
               style={styles.img}
-              source={require('./img/어리목.jpg')}></Image>
+              source={require('../img/어리목.jpg')}></Image>
             <Text style={styles.title}>어리목 탐방로</Text>
             <Text style={styles.info}>약 3시간 소요6.8km</Text>
             <Text style={styles.info2}>
@@ -77,10 +77,10 @@ export default function Course({navigation}) {
 
           <TouchableOpacity
             style={styles.courses}
-            onPress={() => navigation.navigate('Guide', 7)}>
+            onPress={() => navigation.navigate('Guide', 0)}>
             <Image
               style={styles.img}
-              source={require('./img/돈내코.jpg')}></Image>
+              source={require('../img/돈내코.jpg')}></Image>
             <Text style={styles.title}>돈내코 탐방로</Text>
             <Text style={styles.info}>약 3시간 30분 소요(7km)</Text>
             <Text style={styles.info2}>
@@ -93,7 +93,7 @@ export default function Course({navigation}) {
             onPress={() => navigation.navigate('Guide', 5)}>
             <Image
               style={styles.img}
-              source={require('./img/석굴암.png')}></Image>
+              source={require('../img/석굴암.png')}></Image>
             <Text style={styles.title}>석굴암 탐방로</Text>
             <Text style={styles.info}>약 50분 소요(1.5km)</Text>
             <Text style={styles.info2}>
@@ -106,7 +106,7 @@ export default function Course({navigation}) {
             onPress={() => navigation.navigate('Guide', 6)}>
             <Image
               style={styles.img}
-              source={require('./img/어승생악.jpg')}></Image>
+              source={require('../img/어승생악.jpg')}></Image>
             <Text style={styles.title}>어승생악 탐방로</Text>
             <Text style={styles.info}>약 30분 소요(1.3km)</Text>
             <Text style={styles.info2}>
@@ -119,7 +119,7 @@ export default function Course({navigation}) {
             onPress={() => navigation.navigate('Guide', 2)}>
             <Image
               style={styles.img}
-              source={require('./img/관음사.jpg')}></Image>
+              source={require('../img/관음사.jpg')}></Image>
             <Text style={styles.title}>관음사 탐방로</Text>
             <Text style={styles.info}>약 5시간 소요(8.7km)</Text>
             <Text style={styles.info2}>

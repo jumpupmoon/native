@@ -1,7 +1,7 @@
 import React from 'react';
 import {Container, Content, Text, View} from 'native-base';
 import {StyleSheet, Image, TouchableHighlight} from 'react-native';
-import Footer from './Footer';
+import Footer from '../Footer';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -16,7 +16,8 @@ export default function Prepare({navigation, route}) {
     .then(address => {
       axios.get(`https://whitedeer.herokuapp.com/start?address=${address}&course=${route.params}`)
       .then(({data}) => {
-        if(data > 0) navigation.reset({routes: [{ name: 'Map', params: data-1 }]});
+        console.log(data);
+        if(data > 0) navigation.navigate('Map', data-1);
         else alert('error!');
       })
     })
@@ -34,7 +35,7 @@ export default function Prepare({navigation, route}) {
         <View style={styles.list}>
           <View style={styles.item}>
             <View style={styles.imgView}>
-              <Image style={styles.img} source={require('./img/간식.png')} />
+              <Image style={styles.img} source={require('../img/간식.png')} />
             </View>
             <Text
               style={{
@@ -51,7 +52,7 @@ export default function Prepare({navigation, route}) {
 
           <View style={styles.item}>
             <View style={styles.imgView}>
-              <Image style={styles.img} source={require('./img/물.png')} />
+              <Image style={styles.img} source={require('../img/물.png')} />
             </View>
             <Text style={styles.imgTitle}>물</Text>
           </View>
@@ -60,7 +61,7 @@ export default function Prepare({navigation, route}) {
             <View style={styles.imgView}>
               <Image
                 style={styles.img}
-                source={require('./img/선그라스.png')}
+                source={require('../img/선그라스.png')}
               />
             </View>
             <Text style={styles.imgTitle}>선글라스</Text>
@@ -68,14 +69,14 @@ export default function Prepare({navigation, route}) {
 
           <View style={styles.item}>
             <View style={styles.imgView}>
-              <Image style={styles.img} source={require('./img/부츠.png')} />
+              <Image style={styles.img} source={require('../img/부츠.png')} />
             </View>
             <Text style={styles.imgTitle}>등산화</Text>
           </View>
 
           <View style={styles.item}>
             <View style={styles.imgView}>
-              <Image style={styles.img} source={require('./img/반창고.png')} />
+              <Image style={styles.img} source={require('../img/반창고.png')} />
             </View>
             <Text style={styles.imgTitle}>비상의약품</Text>
           </View>

@@ -1,8 +1,8 @@
 import React from 'react';
 import {Container, Content, Text, Button, View} from 'native-base';
 import {StyleSheet} from 'react-native';
-import Footer from './Footer';
-import data from './Mountain.json';
+import Footer from '../Footer';
+import data from '../Mountain.json';
 
 export default function Prepare({navigation, route}) {
   return (
