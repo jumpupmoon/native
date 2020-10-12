@@ -17,7 +17,7 @@ import Profile from './mypage/Profile';
 import PointHistory from './mypage/PointHistory';
 import Camera from './mypage/Camera';
 import Rank from './Rank';
-
+import MtRank from './MtRank';
 
 const Stack = createStackNavigator();
 
@@ -41,12 +41,13 @@ function App() {
         <Stack.Screen name="Test" component={Test} />
         <Stack.Screen name="Arrival" component={Arrival} />
         <Stack.Screen name="Map" component={CourseDetail} />
+        <Stack.Screen name="Rank" component={Rank} />
+        <Stack.Screen name="MtRank" component={MtRank} />
         <Stack.Screen name="Mypage" component={Mypage} />
         <Stack.Screen name="PointCharge" component={PointCharge} />
         <Stack.Screen name="Profile" component={Profile} />
         <Stack.Screen name="PointHistory" component={PointHistory} />
         <Stack.Screen name="Camera" component={Camera} />
-        <Stack.Screen name="Rank" component={Rank} />
       </Stack.Navigator>
     </NavigationContainer>
   );
