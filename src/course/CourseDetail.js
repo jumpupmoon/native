@@ -5,7 +5,7 @@ import axios from 'axios';
 import Footer from '../Footer';
 import Popup1 from '../popup/Popup1';
 import AsyncStorage from '@react-native-community/async-storage';
-import data from '../Mountain.json';
+import mountain from '../Mountain.json';
 import Moment from 'react-moment';
 import 'moment-timezone';
 
@@ -22,9 +22,20 @@ export default function CourseDetail({navigation, route}) {
   ]
 
   // 확인할 지점 변경
-  const pointChange = idx =>{
-    if(idx == imgList.length-1) return;
-    setPoint(idx);
+  const pointList = idx => {
+    if(idx == mountain[score[0]].courseDetail.length-1) {
+      return (
+        <TouchableOpacity style={{flex:1}} key={idx}>
+          <Image style={score[2] == idx ? styles.imgCheck : styles.img} source={imgList[idx]} />
+        </TouchableOpacity>
+      )
+    } else {
+      return (
+        <TouchableOpacity style={{flex:1}} key={idx} onPress={() => setPoint(idx)}>
+          <Image style={score[2] == idx ? styles.imgCheck : styles.img} source={imgList[idx]} />
+        </TouchableOpacity>
+      )
+    }
   }
 
   // 시간 표기 컴포넌트
@@ -51,7 +62,6 @@ export default function CourseDetail({navigation, route}) {
   }
 
   useEffect(() => {
-    console.log(data[0].courseDetail)
     AsyncStorage.getItem('address')
     .then(address => {
       axios.get(`https://whitedeer.herokuapp.com/score?address=${address}&idx=${route.params}`)
@@ -69,7 +79,7 @@ export default function CourseDetail({navigation, route}) {
           {score[0] &&
             <>
               <View style={styles.course}>
-                <Text style={styles.title}>{data[score[0]].name}</Text>
+                <Text style={styles.title}>{mountain[score[0]].name}</Text>
 
                 <View style={styles.time}>
                   {timeText(score[1])}
@@ -77,11 +87,7 @@ export default function CourseDetail({navigation, route}) {
               </View>
 
               <View style={styles.imglist}>
-                {imgList.map((img, idx) => (
-                  <TouchableOpacity style={{flex:1}} key={idx} onPress={() => pointChange(idx)}>
-                    <Image style={score[2] == idx ? styles.imgCheck : styles.img} source={img} />
-                  </TouchableOpacity>
-                ))}
+                {mountain[score[0]].courseDetail.map((_, idx) => pointList(idx))}
               </View>
 
               <View style={styles.score}>
@@ -94,28 +100,28 @@ export default function CourseDetail({navigation, route}) {
 
               <View style={styles.scoreInfo}>
                 <View style={styles.scoreView}>
-                  <Text style={styles.time}>{point+1} 지점</Text>
+                  <Text style={styles.time}>{mountain[score[0]].courseDetail[point].name}</Text>
                 </View>
                 <View style={styles.scoreView} />
                 <View style={styles.scoreView}>
-                  <Text style={styles.time}>{point+2} 지점</Text>
+                  <Text style={styles.time}>{mountain[score[0]].courseDetail[point+1].name}</Text>
                 </View>
               </View>
 
               <View style={styles.info}>
                 <View style={styles.infoContent}>
                   <Text style={styles.scoreTitle}>난이도</Text>
-                  <Text style={styles.time}>어려움</Text>
+                  <Text style={styles.time}>{mountain[score[0]].courseDetail[point].difficulty}</Text>
                 </View>
 
                 <View style={styles.infoContent}>
                   <Text style={styles.scoreTitle}>거리</Text>
-                  <Text style={styles.time}>2.3km</Text>
+                  <Text style={styles.time}>{mountain[score[0]].courseDetail[point].distance}</Text>
                 </View>
 
                 <View style={styles.infoContent}>
                   <Text style={styles.scoreTitle}>예상 시간</Text>
-                  <Text style={styles.time}>1시간 30분</Text>
+                  <Text style={styles.time}>{mountain[score[0]].courseDetail[point].time}</Text>
                 </View>
               </View>
 

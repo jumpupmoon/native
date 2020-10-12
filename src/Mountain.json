@@ -3,16 +3,27 @@
         "name": "돈내코탐방로",
         "distance": "7km(왕복 14km)",
         "course": "돈내코탐방로 살채기도 평궤대피소 남벽일대",
-        "courseDetail": {
-            "first": "돈내코탐방로",
-            "second": "살채기도",
-            "third": "평궤대피소",
-            "fourth": "남벽일대"
-        },
-        "time": "약시간 3시간 30분 소요 예정",
-        "shelter": "평궤대피소(무인)",
-        "store": "없음",
-        "toilet": "돈내코탐방안내소",
+        "courseDetail": [
+            {
+                "name": "돈내코 탐방안내소",
+                "distance": "5.3km",
+                "time": "2시간50분",
+                "difficulty": "보통"
+            },
+            {
+                "name": "평궤대피소",
+                "distance": "1.7km",
+                "time": "40분",
+                "difficulty": "보통"
+            },
+            {
+                "name": "남벽분기점"
+            }
+        ],
+        "time": "약 3시간 30분 소요",
+        "shelter": ["평궤대피소(무인)"],
+        "store": ["없음"],
+        "toilet": ["돈내코탐방안내소", "평궤대피소"],
         "average": "평균 : 3시간30분",
         "first": "1 등 :2시간 50분"
     },
@@ -20,17 +31,39 @@
         "name": "영실탐방로",
         "distance": "5.8km(왕복 11.6km)",
         "course": "영실휴게소 영실계곡  병풍바위   대피소   남벽분기점",
-        "courseDetail": {
-            "first": "영실휴게소",
-            "second": "영실계곡",
-            "third": "병풍바위",
-            "fourth": "대피소",
-            "fifth": "남벽분기점"
-        },
-        "time": "약 2시간 30분 소요 예정",
-        "shelter": "윗세오름 대피소(유인)",
-        "store": "영실 휴게소",
-        "toilet": "영실관리사무소-영실휴게소-윗세오름대피소",
+        "courseDetail": [
+            {
+                "name": "영실 탐방안내소",
+                "distance": "2.4km",
+                "time": "40분",
+                "difficulty": "쉬움"
+            },
+            {
+                "name": "영실 휴게소",
+                "distance": "1.5km",
+                "time": "50분",
+                "difficulty": "어려움"
+            },
+            {
+                "name": "병풍바위",
+                "distance": "2.2km",
+                "time": "40분",
+                "difficulty": "쉬움"
+            },
+            {
+                "name": "윗세오름 대피소",
+                "distance": "2.1km",
+                "time": "1시간",
+                "difficulty": "쉬움"
+            },
+            {
+                "name": "남벽분기점"
+            }
+        ],
+        "time": "약 2시간 30분 소요",
+        "shelter": ["윗세오름 대피소(유인)"],
+        "store": ["영실 휴게소"],
+        "toilet": ["영실 탐방안내소", "영실 휴게소", "윗세오름 대피소"],
         "average": "평균 : 2시간 30분",
         "first": "1 등 : 2시간 13분"
     },
@@ -38,17 +71,39 @@
         "name": "관음사탐방로",
         "distance": "8.7km(왕복 17.4km)",
         "course": "탐방안내소 탐라계곡    대피소      용진각      백록담",
-        "courseDetail": {
-            "first": "탐방안내소",
-            "second": "탐라계곡",
-            "third": "대피소",
-            "fourth": "용진각",
-            "fifth": "백록담"
-        },
-        "time": "약 5시간 소요 예정",
-        "shelter": "삼각봉대피소(유인)",
-        "store": "관음사탐방로 입구 휴게소",
-        "toilet": "관음사야영장-삼각봉대피소",
+        "courseDetail": [
+            {
+                "name": "관음사 탐방안내소",
+                "distance": "3.2km",
+                "time": "1시간",
+                "difficulty": "보통"
+            },
+            {
+                "name": "탐라계곡",
+                "distance": "1.7km",
+                "time": "1시간 30분",
+                "difficulty": "어려움"
+            },
+            {
+                "name": "삼각봉 대피소",
+                "distance": "1.1km",
+                "time": "50분",
+                "difficulty": "쉬움"
+            },
+            {
+                "name": "용진각",
+                "distance": "2.7km",
+                "time": "1시간 40분",
+                "difficulty": "어려움"
+            },
+            {
+                "name": "백록담"
+            }
+        ],
+        "time": "약 5시간 소요",
+        "shelter": ["삼각봉대피소(유인)"],
+        "store": ["관음사탐방로 입구 휴게소"],
+        "toilet": ["관음사야영장", "삼각봉대피소"],
         "average": "평균 : 5시간",
         "first": "1 등 : 4시간 48분"
     },
@@ -56,17 +111,39 @@
         "name": "성판악탐방로",
         "distance": "9.6km(왕복 19.2km)",
         "course": "탐방안내소   속밭     사라막샘     진달래밭    백록담",
-        "courseDetail": {
-            "first": "탐방안내소",
-            "second": "속밭",
-            "third": "사라막샘",
-            "fourth": "진달래밭",
-            "fifth": "백록담"
-        },
-        "time": "약 4시간 30분 소요 예정",
-        "shelter": "속밭대피소(무인)-진달래밭대피소(유인)",
-        "store": "성판악 휴게소",
-        "toilet": "성판악 사무실-속밭 대피소-진달래밭 대피소",
+        "courseDetail": [
+            {
+                "name": "성판악 탐방안내소",
+                "distance": "4.1km",
+                "time": "1시간 20분",
+                "difficulty": "쉬움"
+            },
+            {
+                "name": "속밭 대피소",
+                "distance": "1.7km",
+                "time": "40분",
+                "difficulty": "쉬움"
+            },
+            {
+                "name": "사라오름 입구",
+                "distance": "1.5km",
+                "time": "1시간",
+                "difficulty": "보통"
+            },
+            {
+                "name": "진달래밭",
+                "distance": "2.3km",
+                "time": "1시간 30분",
+                "difficulty": "어려움"
+            },
+            {
+                "name": "백록담"
+            }
+        ],
+        "time": "약 4시간 30분 소요",
+        "shelter": ["속밭대피소(무인)", "진달래밭대피소(유인)"],
+        "store": ["성판악 휴게소"],
+        "toilet": ["성판악 사무실", "속밭 대피소", "진달래밭 대피소"],
         "average": "평균 : 4시간 22분",
         "first": "1 등 : 4시간 10분"
     },
@@ -74,17 +151,39 @@
         "name": "어리목탐방로",
         "distance": "6.8km(왕복 13.6km)",
         "course": "어리목계곡 사제비동산 만세동산 윗세오름대피소 남벽분기점",
-        "courseDetail": {
-            "first": "어리목계곡",
-            "second": "사제비동산",
-            "third": "만세동산",
-            "fourth": "윗세오름대피소",
-            "fifth": "남벽분기점"
-        },
-        "time": "약시간 분 소요 예정",
-        "shelter": "윗세오름 대피소(유인)",
-        "store": "없음(물,음료수 자판기 있음)",
-        "toilet": "어리목 광장-윗세오름 대피소",
+        "courseDetail": [
+            {
+                "name": "어리목 탐방안내소",
+                "distance": "2.4km",
+                "time": "1시간",
+                "difficulty": "쉬움"
+            },
+            {
+                "name": "사제비동산",
+                "distance": "0.8km",
+                "time": "30분",
+                "difficulty": "어려움"
+            },
+            {
+                "name": "만세동산",
+                "distance": "1.5km",
+                "time": "30분",
+                "difficulty": "보통"
+            },
+            {
+                "name": "윗세오름",
+                "distance": "2.1km",
+                "time": "1시간",
+                "difficulty": "쉬움"
+            },
+            {
+                "name": "남벽분기점"
+            }
+        ],
+        "time": "약 3시간 소요",
+        "shelter": ["윗세오름 대피소(유인)"],
+        "store": ["물, 음료수 자판기"],
+        "toilet": ["어리목 광장", "윗세오름 대피소"],
         "average": "평균 : 3시간",
         "first": "1 등 : 2시간 24분"
     },
@@ -92,15 +191,21 @@
         "name": "석굴암탐방로",
         "distance": "1.5km(왕복 3km)",
         "course": "탐방로입구 정비된탐방로 석굴암암자",
-        "courseDetail": {
-            "first": "탐방로입구",
-            "second": "정비된탐방로",
-            "third": "석굴암암자"
-        },
-        "time": "약시간 50분 소요 예정",
-        "shelter": "없음",
-        "store": "없음",
-        "toilet": "없음",
+        "courseDetail": [
+            {
+                "name": "충혼묘지 주차장",
+                "distance": "1.5km",
+                "time": "50분",
+                "difficulty": "쉬움"
+            },
+            {
+                "name": "석굴암"
+            }
+        ],
+        "time": "약 50분 소요",
+        "shelter": ["없음"],
+        "store": ["없음"],
+        "toilet": ["없음"],
         "average": "평균 : 50분",
         "first": "1 등 :28분"
     },
@@ -108,14 +213,21 @@
         "name": "어승생악탐방로",
         "distance": "1.3km(왕복 2.6km)",
         "course": "탐방안내소 어승생악",
-        "courseDetail": {
-            "first": "탐방안내소",
-            "second": "어승생악"
-        },
-        "time": "약시간 30분 소요 예정",
-        "shelter": "없음",
-        "store": "없음",
-        "toilet": "없음",
+        "courseDetail": [
+            {
+                "name": "어리목 탐방안내소",
+                "distance": "1.3km",
+                "time": "30분",
+                "difficulty": "쉬움"
+            },
+            {
+                "name": "어승생악"
+            }
+        ],
+        "time": "약 30분 소요",
+        "shelter": ["없음"],
+        "store": ["없음"],
+        "toilet": ["없음"],
         "average": "평균 : 30분",
         "first": "1 등 :26분"
     }
