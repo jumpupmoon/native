@@ -1,15 +1,25 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {Container, Content, Text, Button, View} from 'native-base';
 import {StyleSheet} from 'react-native';
 import Footer from '../Footer';
-import data from '../Mountain.json';
+import course from '../Mountain.json';
+import axios from 'axios';
 
 export default function Prepare({navigation, route}) {
+  // const [course, setCourse] = useState();
+
+  useEffect(() => {
+    axios.get(`https://whitedeer.herokuapp.com/course/${route.params}`)
+    .then(({data}) => {
+      console.log(data.course)
+    })
+  }, [])
+
   return (
     <Container style={styles.container}>
       <Content>
-        <Text style={styles.Title}>{data[route.params].name}</Text>
-        <Text style={styles.distance}>{data[route.params].distance}</Text>
+        <Text style={styles.Title}>{course[route.params].name}</Text>
+        <Text style={styles.distance}>{course[route.params].distance}km(왕복 {course[route.params].distance * 2}km)</Text>
         <View style={styles.List}>
           <View style={styles.item}>
             <View style={styles.trailLine} />
@@ -20,20 +30,20 @@ export default function Prepare({navigation, route}) {
             <View style={styles.circle5}></View>
             <View style={{marginHorizontal: 20}}>
               <Text style={styles.circleText}>
-                {data[route.params].course}
+                {course[route.params].course}
               </Text>
             </View>
           </View>
 
           <View style={{marginVertical: 5}}>
-            <Text style={styles.itemText}>{data[route.params].time}</Text>
+            <Text style={styles.itemText}>{course[route.params].time}</Text>
           </View>
 
           <View style={styles.item}>
             <Text style={styles.itemText}>- 대 피 소 -</Text>
             <View style={styles.itemDetail}>
               <Text style={styles.itemTextDetail}>
-                {data[route.params].shelter}
+                {course[route.params].shelter}
               </Text>
             </View>
           </View>
@@ -41,7 +51,7 @@ export default function Prepare({navigation, route}) {
           <View style={styles.item}>
             <Text style={styles.itemText}>- 매 점 -</Text>
             <View style={styles.itemDetail}>
-              <Text style={styles.itemTextDetail}>{data[route.params].store}</Text>
+              <Text style={styles.itemTextDetail}>{course[route.params].store}</Text>
             </View>
           </View>
 
@@ -55,17 +65,17 @@ export default function Prepare({navigation, route}) {
                 padding: 10,
               }}>
               <Text style={styles.itemTextDetail}>
-                {data[route.params].toilet}
+                {course[route.params].toilet}
               </Text>
             </View>
           </View>
 
           <View style={{alignItems: 'center'}}>
             <Text style={styles.itemText}>
-              {`${data[route.params].name} ${data[route.params].average}`}
+              {`${course[route.params].name} ${course[route.params].average}`}
             </Text>
             <Text style={styles.itemText}>
-              {`${data[route.params].name} ${data[route.params].first}`}
+              {`${course[route.params].name} ${course[route.params].first}`}
               </Text>
           </View>
 
