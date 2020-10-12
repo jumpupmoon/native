@@ -12,27 +12,26 @@ import 'moment-timezone';
 export default function CourseDetail({navigation, route}) {
   const [score, setScore] = useState([]);
   const [point, setPoint] = useState(0);
-
-  const imgList = [
-    require('../img/돈내코.jpg'),
-    require('../img/영실.jpg'),
-    require('../img/관음사.jpg'),
-    require('../img/성판악.jpg'),
-    require('../img/어리목.jpg'),
-  ]
+  const [course, setCourse] = useState();
 
   // 확인할 지점 변경
-  const pointList = idx => {
-    if(idx == mountain[score[0]].courseDetail.length-1) {
+  const pointList = d => {
+    if(d.seq == course.courseDetail.length-1) {
       return (
-        <TouchableOpacity style={{flex:1}} key={idx}>
-          <Image style={score[2] == idx ? styles.imgCheck : styles.img} source={imgList[idx]} />
+        <TouchableOpacity style={{flex:1}} key={d.seq}>
+          <View style={styles.circleDetail} key={d.seq}>
+            <View style={score[2] >= d.seq ? styles.circleCheck : styles.circle}></View>
+            <Text style={styles.circleText} textBreakStrategy={'balanced'}>{d.name}</Text>
+          </View>
         </TouchableOpacity>
       )
     } else {
       return (
-        <TouchableOpacity style={{flex:1}} key={idx} onPress={() => setPoint(idx)}>
-          <Image style={score[2] == idx ? styles.imgCheck : styles.img} source={imgList[idx]} />
+        <TouchableOpacity style={{flex:1}} key={d.seq} onPress={() => setPoint(d.seq)}>
+          <View style={styles.circleDetail} key={d.seq}>
+            <View style={score[2] >= d.seq ? styles.circleCheck : styles.circle}></View>
+            <Text style={styles.circleText} textBreakStrategy={'balanced'}>{d.name}</Text>
+          </View>
         </TouchableOpacity>
       )
     }
@@ -64,10 +63,17 @@ export default function CourseDetail({navigation, route}) {
   useEffect(() => {
     AsyncStorage.getItem('address')
     .then(address => {
+      // 내 등산기록 가져오기
       axios.get(`https://whitedeer.herokuapp.com/score?address=${address}&idx=${route.params}`)
       .then(({data}) => {
         setScore(data);
         setPoint(Number(data[2]))
+
+        // 코스 정보 가져오기
+        axios.get(`https://whitedeer.herokuapp.com/course/${data[0]}`)
+        .then(({data}) => {
+          setCourse(data.course)
+        })
       })
       .catch(err => console.log(err));
     })
@@ -76,52 +82,45 @@ export default function CourseDetail({navigation, route}) {
   return (
     <Container>
         <Content>
-          {score[0] &&
+          {course &&
             <>
               <View style={styles.course}>
-                <Text style={styles.title}>{mountain[score[0]].name}</Text>
-
-                <View style={styles.time}>
-                  {timeText(score[1])}
-                </View>
+                <Text style={styles.title}>{course.name}</Text>
               </View>
 
-              <View style={styles.imglist}>
-                {mountain[score[0]].courseDetail.map((_, idx) => pointList(idx))}
-              </View>
-
-              <View style={styles.score}>
-                <Image style={styles.scoreImg} source={imgList[point]} />
-                <View style={styles.scoreView}>
-                  <Text style={styles.scoreIcon}>▶</Text>
+              <View style={styles.item}>
+                <View style={styles.trailLine} />
+                <View style={styles.circleItem}>
+                  {course.courseDetail.map(d => pointList(d))}
                 </View>
-                <Image style={styles.scoreImg} source={imgList[point+1]} />
               </View>
 
               <View style={styles.scoreInfo}>
                 <View style={styles.scoreView}>
-                  <Text style={styles.time}>{mountain[score[0]].courseDetail[point].name}</Text>
+                  <Text style={styles.scoreIcon}>{course.courseDetail[point].name}</Text>
                 </View>
-                <View style={styles.scoreView} />
                 <View style={styles.scoreView}>
-                  <Text style={styles.time}>{mountain[score[0]].courseDetail[point+1].name}</Text>
+                  <Text style={styles.scoreIcon}>▶</Text>
+                </View>
+                <View style={styles.scoreView}>
+                  <Text style={styles.scoreIcon}>{course.courseDetail[point+1].name}</Text>
                 </View>
               </View>
 
               <View style={styles.info}>
                 <View style={styles.infoContent}>
                   <Text style={styles.scoreTitle}>난이도</Text>
-                  <Text style={styles.time}>{mountain[score[0]].courseDetail[point].difficulty}</Text>
+                  <Text style={styles.time}>{course.courseDetail[point].difficulty}</Text>
                 </View>
 
                 <View style={styles.infoContent}>
                   <Text style={styles.scoreTitle}>거리</Text>
-                  <Text style={styles.time}>{mountain[score[0]].courseDetail[point].distance}</Text>
+                  <Text style={styles.time}>{course.courseDetail[point].distance}</Text>
                 </View>
 
                 <View style={styles.infoContent}>
                   <Text style={styles.scoreTitle}>예상 시간</Text>
-                  <Text style={styles.time}>{mountain[score[0]].courseDetail[point].time}</Text>
+                  <Text style={styles.time}>{course.courseDetail[point].time}</Text>
                 </View>
               </View>
 
@@ -150,18 +149,14 @@ const styles = StyleSheet.create({
   course: {
     display: 'flex',
     flex: 1,
-    margin: 20,
-    borderColor: '#404040',
-    borderWidth: 3,
-    borderRadius: 10,
+    margin: 40,
     padding: 20,
   },
   title: {
-    alignItems: 'flex-start',
     fontFamily: 'DungGeunMo',
-    fontSize: 30,
-    color: '#181717',
-    marginBottom: 20
+    fontSize: 36,
+    color: '#1E824C',
+    textAlign: 'center'
   },
   time: {
     alignItems: 'flex-end',
@@ -172,6 +167,7 @@ const styles = StyleSheet.create({
   info: {
     flexDirection: 'row',
     justifyContent: 'space-around',
+    marginBottom: 20
   },
   infoContent: {
     flex:1,
@@ -208,12 +204,16 @@ const styles = StyleSheet.create({
     margin: 20,
   },
   scoreIcon: {
-    fontSize: 40
+    fontSize: 20,
+    fontFamily: 'DungGeunMo',
+    textAlign: 'center'
   },
   scoreView: {
+    fontSize: 40,
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    marginBottom: 40
   },
   scoreImg: {
     flex: 1,
@@ -225,7 +225,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     flexDirection: 'row',
     marginHorizontal: 20,
-    marginBottom: 40,
+    marginBottom: 20,
   },
   scoreTitle: {
     fontFamily: 'DungGeunMo',
@@ -244,5 +244,48 @@ const styles = StyleSheet.create({
     fontFamily: 'DungGeunMo',
     textAlign: 'center',
     color: '#FFF',
-  }
+  },
+  item: {
+    margin: 10,
+    marginBottom: 120
+  },
+  trailLine: {
+    borderBottomColor: '#1E824C',
+    borderBottomWidth: 5,
+    marginHorizontal: 10,
+    borderStyle: 'dashed',
+    marginTop: 20,
+    borderRadius: 1,
+  },
+  circle: {
+    width: 18,
+    height: 18,
+    borderRadius: 9,
+    backgroundColor: '#F5E51B',
+    borderWidth: 4,
+    borderColor: '#1E824C',
+  },
+  circleCheck: {
+    width: 18,
+    height: 18,
+    borderRadius: 9,
+    backgroundColor: '#1E824C',
+    borderWidth: 4,
+    borderColor: '#1E824C',
+  },
+  circleItem: {
+    flexDirection: "row",
+    position: "absolute",
+    marginTop: 14
+  },
+  circleDetail: {
+    flex: 1,
+    alignItems: 'center'
+  },
+  circleText: {
+    fontFamily: 'NotoSansKR-Regular',
+    color: '#181717',
+    fontSize: 14,
+    textAlign: 'center'
+  },
 })

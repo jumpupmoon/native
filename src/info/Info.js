@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
   info2: {
     marginTop: 110,
     position: 'absolute',
-
+    textAlign: 'center',
     padding: 0,
     fontFamily: 'DungGeunMo',
     fontSize: 16,

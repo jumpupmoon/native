@@ -2,102 +2,104 @@ import React, { useEffect, useState } from 'react';
 import {Container, Content, Text, Button, View} from 'native-base';
 import {StyleSheet} from 'react-native';
 import Footer from '../Footer';
-import course from '../Mountain.json';
+// import course from '../Mountain.json';
 import axios from 'axios';
 
 export default function Prepare({navigation, route}) {
-  // const [course, setCourse] = useState();
+  const [course, setCourse] = useState();
 
   useEffect(() => {
     axios.get(`https://whitedeer.herokuapp.com/course/${route.params}`)
     .then(({data}) => {
-      console.log(data.course)
+      setCourse(data.course)
     })
   }, [])
 
   return (
     <Container style={styles.container}>
       <Content>
-        <Text style={styles.Title}>{course[route.params].name}</Text>
-        <Text style={styles.distance}>{course[route.params].distance}km(왕복 {course[route.params].distance * 2}km)</Text>
-        <View style={styles.List}>
-          <View style={styles.item}>
-            <View style={styles.trailLine} />
-            <View style={styles.circle1}></View>
-            <View style={styles.circle2}></View>
-            <View style={styles.circle3}></View>
-            <View style={styles.circle4}></View>
-            <View style={styles.circle5}></View>
-            <View style={{marginHorizontal: 20}}>
-              <Text style={styles.circleText}>
-                {course[route.params].course}
-              </Text>
+        {course &&
+          <>
+            <Text style={styles.Title}>{course.name}</Text>
+            <Text style={styles.distance}>{course.distance}km(왕복 {course.distance * 2}km)</Text>
+            <Text style={styles.distance}>{course.time}</Text>
+            
+            <View style={styles.List}>
+              <View style={styles.item}>
+                <View style={styles.trailLine} />
+                <View style={styles.circleItem}>
+                  {course.courseDetail.map((d) => (
+                      <View style={styles.circleDetail} key={d.seq}>
+                        <View style={styles.circle}></View>
+                        <Text style={styles.circleText} textBreakStrategy={'balanced'}>{d.name}</Text>
+                      </View>
+                  ))}
+                </View>
+              </View>
+
+              <View style={{marginTop: 60}}></View>
+
+              <View style={styles.item}>
+                <Text style={styles.itemText}>- 대 피 소 -</Text>
+                <View style={styles.itemDetail}>
+                  <Text style={styles.itemTextDetail}>
+                    {course.shelter}
+                  </Text>
+                </View>
+              </View>
+
+              <View style={styles.item}>
+                <Text style={styles.itemText}>- 매 점 -</Text>
+                <View style={styles.itemDetail}>
+                  <Text style={styles.itemTextDetail}>{course.store}</Text>
+                </View>
+              </View>
+
+              <View style={styles.item}>
+                <Text style={styles.itemText}>- 화 장 실 -</Text>
+                <View
+                  style={{
+                    borderWidth: 2,
+                    borderRadius: 3,
+                    marginVertical: 10,
+                    padding: 10,
+                  }}>
+                  <Text style={styles.itemTextDetail}>
+                    {course.toilet}
+                  </Text>
+                </View>
+              </View>
+
+              {/* <View style={{alignItems: 'center'}}>
+                <Text style={styles.itemText}>
+                  {`${course.name} ${course.average}`}
+                </Text>
+                <Text style={styles.itemText}>
+                  {`${course.name} ${course.first}`}
+                  </Text>
+              </View> */}
+
+              <Button
+                onPress={() => navigation.navigate('Prepare', route.params)}
+                style={{
+                  textAlign: 'center',
+                  backgroundColor: '#1E824C',
+                  alignSelf: 'center',
+                  marginTop: 30,
+                }}>
+                <Text
+                  style={{
+                    fontSize: 26,
+                    fontFamily: 'DungGeunMo',
+                    textAlign: 'center',
+                    color: '#FFF',
+                  }}>
+                  시작하기
+                </Text>
+              </Button>
             </View>
-          </View>
-
-          <View style={{marginVertical: 5}}>
-            <Text style={styles.itemText}>{course[route.params].time}</Text>
-          </View>
-
-          <View style={styles.item}>
-            <Text style={styles.itemText}>- 대 피 소 -</Text>
-            <View style={styles.itemDetail}>
-              <Text style={styles.itemTextDetail}>
-                {course[route.params].shelter}
-              </Text>
-            </View>
-          </View>
-
-          <View style={styles.item}>
-            <Text style={styles.itemText}>- 매 점 -</Text>
-            <View style={styles.itemDetail}>
-              <Text style={styles.itemTextDetail}>{course[route.params].store}</Text>
-            </View>
-          </View>
-
-          <View style={styles.item}>
-            <Text style={styles.itemText}>- 화 장 실 -</Text>
-            <View
-              style={{
-                borderWidth: 2,
-                borderRadius: 3,
-                marginVertical: 10,
-                padding: 10,
-              }}>
-              <Text style={styles.itemTextDetail}>
-                {course[route.params].toilet}
-              </Text>
-            </View>
-          </View>
-
-          <View style={{alignItems: 'center'}}>
-            <Text style={styles.itemText}>
-              {`${course[route.params].name} ${course[route.params].average}`}
-            </Text>
-            <Text style={styles.itemText}>
-              {`${course[route.params].name} ${course[route.params].first}`}
-              </Text>
-          </View>
-
-          <Button
-            onPress={() => navigation.navigate('Prepare', route.params)}
-            style={{
-              textAlign: 'center',
-              backgroundColor: '#1E824C',
-              alignSelf: 'center',
-              marginTop: 30,
-            }}>
-            <Text
-              style={{
-                fontSize: 26,
-                fontFamily: 'DungGeunMo',
-                textAlign: 'center',
-                color: '#FFF',
-              }}>
-              시작하기
-            </Text>
-          </Button>
-        </View>
+            </>
+          }
       </Content>
 
       <Footer navigation={navigation} value="2" />
@@ -131,6 +133,7 @@ const styles = StyleSheet.create({
     fontFamily: 'DungGeunMo',
     textAlign: 'center',
     color: '#404040',
+    marginTop: 10
   },
   List: {
     margin: 20,
@@ -168,6 +171,7 @@ const styles = StyleSheet.create({
     fontFamily: 'NotoSansKR-Regular',
     color: '#181717',
     fontSize: 14,
+    textAlign: 'center'
   },
   circle1: {
     width: 18,
@@ -224,4 +228,21 @@ const styles = StyleSheet.create({
     marginTop: 14,
     marginLeft: 280,
   },
+  circle: {
+    width: 18,
+    height: 18,
+    borderRadius: 9,
+    backgroundColor: '#F5E51B',
+    borderWidth: 4,
+    borderColor: '#1E824C',
+  },
+  circleItem: {
+    flexDirection: "row",
+    position: "absolute",
+    marginTop: 14
+  },
+  circleDetail: {
+    flex: 1,
+    alignItems: 'center'
+  }
 });
