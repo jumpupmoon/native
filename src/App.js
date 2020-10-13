@@ -18,15 +18,35 @@ import PointHistory from './mypage/PointHistory';
 import Camera from './mypage/Camera';
 import Rank from './Rank';
 import MtRank from './MtRank';
+import NfcManager, {NfcEvents} from 'react-native-nfc-manager';
 
 const Stack = createStackNavigator();
 
 function App() {
-  // 스플래시 이미지 숨기기
   useEffect(() => {
+    // nfc 설정
+    NfcManager.start();
+    NfcManager.setEventListener(NfcEvents.DiscoverTag, tag => {
+      NfcManager.unregisterTagEvent().catch(() => 0);
+      console.log(tag.id);
+
+      NfcManager.registerTagEvent();
+    });
+
+    // nfc 태깅 이벤트 실행
+    try {
+      NfcManager.registerTagEvent();
+    } catch (ex) {
+      console.warn('ex', ex);
+      NfcManager.unregisterTagEvent().catch(() => 0);
+    }
+
+    // 스플래시 이미지 숨기기
     setTimeout(() => {
       SplashScreen.hide();
     }, 1000);
+
+    return () => NfcManager.unregisterTagEvent().catch(() => 0);
   }, []);
 
   return (
