@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import SplashScreen from 'react-native-splash-screen';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
@@ -19,11 +19,20 @@ import Camera from './mypage/Camera';
 import Rank from './Rank';
 import MtRank from './MtRank';
 import NfcManager, {NfcEvents} from 'react-native-nfc-manager';
+import AsyncStorage from '@react-native-community/async-storage';
 
 const Stack = createStackNavigator();
 
 function App() {
+  const [address, setAddress] = useState();
+
   useEffect(() => {
+    // 지갑 주소 체크 후 없을 경우 시작하기, 있으면 홈화면으로
+    AsyncStorage.getItem('address')
+    .then(data => {
+      if(data) setAddress(data);
+    })
+
     // nfc 설정
     NfcManager.start();
     NfcManager.setEventListener(NfcEvents.DiscoverTag, tag => {
@@ -37,7 +46,7 @@ function App() {
     try {
       NfcManager.registerTagEvent();
     } catch (ex) {
-      console.warn('ex', ex);
+      console.log('ex', ex);
       NfcManager.unregisterTagEvent().catch(() => 0);
     }
 
@@ -49,10 +58,9 @@ function App() {
     return () => NfcManager.unregisterTagEvent().catch(() => 0);
   }, []);
 
-  return (
+  return !address ? <Intro setAddress={setAddress} /> : (
     <NavigationContainer>
-      <Stack.Navigator headerMode="none" initialRouteName=",">
-        <Stack.Screen name="Intro" component={Intro} />
+      <Stack.Navigator headerMode="none" initialRouteName="Home">
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="Info" component={Info} />
         <Stack.Screen name="Course" component={Course} />

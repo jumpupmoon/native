@@ -9,23 +9,21 @@ const ImageBackground = Styled.ImageBackground`
   justify-content: center;
 `;
 
-export default function Intro({navigation}) {
-  const [includeFontPadding, setIncludeFontPadding] = useState(false);
+export default function Intro({setAddress}) {
+  const [pendding, setPendding] = useState(false);
 
   const starting = () => {
-    // 계정이 없을 경우 새 계정 받아오기
-    AsyncStorage.getItem('address')
-    .then(data => {
-      if(!data) {
-        axios.get('https://whitedeer.herokuapp.com/new')
-        .then(({data}) => {
-          AsyncStorage.setItem('address', data);
-        })
-        .catch(err => alert(err));
-      }
-      
-      navigation.reset({routes: [{ name: 'Home' }]})
+    // 이중 작동 방지
+    if(pendding) return;
+    setPendding(true);
+
+    // 지갑 주소 받아서 기기에 저장
+    axios.get('https://whitedeer.herokuapp.com/new')
+    .then(({data}) => {
+      AsyncStorage.setItem('address', data);
+      setAddress(data);
     })
+    .catch(err => alert(err));
   }
 
   return (
@@ -35,15 +33,17 @@ export default function Intro({navigation}) {
           <Text style={styles.title1}>안녕하우꽈?</Text>
           <Text style={styles.title2}>산 오쿠과!</Text>      
         </View>
+        
         <View style={styles.contentView}>
           <Text style={styles.contents}> '산에 오시겠습니까'라는 뜻의 제주도 사투리입니다.</Text>
           <Text style={styles.contents}>{"\n"}한라산을 방문한 등산 초보를 위해{"\n"}
               한라산에 좀 더 쉽고 재밌게 다가갈 수 있기를{"\n"}
               바라는 뜻에서 출발했습니다.</Text>
         </View>
+
         <TouchableOpacity style={styles.button} onPress={starting}>
-        <Text style={styles.buttonTitle}>시작하기</Text>
-      </TouchableOpacity>
+          <Text style={styles.buttonTitle}>시작하기</Text>
+        </TouchableOpacity>
       </ImageBackground>
       </View>
   );
