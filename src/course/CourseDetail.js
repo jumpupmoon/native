@@ -4,14 +4,11 @@ import {StyleSheet, Image, TouchableOpacity, Alert } from 'react-native';
 import axios from 'axios';
 import Footer from '../Footer';
 import Popup1 from '../popup/Popup1';
-import AsyncStorage from '@react-native-community/async-storage';
-import mountain from '../Mountain.json';
 import Moment from 'react-moment';
 import 'moment-timezone';
 
 export default function CourseDetail({navigation, route}) {
   const [score, setScore] = useState([]);
-  const [point, setPoint] = useState(0);
   const [course, setCourse] = useState();
 
   // 확인할 지점 변경
@@ -20,7 +17,7 @@ export default function CourseDetail({navigation, route}) {
       return (
         <TouchableOpacity style={{flex:1}} key={d.seq}>
           <View style={styles.circleDetail} key={d.seq}>
-            <View style={score[2] >= d.seq ? styles.circleCheck : styles.circle}></View>
+            <View style={score.score >= d.seq ? styles.circleCheck : styles.circle}></View>
             <Text style={styles.circleText} textBreakStrategy={'balanced'}>{d.name}</Text>
           </View>
         </TouchableOpacity>
@@ -29,7 +26,7 @@ export default function CourseDetail({navigation, route}) {
       return (
         <TouchableOpacity style={{flex:1}} key={d.seq} onPress={() => setPoint(d.seq)}>
           <View style={styles.circleDetail} key={d.seq}>
-            <View style={score[2] >= d.seq ? styles.circleCheck : styles.circle}></View>
+            <View style={score.score >= d.seq ? styles.circleCheck : styles.circle}></View>
             <Text style={styles.circleText} textBreakStrategy={'balanced'}>{d.name}</Text>
           </View>
         </TouchableOpacity>
@@ -57,26 +54,22 @@ export default function CourseDetail({navigation, route}) {
 
   // 포기하기 처리
   const giveup = idx => {
-    console.log(idx)
+    console.log(idx);
   }
 
   useEffect(() => {
-    AsyncStorage.getItem('address')
-    .then(address => {
-      // 내 등산기록 가져오기
-      axios.get(`https://whitedeer.herokuapp.com/score?address=${address}&idx=${route.params}`)
-      .then(({data}) => {
-        setScore(data);
-        setPoint(Number(data[2]))
+    // 내 등산기록 가져오기
+    axios.get(`https://whitedeer.herokuapp.com/score/${route.params}`)
+    .then(({data}) => {
+      setScore(data.score);
 
-        // 코스 정보 가져오기
-        axios.get(`https://whitedeer.herokuapp.com/course/${data[0]}`)
-        .then(({data}) => {
-          setCourse(data.course)
-        })
+      // 코스 정보 가져오기
+      axios.get(`https://whitedeer.herokuapp.com/course/${data.score.course.seq}`)
+      .then(({data}) => {
+        setCourse(data.course);
       })
-      .catch(err => console.log(err));
     })
+    .catch(err => console.log(err));
   }, [])
 
   return (
@@ -97,30 +90,30 @@ export default function CourseDetail({navigation, route}) {
 
               <View style={styles.scoreInfo}>
                 <View style={styles.scoreView}>
-                  <Text style={styles.scoreIcon}>{course.courseDetail[point].name}</Text>
+                  <Text style={styles.scoreIcon}>{course.courseDetail[score.score].name}</Text>
                 </View>
                 <View style={styles.scoreView}>
                   <Text style={styles.scoreIcon}>▶</Text>
                 </View>
                 <View style={styles.scoreView}>
-                  <Text style={styles.scoreIcon}>{course.courseDetail[point+1].name}</Text>
+                  <Text style={styles.scoreIcon}>{course.courseDetail[score.score+1].name}</Text>
                 </View>
               </View>
 
               <View style={styles.info}>
                 <View style={styles.infoContent}>
                   <Text style={styles.scoreTitle}>난이도</Text>
-                  <Text style={styles.time}>{course.courseDetail[point].difficulty}</Text>
+                  <Text style={styles.time}>{course.courseDetail[score.score].difficulty}</Text>
                 </View>
 
                 <View style={styles.infoContent}>
                   <Text style={styles.scoreTitle}>거리</Text>
-                  <Text style={styles.time}>{course.courseDetail[point].distance}</Text>
+                  <Text style={styles.time}>{course.courseDetail[score.score].distance}</Text>
                 </View>
 
                 <View style={styles.infoContent}>
                   <Text style={styles.scoreTitle}>예상 시간</Text>
-                  <Text style={styles.time}>{course.courseDetail[point].time}</Text>
+                  <Text style={styles.time}>{course.courseDetail[score.score].time}</Text>
                 </View>
               </View>
 
