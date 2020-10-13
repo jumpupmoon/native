@@ -10,16 +10,26 @@ import AsyncStorage from '@react-native-community/async-storage';
 import axios from 'axios';
 
 export default function Prepare({navigation, route}) {
-  // 코스 등록
+  // 코스 등록 address score course
   const Preapare = () => {
     AsyncStorage.getItem('address')
     .then(address => {
-      axios.get(`https://whitedeer.herokuapp.com/start?address=${address}&course=${route.params}`)
+      axios.post('https://whitedeer.herokuapp.com/score', {
+        address,
+        score: 0,
+        course: route.params
+      })
       .then(({data}) => {
-        console.log(data);
-        if(data > 0) navigation.navigate('Map', data-1);
+        if(data.result > 0) navigation.navigate('Map', data.id);
         else alert('error!');
       })
+
+      // axios.get(`https://whitedeer.herokuapp.com/start?address=${address}&course=${route.params}`)
+      // .then(({data}) => {
+      //   console.log(data);
+      //   if(data > 0) navigation.navigate('Map', data-1);
+      //   else alert('error!');
+      // })
     })
   };
 

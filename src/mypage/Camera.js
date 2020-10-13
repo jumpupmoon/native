@@ -1,7 +1,7 @@
 import React,{useState} from 'react';
 import {Container, Content, Text, View} from 'native-base';
 import ImagePicker from 'react-native-image-picker';
-import Footer from './Footer';
+import Footer from '../Footer';
 import {
   StyleSheet,
   TouchableOpacity,
@@ -17,10 +17,11 @@ export default function Camera({navigation}){
     takePhotoButtonTitle: '사진 찍기',
     chooseFromLibraryButtonTitle: '이미지 불러오기',
     cancelButtonTitle : '취소',
-    customButtons: [
-      { name: 'button_id_1', title: 'CustomButton 1' },
-      { name: 'button_id_2', title: 'CustomButton 2' }
-    ],
+    // customButtons: [
+    //   { name: 'button_id_1', title: 'CustomButton 1' },
+    //   { name: 'button_id_2', title: 'CustomButton 2' }
+    // ],
+    
     storageOptions: {
       skipBackup: true,
       path: 'images',
@@ -41,8 +42,6 @@ export default function Camera({navigation}){
         console.log('User tapped custom button: ', response.customButton);
         Alert.alert(response.customButton);
       } else {
-        // You can also display the image using data:
-        // const source = { uri: 'data:image/jpeg;base64,' + response.data };
         let src = response;
         setImageSource(src);
       }
@@ -74,10 +73,7 @@ export default function Camera({navigation}){
   }
 
   return (
-    <Container>
-      <Content>
-        
-        <TouchableOpacity onPress={showImagePicker}>
+  <TouchableOpacity onPress={showImagePicker}>
           <View style={[styles.avatar, styles.avatarContainer, { marginBottom: 20 }]} >
             {ImageSource === null ? (
               <Text>이미지 가져오기</Text>
@@ -86,16 +82,6 @@ export default function Camera({navigation}){
               )}
           </View>
         </TouchableOpacity>
-        <TouchableOpacity onPress={showCamera}>
-          <Text>사진 찍기</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={showCameraRoll}>
-          <Text>Show Camera Roll</Text>
-        </TouchableOpacity>
-        
-      </Content>
-      <Footer navigation={navigation} />
-    </Container>
   );
 }
 

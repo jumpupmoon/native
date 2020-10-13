@@ -61,7 +61,7 @@ export default function NfcTag({idx}) {
               source={require('../img/nfc.jpg')}
             />
             <Text style={styles.modalText1}>Now!</Text>
-            <Text style={styles.modalText2}>{data[1].courseDetail}</Text>
+            <Text style={styles.modalText2}>{data[1].courseDetail.first}</Text>
             <Text style={styles.modalText1}>IN</Text>
             <Text style={styles.modalText2}>{data[1].name}</Text>
             <Text style={styles.modalText3}>

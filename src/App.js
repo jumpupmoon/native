@@ -11,12 +11,12 @@ import Prepare from './info/Prepare';
 import Guide from './info/Guide';
 import Test from './Test';
 import Arrival from './Arrival';
+import Mypage from './mypage/Mypage';
+import PointCharge from './mypage/PointCharge';
+import Profile from './mypage/Profile';
+import PointHistory from './mypage/PointHistory';
+import Camera from './mypage/Camera';
 import Rank from './Rank';
-import Mypage from './Mypage';
-import PointCharge from './PointCharge';
-import Profile from './Profile';
-import PointHistory from './PointHistory';
-import Camera from './Camera';
 import MtRank from './MtRank';
 
 const Stack = createStackNavigator();

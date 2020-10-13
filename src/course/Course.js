@@ -20,26 +20,13 @@ export default function Course({navigation, route}) {
     require('../img/어승생악.jpg'),
   ]
 
-  // 저장된 지갑 주소로 등산 횟수 찾아오기
+  // 지갑 주소로 등산 기록 찾아오기
   useEffect(() => {
     AsyncStorage.getItem('address')
     .then(address => {
       axios.get(`https://whitedeer.herokuapp.com/list/${address}`)
       .then(({data}) => {
-        setCount(data.score[0]);
-        
-        let output = [];
-        for(let i=0; i<5; i++) {
-          if(i == data.score[0]) break;
-          output.push([
-            data.score[0]-(1+i), // 인덱스 번호
-            data.score[1][i], // 선택한 코스 번호
-            data.score[2][i], // 마지막 지점
-            data.score[3][i], // 시작 시간
-            data.score[4][i] // 마지막 시간
-          ]);
-        }
-        setScore(output);
+        setScore(data.scores);
       })
       .catch(err => console.log(err));
     })
@@ -48,14 +35,15 @@ export default function Course({navigation, route}) {
   return (
     <Container>
         <Content>
-          <Text style={styles.Title}>현재 등산 수 : {count}</Text>
-            {score.map(s => (
-              <ImageBackground style={styles.buttonView} key={s[0]} source={imgList[s[1]]}>
-                <Button style={styles.button} onPress={() => navigation.navigate('Map', s[0])}> 
-                  <Text style={styles.buttonTitle}>등산 기록 {s[0]+1}</Text>
-                </Button>
-              </ImageBackground>
-            ))}
+          <Text style={styles.Title}>현재 등산 수 : {score.length}</Text>
+
+          {score.map((s, idx) => (
+            <ImageBackground style={styles.buttonView} key={idx} source={imgList[s.course.seq]}>
+              <Button style={styles.button} onPress={() => navigation.navigate('Map', s._id)}> 
+                <Text style={styles.buttonTitle}>등산 기록 {score.length - idx}</Text>
+              </Button>
+            </ImageBackground>
+          ))}
         </Content>
         
         <Footer navigation={navigation} value='3' />
