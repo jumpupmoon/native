@@ -21,8 +21,9 @@ export default function Layout({navigation}) {
     setCurrentIndex((currentIndex) => currentIndex + 1);
   }
 
+  // nfc 인식 시 화면 이동을 위해 app.js로 navigation 전달
   useEffect(() => {
-    EventEmitter.emit('test', navigation)
+    EventEmitter.emit('nfcNav', navigation)
   }, [])
 
   return (
