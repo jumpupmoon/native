@@ -7,6 +7,8 @@ import Footer from './Footer';
 import LottieView from 'lottie-react-native';
 import Icon from 'react-native-vector-icons/Foundation';
 import WeatherInfo from './WeatherInfo';
+import NfcManager, {NfcEvents} from 'react-native-nfc-manager';
+import EventEmitter from "react-native-eventemitter";
 
 export default function Layout({navigation}) {
   const [currentIndex, setCurrentIndex] = useState(1);
@@ -18,10 +20,10 @@ export default function Layout({navigation}) {
   function increment() {
     setCurrentIndex((currentIndex) => currentIndex + 1);
   }
-  // useEffect(() => {
-  //   // 컴포넌트가 마운트 되고 함수를실행합니다.
-  //     this.animation.play();
-  // }, []);
+
+  useEffect(() => {
+    EventEmitter.emit('test', navigation)
+  }, [])
 
   return (
     <Container>

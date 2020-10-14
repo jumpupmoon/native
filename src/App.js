@@ -20,13 +20,20 @@ import Rank from './Rank';
 import MtRank from './MtRank';
 import NfcManager, {NfcEvents} from 'react-native-nfc-manager';
 import AsyncStorage from '@react-native-community/async-storage';
+import EventEmitter from "react-native-eventemitter";
 
 const Stack = createStackNavigator();
 
-function App() {
+export default function App() {
   const [address, setAddress] = useState();
 
   useEffect(() => {
+    let nav;
+
+    EventEmitter.on('test', res => {
+      nav = res;
+    });
+
     // 지갑 주소 체크 후 없을 경우 시작하기, 있으면 홈화면으로
     AsyncStorage.getItem('address')
     .then(data => {
@@ -37,7 +44,13 @@ function App() {
     NfcManager.start();
     NfcManager.setEventListener(NfcEvents.DiscoverTag, tag => {
       NfcManager.unregisterTagEvent().catch(() => 0);
-      console.log(tag.id);
+      nav.navigate('Info');
+      if(tag.id == '04B0A1B2C65B80') {
+        console.log(tag.id)
+        // Navigator.navigate('Info')
+      }
+      // console.log(tag.id === '04B0A1B2C65B80');
+      // console.log(tag.id === '04A30DB2C65B80');
 
       NfcManager.registerTagEvent();
     });
@@ -80,5 +93,3 @@ function App() {
     </NavigationContainer>
   );
 }
-
-export default App;
