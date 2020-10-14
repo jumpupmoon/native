@@ -103,18 +103,18 @@ export default function CourseDetail({navigation, route}) {
 
               <View style={styles.info}>
                 <View style={styles.infoContent}>
-                  <Text style={styles.scoreTitle}>난이도</Text>
-                  <Text style={styles.time}>{course.courseDetail[point].difficulty}</Text>
+                  <Text style={styles.scoreTitle}>{course.courseDetail[point].difficulty}</Text>
+                  <Text style={styles.time}>난이도</Text>
                 </View>
 
                 <View style={styles.infoContent}>
-                  <Text style={styles.scoreTitle}>거리</Text>
-                  <Text style={styles.time}>{course.courseDetail[point].distance}</Text>
+                  <Text style={styles.scoreTitle}>{course.courseDetail[point].distance}km</Text>
+                  <Text style={styles.time}>거리</Text>
                 </View>
 
                 <View style={styles.infoContent}>
-                  <Text style={styles.scoreTitle}>예상 시간</Text>
-                  <Text style={styles.time}>{course.courseDetail[point].time}</Text>
+                  <Text style={styles.scoreTitle}>{course.courseDetail[point].time}</Text>
+                  <Text style={styles.time}>예상 시간</Text>
                 </View>
               </View>
 
@@ -223,7 +223,7 @@ const styles = StyleSheet.create({
   },
   scoreTitle: {
     fontFamily: 'DungGeunMo',
-    fontSize: 20,
+    fontSize: 22.5,
     color: '#181717',
     marginBottom: 10
   },

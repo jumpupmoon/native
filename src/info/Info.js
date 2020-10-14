@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import {Container, Content, Text, TextInput} from 'native-base';
-
 import Footer from '../Footer';
 import {
   StyleSheet,
@@ -67,7 +66,6 @@ export default function Course({navigation}) {
         </ScrollView>
         {/* 코스 아이템 끝 */}
       </Content>
-
       <Footer navigation={navigation} value="2" />
     </Container>
   );

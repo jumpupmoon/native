@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{ useEffect, useState } from 'react';
 import {Container, Content, Text, TextInput} from 'native-base';
 import Footer from './Footer';
 import {
@@ -14,14 +14,34 @@ import {
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Icon2 from 'react-native-vector-icons/Fontisto';
+import axios from 'axios';
+
 export default function Course({navigation}) {
+  const [mountain, setMountain] = useState([]);
+
+  useEffect(() => {
+    axios.get('https://whitedeer.herokuapp.com/course')
+    .then(({data}) => {
+      setMountain(data.list)
+    })
+  }, [])
+
+  const imgList = [
+    require('./img/돈내코.jpg'),
+    require('./img/영실.jpg'),
+    require('./img/관음사.jpg'),
+    require('./img/성판악.jpg'),
+    require('./img/어리목.jpg'),
+    require('./img/석굴암.png'),
+    require('./img/어승생악.jpg'),
+  ]
+  
   return (
     <Container>
       <Content>
         <View style={styles.header}>
           <Text
             style={{
-              
               fontSize: 30,
               textAlign: 'center',
               color: '#FFF',
@@ -32,36 +52,19 @@ export default function Course({navigation}) {
         </View>
         {/* 코스 아이템 시작 */}
         <ScrollView style={{paddingBottom:20}}>
-          <TouchableOpacity
-            style={styles.courses}
-            onPress={() => navigation.navigate('Rank')}>
-            <Image
-              style={styles.img}
-              source={require('./img/성판악.jpg')}></Image>
-            <Text style={styles.title}>한라산(제주)</Text>
-            <Text style={styles.info}>test</Text>
-            <Text style={styles.info2}>test</Text>
-
-            {/* <Icon name="flag" size={35} color="#181717" style={styles.icon} />
-            <Text style={styles.iconInfo}>정상 등반</Text> */}
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.courses}
-            onPress={() => navigation.navigate('Rank')}>
-            <Image
-              style={styles.img}
-              source={require('./img/어리목.jpg')}></Image>
-            <Text style={styles.title}>관악산(서울)</Text>
-            <Text style={styles.info}>test</Text>
-            <Text style={styles.info2}>test</Text>
-
-            {/* <Icon name="flag" size={35} color="#181717" style={styles.icon} />
-            <Text style={styles.iconInfo}>정상 등반</Text> */}
-          </TouchableOpacity>
+          {mountain.map((m, idx) => (
+              <TouchableOpacity style={styles.courses} onPress={() => navigation.navigate('Rank', idx)} key={idx}>
+                <Image
+                  style={styles.img}
+                  source={imgList[idx]}></Image>
+                <Text style={styles.title}>{m.name}</Text>
+                <Text style={styles.info}>{m.time}({m.distance}km)</Text>
+                <Text style={styles.info2}>{m.discription}</Text>
+              </TouchableOpacity>
+            ))}      
         </ScrollView>
         {/* 코스 아이템 끝 */}
       </Content>
-
       <Footer navigation={navigation} value="4" />
     </Container>
   );
@@ -79,7 +82,7 @@ const styles = StyleSheet.create({
     marginRight: 20,
     marginHorizontal: 20,
     width: wp('91%'),
-    height: hp('25.5%'),
+    height: hp('22.5%'),
 
     marginTop: 20,
     // borderStyle: 'dotted',
@@ -89,7 +92,7 @@ const styles = StyleSheet.create({
   },
   img: {
     width: wp('90%'),
-    height: hp('25%'),
+    height: hp('22%'),
     alignItems: 'center',
     padding: 10,
     resizeMode: 'stretch',
