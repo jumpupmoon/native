@@ -10,6 +10,7 @@ import 'moment-timezone';
 export default function CourseDetail({navigation, route}) {
   const [score, setScore] = useState([]);
   const [course, setCourse] = useState();
+  const [point, setPoint] = useState(0);
 
   // 확인할 지점 변경
   const pointList = d => {
@@ -90,30 +91,30 @@ export default function CourseDetail({navigation, route}) {
 
               <View style={styles.scoreInfo}>
                 <View style={styles.scoreView}>
-                  <Text style={styles.scoreIcon}>{course.courseDetail[score.score].name}</Text>
+                  <Text style={styles.scoreIcon}>{course.courseDetail[point].name}</Text>
                 </View>
                 <View style={styles.scoreView}>
                   <Text style={styles.scoreIcon}>▶</Text>
                 </View>
                 <View style={styles.scoreView}>
-                  <Text style={styles.scoreIcon}>{course.courseDetail[score.score+1].name}</Text>
+                  <Text style={styles.scoreIcon}>{course.courseDetail[point+1].name}</Text>
                 </View>
               </View>
 
               <View style={styles.info}>
                 <View style={styles.infoContent}>
                   <Text style={styles.scoreTitle}>난이도</Text>
-                  <Text style={styles.time}>{course.courseDetail[score.score].difficulty}</Text>
+                  <Text style={styles.time}>{course.courseDetail[point].difficulty}</Text>
                 </View>
 
                 <View style={styles.infoContent}>
                   <Text style={styles.scoreTitle}>거리</Text>
-                  <Text style={styles.time}>{course.courseDetail[score.score].distance}</Text>
+                  <Text style={styles.time}>{course.courseDetail[point].distance}</Text>
                 </View>
 
                 <View style={styles.infoContent}>
                   <Text style={styles.scoreTitle}>예상 시간</Text>
-                  <Text style={styles.time}>{course.courseDetail[score.score].time}</Text>
+                  <Text style={styles.time}>{course.courseDetail[point].time}</Text>
                 </View>
               </View>
 
@@ -230,7 +231,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     backgroundColor: '#1E824C',
     alignSelf: 'center',
-    marginTop: 40,
+    marginVertical: 40,
   },
   giveupText: {
     fontSize: 26,
