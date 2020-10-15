@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {Container, Content, Text, View} from 'native-base';
 import Footer from './Footer';
 import {
@@ -14,15 +14,28 @@ import {
   SafeAreaView,
   StatusBar,
 } from 'react-native';
+import axios from 'axios';
+
+
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
-export default function Course({navigation}){
+export default function Course({navigation, route}){
+  const [course, setCourse] = useState();
+
+  useEffect(() => {
+    axios.get(`https://whitedeer.herokuapp.com/course/${route.params}`)
+    .then(({data}) => {
+      setCourse(data.course)
+    })
+  }, [])
+  
   return ( 
     <><Container>
         <Content>
+          {course &&
           <ScrollView style={{paddingBottom:20}}>
-            <View style={styles.header}><Text>한라산 A코스 랭킹</Text></View>
-            {/* <View style={styles.fixToText}>
+            <View style={styles.header}><Text>{course.name}</Text></View>
+            <View style={styles.fixToText}>
                 <Button
                   title="개인 랭킹"
                   onPress={() => Alert.alert('Left button pressed')}
@@ -31,47 +44,51 @@ export default function Course({navigation}){
                   title="단체 랭킹"
                   onPress={() => Alert.alert('Right button pressed')}
                 />
-              </View> */}
-            <View style={styles.title2}><Text>순위</Text><Text>사진</Text><Text>등정횟수</Text></View>
+              </View>
+            <View style={styles.content}>
+              <Text style={styles.bla1}>순위</Text>
+              <Text style={styles.bla2}>닉네임</Text>
+              <Text style={styles.bla3}>등정횟수</Text>
+            </View>
             <View style={styles.title}><Text></Text></View>
-            <TouchableOpacity>
-              <View style={styles.content}><Text>1순위</Text><Image style={styles.img}
-              source={require('./img/성판악.jpg')}></Image><Text>23회</Text></View>
-            </TouchableOpacity>
-            <TouchableOpacity>
-              <View style={styles.content}><Text>2순위</Text><Image style={styles.img}
-              source={require('./img/성판악.jpg')}></Image><Text>22회</Text></View>
-            </TouchableOpacity>
-            <TouchableOpacity>
-              <View style={styles.content}><Text>3순위</Text><Image style={styles.img}
-              source={require('./img/성판악.jpg')}></Image><Text>21회</Text></View>
-            </TouchableOpacity>
-            <TouchableOpacity>
-              <View style={styles.content}><Text>4순위</Text><Image style={styles.img}
-              source={require('./img/성판악.jpg')}></Image><Text>20회</Text></View>
-            </TouchableOpacity>
-            <TouchableOpacity>
-              <View style={styles.content}><Text>5순위</Text><Image style={styles.img}
-              source={require('./img/성판악.jpg')}></Image><Text>19회</Text></View>
-            </TouchableOpacity>
-            <TouchableOpacity>
-              <View style={styles.content}><Text>6순위</Text><Image style={styles.img}
-              source={require('./img/성판악.jpg')}></Image><Text>18회</Text></View>
-            </TouchableOpacity>
-            <TouchableOpacity>
-              <View style={styles.content}><Text>7순위</Text><Image style={styles.img}
-              source={require('./img/성판악.jpg')}></Image><Text>17회</Text></View>
-            </TouchableOpacity>
-            <TouchableOpacity>
-              <View style={styles.content}><Text>8순위</Text><Image style={styles.img}
-              source={require('./img/성판악.jpg')}></Image><Text>16회</Text></View>
-            </TouchableOpacity>
-            <TouchableOpacity>
-              <View style={styles.content}><Text>8순위</Text><Image style={styles.img}
-              source={require('./img/성판악.jpg')}></Image><Text>16회</Text></View>
-            </TouchableOpacity>
+            <View style={styles.content}>
+              <Text style={styles.bla1}>1순위</Text>
+              <Text style={styles.bla2}>비실이</Text>
+              <Text style={styles.bla3}>23회</Text>
+            </View>
+            <View style={styles.title}><Text></Text></View>
+            <View style={styles.content}>
+              <Text style={styles.bla1}>2순위</Text>
+              <Text style={styles.bla2}>퉁퉁이</Text>
+              <Text style={styles.bla3}>22회</Text>
+            </View>
+            <View style={styles.title}><Text></Text></View>
+            <View style={styles.content}>
+              <Text style={styles.bla1}>3순위</Text>
+              <Text style={styles.bla2}>미란이</Text>
+              <Text style={styles.bla3}>21회</Text>
+            </View>
+            <View style={styles.title}><Text></Text></View>
+            <View style={styles.content}>
+              <Text style={styles.bla1}>4순위</Text>
+              <Text style={styles.bla2}>코난</Text>
+              <Text style={styles.bla3}>20회</Text>
+            </View>
+            <View style={styles.title}><Text></Text></View>
+            <View style={styles.content}>
+              <Text style={styles.bla1}>5순위</Text>
+              <Text style={styles.bla2}>유명한</Text>
+              <Text style={styles.bla3}>19회</Text>
+            </View>
+            <View style={styles.title}><Text></Text></View>
+            <View style={styles.content}>
+              <Text style={styles.bla1}>6순위</Text>
+              <Text style={styles.bla2}>검은그림자</Text>
+              <Text style={styles.bla3}>18회</Text>
+            </View>
             {/* <View style={styles.footer}><Text>footer</Text></View> */}
           </ScrollView>
+          }
         </Content>
       </Container>
       <Footer navigation={navigation} value="4" />
@@ -89,6 +106,7 @@ const styles = StyleSheet.create({
   // },
   header: {
     width:'100%',
+    fontSize:22,
     height:'5%',
     justifyContent: 'center',
     alignItems: 'center',
@@ -107,17 +125,18 @@ const styles = StyleSheet.create({
     borderBottomColor: '#737373',
     width:'100%',
     // height: hp('5%'),
-    justifyContent: 'center',
+    // justifyContent: 'center',
     alignItems: 'center',
     height:'7%',
-    justifyContent: 'center',
+    // justifyContent: 'space-between',
     // alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'space-evenly',
     backgroundColor: 'white',
   },
   content: {
-    height: 100,
+    flex:1,
+    height: 88,
     flexDirection: 'row',
     justifyContent: 'space-evenly',
     // justifyContent: 'center',
@@ -144,5 +163,20 @@ const styles = StyleSheet.create({
     resizeMode: 'stretch',
     alignItems: 'center',
     opacity: 0.6,
+  },
+  bla1:{
+    flex:3,
+    flexDirection:'column',
+    textAlign:'center'
+  },
+  bla2:{
+    flex:4,
+    flexDirection:'column',
+    textAlign:'center'
+  },
+  bla3:{
+    flex:3,
+    flexDirection:'column',
+    textAlign:'center'
   },
 });
