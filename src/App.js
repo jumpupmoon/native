@@ -112,7 +112,11 @@ export default function App() {
       SplashScreen.hide();
     }, 1000);
     
-    return () => NfcManager.unregisterTagEvent().catch(() => 0);
+    return () => {
+      EventEmitter.removeListener('nfcNav');
+      NfcManager.setEventListener(NfcEvents.DiscoverTag, null);
+      NfcManager.unregisterTagEvent().catch(() => 0);
+    }
   }, []);
 
   return !address ? <Intro setAddress={setAddress} /> : (
