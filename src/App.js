@@ -20,26 +20,64 @@ import Rank from './Rank';
 import MtRank from './MtRank';
 import NfcManager, {NfcEvents} from 'react-native-nfc-manager';
 import AsyncStorage from '@react-native-community/async-storage';
+import EventEmitter from "react-native-eventemitter";
+import axios from 'axios';
+import {Alert} from 'react-native';
 
 const Stack = createStackNavigator();
 
-function App() {
+export default function App() {
   const [address, setAddress] = useState();
+  // 페이지 이동을 위한 객체 변수
+  let nav;
 
-  useEffect(() => {
-    // 지갑 주소 체크 후 없을 경우 시작하기, 있으면 홈화면으로
+  // 코스 정보 등록 및 페이지 이동
+  const courseStart = (score, course) => {
     AsyncStorage.getItem('address')
-    .then(data => {
-      if(data) setAddress(data);
-    })
+    .then(address => {
+      axios.post('https://whitedeer.herokuapp.com/score', {
+        address,
+        score,
+        course
+      })
+      .then(({data}) => {
+        if(data.result > 0) nav.navigate('Map', data.id);
+        else alert('error!');
 
+        NfcManager.registerTagEvent();
+      })
+    })
+  }
+
+  // nfc 관련 함수
+  const nfcSetting = () => {
     // nfc 설정
     NfcManager.start();
     NfcManager.setEventListener(NfcEvents.DiscoverTag, tag => {
       NfcManager.unregisterTagEvent().catch(() => 0);
-      console.log(tag.id);
+      
+      // nfc id로 코스 정보 받아오기
+      if(tag.id) {
+        axios.get(`https://whitedeer.herokuapp.com/nfc/${tag.id}`)
+        .then(({data}) => {
+          // 시작 포인트일 때만 함수 실행
+          if(data.point.seq) return NfcManager.registerTagEvent();
 
-      NfcManager.registerTagEvent();
+          // 태깅 후 확인 알림창
+          Alert.alert(
+            `${data.point.course.name}\n기록을 시작하시겠습니까?`,
+            "",
+            [
+              { text: "취소", style: "cancel", onPress: () => NfcManager.registerTagEvent() },
+              { text: "시작하기", onPress: () => courseStart(data.point.seq, data.point.course.seq) }
+            ],
+            { cancelable: false }
+          )
+        })
+        .catch(err => alert(err));
+      }
+      // console.log(tag.id === '04B0A1B2C65B80');
+      // console.log(tag.id === '04A30DB2C65B80');
     });
 
     // nfc 태깅 이벤트 실행
@@ -49,12 +87,29 @@ function App() {
       console.log('ex', ex);
       NfcManager.unregisterTagEvent().catch(() => 0);
     }
+  }
+
+  useEffect(() => {
+    // nfc 태깅 후 이동을 위해 home.js에서 navigation 받아오기
+    EventEmitter.on('nfcNav', homeNav => {
+      nav = homeNav;
+    });
+
+    // 지갑 주소 체크 후 없을 경우 시작하기, 있으면 홈화면으로
+    AsyncStorage.getItem('address')
+    .then(address => {
+      if(address) {
+        setAddress(address);
+        // 지갑 주소가 있을 경우 nfc 관련 함수 실행
+        nfcSetting();
+      }
+    })
 
     // 스플래시 이미지 숨기기
     setTimeout(() => {
       SplashScreen.hide();
     }, 1000);
-
+    
     return () => NfcManager.unregisterTagEvent().catch(() => 0);
   }, []);
 
@@ -80,5 +135,3 @@ function App() {
     </NavigationContainer>
   );
 }
-
-export default App;
