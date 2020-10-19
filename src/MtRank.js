@@ -53,15 +53,15 @@ export default function Course({navigation}) {
         {/* 코스 아이템 시작 */}
         <ScrollView style={{paddingBottom:20}}>
           {mountain.map((m, idx) => (
-              <TouchableOpacity style={styles.courses} onPress={() => navigation.navigate('Rank', idx)} key={idx}>
-                <Image
-                  style={styles.img}
-                  source={imgList[idx]}></Image>
-                <Text style={styles.title}>{m.name}</Text>
-                <Text style={styles.info2}>{m.time}({m.distance}km)</Text>
-                {/* <Text style={styles.info2}>{m.discription}</Text> */}
-              </TouchableOpacity>
-            ))}
+            <TouchableOpacity style={styles.courses} onPress={() => navigation.navigate('Rank', idx)} key={idx}>
+              <Image
+                style={styles.img}
+                source={imgList[idx]}></Image>
+              <Text style={styles.title}>{m.name}({m.location})</Text>
+              <Text style={styles.info}>{m.time}({m.distance}km)</Text>
+              <Text style={styles.info2}>{m.discription}</Text>
+            </TouchableOpacity>
+          ))}          
         </ScrollView>
         {/* 코스 아이템 끝 */}
       </Content>

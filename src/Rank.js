@@ -34,7 +34,10 @@ export default function Course({navigation, route}){
         <Content>
           {course &&
           <ScrollView style={{paddingBottom:20}}>
-            <View style={styles.header}><Text>{course.name}</Text></View>
+            <View style={styles.header}><Text>{course.name}({course.location})</Text></View>
+            {/* <TouchableOpacity hitSlop={{ top: 10, right: 10, bottom: 10, left: 10 }} style={styles.button}>
+              <Text>버튼</Text><Text>버튼</Text>
+            </TouchableOpacity> */}
             {/* <View style={styles.fixToText}>
                 <Button
                   title="개인 랭킹"
@@ -50,35 +53,32 @@ export default function Course({navigation, route}){
               <Text style={styles.bla2}>닉네임</Text>
               <Text style={styles.bla3}>등정횟수</Text>
             </View>
-            <View style={styles.content}>
+            <View style={styles.content2}>
               <Text style={styles.bla1}>1순위</Text>
               <Text style={styles.bla2}>비실이</Text>
               <Text style={styles.bla3}>23회</Text>
             </View>
-            <View style={styles.content}>
+            <View style={styles.content2}>
               <Text style={styles.bla1}>2순위</Text>
               <Text style={styles.bla2}>퉁퉁이</Text>
               <Text style={styles.bla3}>22회</Text>
             </View>
-            <View style={styles.content}>
+            <View style={styles.content2}>
               <Text style={styles.bla1}>3순위</Text>
               <Text style={styles.bla2}>미란이</Text>
               <Text style={styles.bla3}>21회</Text>
             </View>
-            <View style={styles.title}><Text></Text></View>
-            <View style={styles.content}>
+            <View style={styles.content2}>
               <Text style={styles.bla1}>4순위</Text>
               <Text style={styles.bla2}>코난</Text>
               <Text style={styles.bla3}>20회</Text>
             </View>
-            <View style={styles.title}><Text></Text></View>
-            <View style={styles.content}>
+            <View style={styles.content2}>
               <Text style={styles.bla1}>5순위</Text>
               <Text style={styles.bla2}>유명한</Text>
               <Text style={styles.bla3}>19회</Text>
             </View>
-            <View style={styles.title}><Text></Text></View>
-            <View style={styles.content}>
+            <View style={styles.content2}>
               <Text style={styles.bla1}>6순위</Text>
               <Text style={styles.bla2}>검은그림자</Text>
               <Text style={styles.bla3}>18회</Text>
@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
     height: hp('0.15%'),
     justifyContent: 'center',
     // alignItems: 'center',
-    backgroundColor: 'red',
+    backgroundColor: 'gray',
   },
   title2: {
     borderBottomColor: '#737373',
@@ -133,14 +133,22 @@ const styles = StyleSheet.create({
   },
   content: {
     flex:1,
-    borderBottomColor: "red",
-    padding:4,
     height: 88,
     flexDirection: 'row',
     justifyContent: 'space-evenly',
     // justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'white',
+  },
+  content2: {
+    flex:1,
+    height: 88,
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+    // justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'white',
+    borderTopWidth : 1
   },
   footer: {
     width:'100%',
@@ -164,18 +172,31 @@ const styles = StyleSheet.create({
     opacity: 0.6,
   },
   bla1:{
-    flex:3,
+    flex:1.3,
     flexDirection:'column',
-    textAlign:'center'
+    textAlign:'center',
+    fontWeight: 'bold',
+    fontSize:20
   },
   bla2:{
-    flex:4,
+    flex:2,
     flexDirection:'column',
-    textAlign:'center'
+    textAlign:'center',
+    fontWeight: 'bold',
+    fontSize:20
   },
   bla3:{
     flex:3,
     flexDirection:'column',
-    textAlign:'center'
+    textAlign:'center',
+    fontWeight: 'bold',
+    fontSize:20
+  },
+  button: {
+    marginTop: 50,
+    alignSelf: 'center',
+    borderWidth: 1,
+    borderRadius: 4,
+    padding: 20,
   },
 });

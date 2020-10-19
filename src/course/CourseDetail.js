@@ -81,46 +81,47 @@ export default function CourseDetail({navigation, route}) {
               <View style={styles.course}>
                 <Text style={styles.title}>{course.name}</Text>
               </View>
-
-              <View style={styles.item}>
-                <View style={styles.trailLine} />
-                <View style={styles.circleItem}>
-                  {course.courseDetail.map(d => pointList(d))}
+              <View style={styles.leftLine}>
+                <View style={styles.item}>
+                  {/* <View style={styles.trailLine} /> */}
+                  <View style={styles.circleItem}>
+                    {course.courseDetail.map(d => pointList(d))}
+                  </View>
                 </View>
-              </View>
-
-              <View style={styles.scoreInfo}>
-                <View style={styles.scoreView}>
-                  <Text style={styles.scoreIcon}>{course.courseDetail[point].name}</Text>
+              
+                <View style={styles.scoreInfo}>
+                  <View style={styles.scoreView}>
+                    <Text style={styles.scoreIcon}>{course.courseDetail[point].name}</Text>
+                  </View>
+                  <View style={styles.scoreView}>
+                    <Text style={styles.scoreIcon}>▶</Text>
+                  </View>
+                  <View style={styles.scoreView}>
+                    <Text style={styles.scoreIcon}>{course.courseDetail[point+1].name}</Text>
+                  </View>
                 </View>
-                <View style={styles.scoreView}>
-                  <Text style={styles.scoreIcon}>▶</Text>
-                </View>
-                <View style={styles.scoreView}>
-                  <Text style={styles.scoreIcon}>{course.courseDetail[point+1].name}</Text>
-                </View>
-              </View>
-
-              <View style={styles.info}>
-                <View style={styles.infoContent}>
-                  <Text style={styles.scoreTitle}>{course.courseDetail[point].difficulty}</Text>
-                  <Text style={styles.time}>난이도</Text>
-                </View>
-
-                <View style={styles.infoContent}>
-                  <Text style={styles.scoreTitle}>{course.courseDetail[point].distance}km</Text>
-                  <Text style={styles.time}>거리</Text>
-                </View>
-
-                <View style={styles.infoContent}>
-                  <Text style={styles.scoreTitle}>{course.courseDetail[point].time}</Text>
-                  <Text style={styles.time}>예상 시간</Text>
+                
+                <View style={styles.info}>
+                  <View style={styles.infoContent}>
+                    <Text style={styles.time}>난이도</Text>
+                    <Text style={styles.scoreTitle}>{course.courseDetail[point].difficulty}</Text>
+                  </View>
+                    
+                  <View style={styles.infoContent}>
+                    <Text style={styles.time}>거리</Text>
+                    <Text style={styles.scoreTitle}>{course.courseDetail[point].distance}km</Text>
+                  </View>
+                  <View style={styles.infoContent}>
+                    <Text style={styles.time}>예상 시간</Text>
+                    <Text style={styles.scoreTitle}>{course.courseDetail[point].time}</Text>
+                  </View>
                 </View>
               </View>
 
               <Button onPress={() => giveupCheck(score.idx)} style={styles.giveupBtn}>
                 <Text style={styles.giveupText}>그만두기</Text>
               </Button>
+              
 
               {/* {score[2] != 0 ?
                   <Text>종료지점 : {score[2]}</Text>
@@ -132,6 +133,7 @@ export default function CourseDetail({navigation, route}) {
               } */}
             </>
           }
+          
         </Content>
         
         <Footer navigation={navigation} value='3' />
@@ -146,6 +148,17 @@ const styles = StyleSheet.create({
     margin: 40,
     padding: 20,
   },
+  leftLine : {
+    flexDirection:"column",
+    // flex:10,
+    marginLeft:25,
+    borderLeftWidth : 13,
+    borderLeftColor : "#1E824C",
+    paddingLeft:25,
+  },
+  // leftLine2 : {
+  //   flexDirection:"column",
+  // },
   title: {
     fontFamily: 'DungGeunMo',
     fontSize: 36,
@@ -156,18 +169,23 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
     fontFamily: 'DungGeunMo',
     fontSize: 16,
+    flex:1,
+    // textAlign:"center",
     // paddingTop: 10
   },
   info: {
-    flexDirection: 'row',
+    flex:1,
+    flexDirection: 'column',
+    // backgroundColor : "#26A65B",
     justifyContent: 'space-around',
     marginBottom: 20
   },
   infoContent: {
-    flex:1,
+    flex:2,
+    flexDirection:"row",
     borderColor: '#404040',
-    borderWidth: 3,
-    borderRadius: 10,
+    borderWidth: 2,
+    borderRadius: 4,
     marginHorizontal: 10,
     paddingVertical: 20,
     alignItems: 'center',
@@ -225,7 +243,9 @@ const styles = StyleSheet.create({
     fontFamily: 'DungGeunMo',
     fontSize: 22.5,
     color: '#181717',
-    marginBottom: 10
+    marginBottom: 10,
+    flex:1,
+    // textAlign:"center",
   },
   giveupBtn: {
     textAlign: 'center',
@@ -241,7 +261,7 @@ const styles = StyleSheet.create({
   },
   item: {
     margin: 10,
-    marginBottom: 120
+    marginBottom: 400,
   },
   trailLine: {
     borderBottomColor: '#1E824C',

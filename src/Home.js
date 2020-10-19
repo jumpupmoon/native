@@ -31,9 +31,9 @@ export default function Layout({navigation}) {
       <Content>
         <View style={styles.container}>
           {/* 상단바 */}
-          <View style={styles.header}>
+          {/* <View style={styles.header}>
             <Text style={styles.headerText}>산오쿠과</Text>
-          </View>
+          </View> */}
           {/* 이미지 슬라이더 */}
           <View style={styles.image}>
             <SliderBox
@@ -52,9 +52,7 @@ export default function Layout({navigation}) {
             />
           </View>
           {/* 이미지 슬라이더 */}
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => navigation.navigate('Info')}>
+          <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Info')}>
             <Text style={styles.buttonTitle}>탐방로</Text>
           </TouchableOpacity>
 
@@ -75,11 +73,9 @@ export default function Layout({navigation}) {
           <WeatherInfo />
         </View> */}
               <View style={styles.weather}>
-                <TouchableOpacity 
-                  onPress={() => navigation.navigate('Course')}>
-                </TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.navigate('Course')}></TouchableOpacity>
                 <Image
-                  source={require('./img/수첩.png')}
+                  source={require('./img/note.png')}
                   style={styles.weatherImage}></Image>
                 <Text style={styles.trail1}>내 등산수첩</Text>
               </View>
@@ -90,7 +86,7 @@ export default function Layout({navigation}) {
                     left: 150,
                     width: wp('6%'),
                   }}
-                  onPress={() => navigation.navigate('Arrival')}>
+                  onPress={() => navigation.navigate('Rank')}>
                   {/* <Icon name="plus" size={30} color="#fff" /> */}
                 </TouchableOpacity>
                 <Image
@@ -219,7 +215,7 @@ const styles = StyleSheet.create({
   },
   ranking: {
     borderRadius: 5,
-    backgroundColor: '#26A65B',
+    backgroundColor: '#1E824C',
     height: hp('30%'),
     width: wp('46%'),
     marginLeft: 5,
