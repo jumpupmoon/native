@@ -11,7 +11,7 @@ export default function CourseDetail({navigation, route}) {
   const [score, setScore] = useState([]);
   const [course, setCourse] = useState();
   const [point, setPoint] = useState(0);
-
+  
   // 확인할 지점 변경
   const pointList = d => {
     if(d.seq == course.courseDetail.length-1) {
