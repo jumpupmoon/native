@@ -1,5 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import SplashScreen from 'react-native-splash-screen';
+import NfcManager, {NfcEvents} from 'react-native-nfc-manager';
+import AsyncStorage from '@react-native-community/async-storage';
+import EventEmitter from "react-native-eventemitter";
+import axios from 'axios';
+import {Alert} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import Intro from './Intro';
@@ -18,11 +23,6 @@ import PointHistory from './mypage/PointHistory';
 import Camera from './mypage/Camera';
 import Rank from './Rank';
 import MtRank from './MtRank';
-import NfcManager, {NfcEvents} from 'react-native-nfc-manager';
-import AsyncStorage from '@react-native-community/async-storage';
-import EventEmitter from "react-native-eventemitter";
-import axios from 'axios';
-import {Alert} from 'react-native';
 
 const Stack = createStackNavigator();
 
@@ -41,8 +41,9 @@ export default function App() {
         course
       })
       .then(({data}) => {
-        if(data.result > 0) nav.reset({routes: [{ name: 'Map', params: data.id }]});
-        
+        if(data.result > 0) nav.navigate('Map', data.id);
+        else alert('error!');
+
         NfcManager.registerTagEvent();
       })
     })
@@ -59,13 +60,10 @@ export default function App() {
       if(tag.id) {
         axios.get(`https://whitedeer.herokuapp.com/nfc/${tag.id}`)
         .then(({data}) => {
-          // 시작 포인트가 아닐 때 서버로 업데이트 요청
-          if(data.point.seq) {
-            courseStart(data.point.seq, data.point.course.seq);
-            return NfcManager.registerTagEvent();
-          } 
+          // 시작 포인트일 때만 함수 실행
+          if(data.point.seq) return NfcManager.registerTagEvent();
 
-          // 시작 포인트 일 경우 코스 시작 알림창
+          // 태깅 후 확인 알림창
           Alert.alert(
             `${data.point.course.name}\n기록을 시작하시겠습니까?`,
             "",
@@ -112,11 +110,7 @@ export default function App() {
       SplashScreen.hide();
     }, 1000);
     
-    return () => {
-      EventEmitter.removeListener('nfcNav');
-      NfcManager.setEventListener(NfcEvents.DiscoverTag, null);
-      NfcManager.unregisterTagEvent().catch(() => 0);
-    }
+    return () => NfcManager.unregisterTagEvent().catch(() => 0);
   }, []);
 
   return !address ? <Intro setAddress={setAddress} /> : (

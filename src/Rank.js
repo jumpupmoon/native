@@ -35,7 +35,7 @@ export default function Course({navigation, route}){
           {course &&
           <ScrollView style={{paddingBottom:20}}>
             <View style={styles.header}><Text>{course.name}</Text></View>
-            <View style={styles.fixToText}>
+            {/* <View style={styles.fixToText}>
                 <Button
                   title="개인 랭킹"
                   onPress={() => Alert.alert('Left button pressed')}
@@ -44,25 +44,22 @@ export default function Course({navigation, route}){
                   title="단체 랭킹"
                   onPress={() => Alert.alert('Right button pressed')}
                 />
-              </View>
+              </View> */}
             <View style={styles.content}>
               <Text style={styles.bla1}>순위</Text>
               <Text style={styles.bla2}>닉네임</Text>
               <Text style={styles.bla3}>등정횟수</Text>
             </View>
-            <View style={styles.title}><Text></Text></View>
             <View style={styles.content}>
               <Text style={styles.bla1}>1순위</Text>
               <Text style={styles.bla2}>비실이</Text>
               <Text style={styles.bla3}>23회</Text>
             </View>
-            <View style={styles.title}><Text></Text></View>
             <View style={styles.content}>
               <Text style={styles.bla1}>2순위</Text>
               <Text style={styles.bla2}>퉁퉁이</Text>
               <Text style={styles.bla3}>22회</Text>
             </View>
-            <View style={styles.title}><Text></Text></View>
             <View style={styles.content}>
               <Text style={styles.bla1}>3순위</Text>
               <Text style={styles.bla2}>미란이</Text>
@@ -119,7 +116,7 @@ const styles = StyleSheet.create({
     height: hp('0.15%'),
     justifyContent: 'center',
     // alignItems: 'center',
-    backgroundColor: 'gray',
+    backgroundColor: 'red',
   },
   title2: {
     borderBottomColor: '#737373',
@@ -136,6 +133,8 @@ const styles = StyleSheet.create({
   },
   content: {
     flex:1,
+    borderBottomColor: "red",
+    padding:4,
     height: 88,
     flexDirection: 'row',
     justifyContent: 'space-evenly',

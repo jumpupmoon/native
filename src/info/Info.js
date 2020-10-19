@@ -48,7 +48,7 @@ export default function Course({navigation}) {
               color: '#FFF',
               fontFamily: 'DungGeunMo',
             }}>
-            코스 선택하기
+            시작코스 선택하기
           </Text>
         </View>
         {/* 코스 아이템 시작 */}

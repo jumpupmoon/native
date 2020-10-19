@@ -55,12 +55,12 @@ export default function Layout({navigation}) {
           <TouchableOpacity
             style={styles.button}
             onPress={() => navigation.navigate('Info')}>
-            <Text style={styles.buttonTitle}>▶탐방로 정보 확인하기</Text>
+            <Text style={styles.buttonTitle}>탐방로</Text>
           </TouchableOpacity>
 
           <View style={styles.trailBar}>
             <View style={styles.trailContent}>
-              <Text style={styles.trail1}>My Trail</Text>
+              <Text style={styles.trail1}>내 상태</Text>
               <LottieView autoPlay loop source={require('./svg/run.json')} />
               <View style={styles.trailLine} />
               <View style={styles.circle1}></View>
@@ -75,10 +75,13 @@ export default function Layout({navigation}) {
           <WeatherInfo />
         </View> */}
               <View style={styles.weather}>
+                <TouchableOpacity 
+                  onPress={() => navigation.navigate('Course')}>
+                </TouchableOpacity>
                 <Image
-                  source={require('./img/weather.png')}
+                  source={require('./img/수첩.png')}
                   style={styles.weatherImage}></Image>
-                <Text style={styles.trail1}>Weather</Text>
+                <Text style={styles.trail1}>내 등산수첩</Text>
               </View>
               <View style={styles.ranking}>
                 <TouchableOpacity
@@ -88,12 +91,12 @@ export default function Layout({navigation}) {
                     width: wp('6%'),
                   }}
                   onPress={() => navigation.navigate('Arrival')}>
-                  <Icon name="plus" size={30} color="#fff" />
+                  {/* <Icon name="plus" size={30} color="#fff" /> */}
                 </TouchableOpacity>
                 <Image
                   source={require('./img/rank.png')}
                   style={styles.rankImage}></Image>
-                <Text style={styles.trail1}>Ranking</Text>
+                <Text style={styles.trail1}>랭킹</Text>
               </View>
             </View>
           </View>
@@ -136,37 +139,60 @@ const styles = StyleSheet.create({
   button: {
     position: 'absolute',
     alignItems: 'center',
-    backgroundColor: 'transparent',
-    borderStyle: 'solid',
-    borderColor: '#FFFFFF',
-    borderWidth: 1,
+    // backgroundColor: 'transparent',
+    // borderStyle: 'solid',
+    // borderColor: '#FFFFFF',
+    // borderWidth: 1,
     padding: 5,
-    marginHorizontal: 100,
-    marginTop: 120,
+    marginHorizontal: 10,
+    marginTop: 50,
+    fontSize: 25,
+    // fontWeight: 'bold',
   },
   buttonTitle: {
     padding: 3,
-    fontSize: 16,
+    fontSize: 24,
     color: '#FFFFFF',
+    position: 'relative',
+    fontWeight: 'bold',
+        // borderStyle: 'solid',
+    // borderColor: '#FFFFFF',
+    // borderWidth: 1,
   },
   trailBar: {
     position: 'relative',
     paddingHorizontal: 10,
+    borderStyle: 'solid',
+    borderColor: '#76D46D',
+    borderWidth: 1,    // borderColor:'green',
   },
 
   trail1: {
     position: 'absolute',
     padding: 3,
-    margin: 2,
+    margin: 6,
     fontSize: 24,
     color: '#FFF',
+    fontWeight: 'bold',
+  },
+  trail2: {
+    position: 'absolute',
+    padding: 3,
+    margin: 6,
+    fontSize: 24,
+    color: '#47525E',
     fontWeight: 'bold',
   },
   trailContent: {
     marginTop: 280,
     borderRadius: 5,
-    backgroundColor: '#f4d03f',
+    // backgroundColor: '#f4d03f',
+    borderColor:'green',
     height: hp('20%'),
+    borderStyle: 'solid',
+    // borderWidth: 3,
+    backgroundColor:'#9EFF95'
+    
   },
   trailLine: {
     borderColor: '#1E824C',
@@ -193,16 +219,16 @@ const styles = StyleSheet.create({
   },
   ranking: {
     borderRadius: 5,
-    backgroundColor: '#1E824C',
+    backgroundColor: '#26A65B',
     height: hp('30%'),
     width: wp('46%'),
     marginLeft: 5,
   },
   rankImage: {
-    left: 56,
-    top: 20,
-    width: wp('20%'),
-    height: hp('20%'),
+    left: 48,
+    top: 40,
+    width: wp('22%'),
+    height: hp('22%'),
     //width: 150,
     //height: 'auto'
   },
