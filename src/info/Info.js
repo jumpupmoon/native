@@ -47,13 +47,13 @@ export default function Course({navigation}) {
               color: '#FFF',
               fontFamily: 'DungGeunMo',
             }}>
-            시작코스 선택하기
+            탐방로 안내
           </Text>
         </View>
         {/* 코스 아이템 시작 */}
         <ScrollView style={{paddingBottom:20}}>
           {mountain.map((m, idx) => (
-            <TouchableOpacity style={styles.courses} onPress={() => navigation.navigate('Prepare', idx)} key={idx}>
+            <TouchableOpacity style={styles.courses} onPress={() => navigation.navigate('Guide', idx)} key={idx}>
             <Image
               style={styles.img}
               source={imgList[idx]}></Image>

@@ -47,7 +47,7 @@ export default function Course({navigation}) {
               color: '#FFF',
               fontFamily: 'DungGeunMo',
             }}>
-            산 선택하기
+            랭킹
           </Text>
         </View>
         {/* 코스 아이템 시작 */}

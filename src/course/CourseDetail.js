@@ -75,75 +75,76 @@ export default function CourseDetail({navigation, route}) {
 
   return (
     <Container>
-      {course &&
-        <>
-        <View style={styles.container}>
-          <View style={styles.First}>
-            <Text style={styles.title}>{course.name}</Text>
-          </View>
-          {/* <View style={styles.item}>
-            <View style={styles.circleItem}>
-              {course.courseDetail.map(d => pointList(d))}
+      <View style={styles.container}>
+        {course &&
+          <>
+            <View style={styles.First}>
+              <Text style={styles.title}>{course.name}</Text>
             </View>
-          </View> */}
-          {/* <View style={styles.trailLine} /> */}
-          <View style={styles.Second}>
-            <View style={styles.scoreView}>
-              <Text style={styles.scoreIcon}>{course.courseDetail[point].name}</Text>
-            </View>
-            <View style={styles.scoreView2}>
-              <Text style={styles.scoreIcon}>▶</Text>
-            </View>
-            <View style={styles.scoreView}>
-              <Text style={styles.scoreIcon}>{course.courseDetail[point+1].name}</Text>
-            </View>
-          </View>
-            
-          <View style={styles.Third}>
-            {/* <View style={styles.circleItem}>
-              {course.courseDetail.map(d => pointList(d))}
+            {/* <View style={styles.item}>
+              <View style={styles.circleItem}>
+                {course.courseDetail.map(d => pointList(d))}
+              </View>
             </View> */}
-            <View style={styles.Third1}>
-              <View style={styles.item}>
-                <View style={styles.circleItem}>
-                  {course.courseDetail.map(d => pointList(d))}
+            {/* <View style={styles.trailLine} /> */}
+            <View style={styles.Second}>
+              <View style={styles.scoreView}>
+                <Text style={styles.scoreIcon}>{course.courseDetail[point].name.replace(' ', '\n')}</Text>
+              </View>
+              <View style={styles.scoreView2}>
+                <Text style={styles.scoreIcon}>▶</Text>
+              </View>
+              <View style={styles.scoreView}>
+                <Text style={styles.scoreIcon}>{course.courseDetail[point+1].name.replace(' ', '\n')}</Text>
+              </View>
+            </View>
+              
+            <View style={styles.Third}>
+              {/* <View style={styles.circleItem}>
+                {course.courseDetail.map(d => pointList(d))}
+              </View> */}
+              <View style={styles.Third1}>
+                <View style={styles.item}>
+                  <View style={styles.circleItem}>
+                    {course.courseDetail.map(d => pointList(d))}
+                  </View>
+                </View>
+                <View style={styles.trailLine} />
+              </View>
+
+              <View style={styles.Third2}>
+                <View style={styles.infoContent}>
+                  <Text style={styles.time}>난이도</Text>
+                  <Text style={styles.scoreTitle}>{course.courseDetail[point].difficulty}</Text>
+                </View>
+                <View style={styles.infoContent}>
+                  <Text style={styles.time}>거리</Text>
+                  <Text style={styles.scoreTitle}>{course.courseDetail[point].distance}km</Text>
+                </View>
+                <View style={styles.infoContent}>
+                  <Text style={styles.time} >시간</Text>
+                  <Text style={styles.scoreTitle}>{course.courseDetail[point].time}</Text>
                 </View>
               </View>
-              <View style={styles.trailLine} />
             </View>
-
-            <View style={styles.Third2}>
-              <View style={styles.infoContent}>
-                <Text style={styles.time}>난이도</Text>
-                <Text style={styles.scoreTitle}>{course.courseDetail[point].difficulty}</Text>
-              </View>
-              <View style={styles.infoContent}>
-                <Text style={styles.time}>거리</Text>
-                <Text style={styles.scoreTitle}>{course.courseDetail[point].distance}km</Text>
-              </View>
-              <View style={styles.infoContent}>
-                <Text style={styles.time} >시간</Text>
-                <Text style={styles.scoreTitle}>{course.courseDetail[point].time}</Text>
-              </View>
+            <View stylle={styles.Fourth}>
+              <Button onPress={() => giveupCheck(score.idx)} style={styles.giveupBtn}>
+                <Text style={styles.giveupText}>그만두기</Text>
+              </Button>
             </View>
-          </View>
-          <View stylle={styles.Fourth}>
-            <Button onPress={() => giveupCheck(score.idx)} style={styles.giveupBtn}>
-              <Text style={styles.giveupText}>그만두기</Text>
-            </Button>
-          </View>
-        </View>
+          
 
-          {/* {score[2] != 0 ?
-              <Text>종료지점 : {score[2]}</Text>
-            <>
-              <Text>종료시간 : {timeText(score[3])}</Text>
-            </>
-            :
-              <Popup1 idx={route.params} />
-          } */}
-        </>
-      }
+            {/* {score[2] != 0 ?
+                <Text>종료지점 : {score[2]}</Text>
+              <>
+                <Text>종료시간 : {timeText(score[3])}</Text>
+              </>
+              :
+                <Popup1 idx={route.params} />
+            } */}
+          </>
+        }
+      </View>
       <Footer navigation={navigation} value='3' />
     </Container>
   );

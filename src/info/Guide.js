@@ -31,7 +31,7 @@ export default function Prepare({navigation, route}) {
                   {course.courseDetail.map((d) => (
                       <View style={styles.circleDetail} key={d.seq}>
                         <View style={styles.circle}></View>
-                        <Text style={styles.circleText} textBreakStrategy={'balanced'}>{d.name}</Text>
+                        <Text style={styles.circleText}>{d.name.replace(' ', '\n')}</Text>
                       </View>
                   ))}
                 </View>
@@ -43,7 +43,10 @@ export default function Prepare({navigation, route}) {
                 <Text style={styles.itemText}>- 대 피 소 -</Text>
                 <View style={styles.itemDetail}>
                   <Text style={styles.itemTextDetail}>
-                    {course.shelter}
+                    {course.shelter.map((s, idx) => {
+                      if(idx != 0) return ' ' + s;
+                      else return s;
+                    })}
                   </Text>
                 </View>
               </View>
@@ -64,39 +67,14 @@ export default function Prepare({navigation, route}) {
                     marginVertical: 10,
                     padding: 10,
                   }}>
-                  <Text style={styles.itemTextDetail}> for(var i, i=0 ,i++
-                    {course.toilet[i]},{course.toilet[1]}
+                  <Text style={styles.itemTextDetail}>
+                    {course.toilet.map((t, idx) => {
+                      if(idx != 0) return ' ' + t;
+                      else return t;
+                    })}
                   </Text>
                 </View>
               </View>
-
-              {/* <View style={{alignItems: 'center'}}>
-                <Text style={styles.itemText}>
-                  {`${course.name} ${course.average}`}
-                </Text>
-                <Text style={styles.itemText}>
-                  {`${course.name} ${course.first}`}
-                  </Text>
-              </View> */}
-
-              <Button
-                onPress={() => navigation.navigate('Prepare', route.params)}
-                style={{
-                  textAlign: 'center',
-                  backgroundColor: '#1E824C',
-                  alignSelf: 'center',
-                  marginTop: 30,
-                }}>
-                <Text
-                  style={{
-                    fontSize: 26,
-                    fontFamily: 'DungGeunMo',
-                    textAlign: 'center',
-                    color: '#FFF',
-                  }}>
-                  시작하기
-                </Text>
-              </Button>
             </View>
             </>
           }

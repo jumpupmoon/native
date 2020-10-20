@@ -35,7 +35,17 @@ export default function Course({navigation, route}) {
   return (
     <Container>
         <Content>
-          <Text style={styles.Title}>현재 등산 수 : {score.length}</Text>
+          <View style={styles.header}>
+            <Text
+              style={{
+                fontSize: 30,
+                textAlign: 'center',
+                color: '#FFF',
+                fontFamily: 'DungGeunMo',
+              }}>
+              등산 기록
+            </Text>
+          </View>
 
           {score.map((s, idx) => (
             <ImageBackground style={styles.buttonView} key={idx} source={imgList[s.course.seq]}>
@@ -62,9 +72,9 @@ const styles = StyleSheet.create({
   },
   buttonView:{
     alignSelf:'center',
-    alignContent:'center',
-    alignItems:'center',
-    margin:10,
+    // alignContent:'center',
+    // alignItems:'center',
+    marginBottom: 20,
     height: hp('20%'),
     width: wp('90%'),
   },
@@ -76,5 +86,10 @@ const styles = StyleSheet.create({
     fontFamily: 'DungGeunMo', 
     textAlign: 'center', 
     color: '#FFF',
-  }
+  },
+  header: {
+    padding: 20,
+    backgroundColor: '#1E824C',
+    marginBottom: 20
+  },
 });

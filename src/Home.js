@@ -9,9 +9,13 @@ import Icon from 'react-native-vector-icons/Foundation';
 import WeatherInfo from './WeatherInfo';
 import NfcManager, {NfcEvents} from 'react-native-nfc-manager';
 import EventEmitter from "react-native-eventemitter";
+import AsyncStorage from '@react-native-community/async-storage'
+import axios from 'axios';
 
 export default function Layout({navigation}) {
   const [currentIndex, setCurrentIndex] = useState(1);
+  const [score, setScore] = useState();
+
   const [imageList, setImageList] = useState([
     require('./img/1.jpg'),
     require('./img/2.jpg'),
@@ -23,7 +27,17 @@ export default function Layout({navigation}) {
 
   // nfc 인식 시 화면 이동을 위해 app.js로 navigation 전달
   useEffect(() => {
-    EventEmitter.emit('nfcNav', navigation)
+    EventEmitter.emit('nfcNav', navigation);
+
+    // 등산기록 가져오기
+    AsyncStorage.getItem('address')
+    .then(address => {
+      axios.get(`https://whitedeer.herokuapp.com/list/${address}`)
+      .then(({data}) => {
+        setScore(data.scores[0]);
+      })
+      .catch(err => console.log(err));
+    })
   }, [])
 
   return (
@@ -42,43 +56,65 @@ export default function Layout({navigation}) {
             inactiveDotColor="rgba(0,0,0,0)"
             ImageComponentStyle={{
               width: wp('100%')-20,
-              // height: hp('40%'),
+              height: '100%',
               borderRadius: 5,
-              margin:10,
+              // margin:10,
               // flex:1,
             }} // 이미지 Style 적용
-            currentImageEmitter={increment}/>
-          <TouchableOpacity onPress={() => navigation.navigate('Info')}></TouchableOpacity>
-          <Text style={styles.trail1}>탐방로</Text>
+            currentImageEmitter={increment}
+          />
+          {/* <TouchableOpacity onPress={() => navigation.navigate('Info')}></TouchableOpacity> */}
+          {/* <Text style={styles.trail1}>탐방로</Text> */}
         </View>
 
         <View style={styles.Second}>
           <View style={styles.Second2}>
-            <Text style={styles.trail1}>내 상태</Text>
-            <LottieView autoPlay loop source={require('./svg/run.json')} />
-            <View style={styles.trailLine} />
-            <View style={styles.circle1}></View>
-            <View style={styles.circle2}></View>
-            <View style={styles.circle3}></View>
-            <View style={styles.circle4}></View>
-            <View style={styles.circle5}></View>
-            <Icon name="flag" size={35} color="#1E824C" style={styles.icon} />
+            <Text style={styles.trail1}>최근 기록</Text>
+
+            <View style={styles.scoreView}>
+              {score ?
+                <TouchableOpacity style={styles.scoreView} onPress={() => navigation.navigate('Map', score._id)}>
+                  <View style={styles.trailLine} />
+                  <View style={styles.circleItem}>
+                    {score.course.courseDetail.map((_, idx) => (
+                      <View style={styles.circleDetail} key={idx}>
+                        <View style={score.score >= idx ? styles.circleCheck : styles.circle}></View>
+                      </View>
+                    ))}
+                  </View>
+                </TouchableOpacity>
+              :
+                <Text style={styles.noScoreText}>최근 등산 기록이 없습니다.</Text>
+              }
+            
+              {/* <LottieView autoPlay loop source={require('./svg/run.json')} />
+              <View style={styles.trailLine} />
+              <View style={styles.circle1}></View>
+              <View style={styles.circle2}></View>
+              <View style={styles.circle3}></View>
+              <View style={styles.circle4}></View>
+              <View style={styles.circle5}></View>
+              <Icon name="flag" size={35} color="#1E824C" style={styles.icon} /> */}
+            </View>
           </View>
         </View>
+
         <View style={styles.Third}>
           <View style={styles.Third2}>
-            <TouchableOpacity onPress={() => navigation.navigate('Course')}></TouchableOpacity>
-            <Image
-              source={require('./img/note.png')}
-              style={styles.noteImage}></Image>
-            <Text style={styles.trail1}>내 등산수첩</Text>
+            <TouchableOpacity onPress={() => navigation.navigate('Course')}>
+              <Image
+                source={require('./img/note.png')}
+                style={styles.noteImage} />
+              <Text style={styles.trail1}>등산 기록</Text>
+            </TouchableOpacity>
           </View>
           <View style={styles.Third3}>
-            <TouchableOpacity onPress={() => navigation.navigate('Course')}></TouchableOpacity>
-            <Image
-              source={require('./img/rank.png')}
-              style={styles.rankImage}></Image>
-            <Text style={styles.trail1}>랭킹</Text>
+            <TouchableOpacity onPress={() => navigation.navigate('MtRank')}>
+              <Image
+                source={require('./img/rank.png')}
+                style={styles.rankImage} />
+              <Text style={styles.trail1}>랭킹</Text>
+            </TouchableOpacity>
           </View>
         </View>
 
@@ -108,11 +144,12 @@ const styles = StyleSheet.create({
     // position: 'absolute',
     flex: 1,
     // margin:10,
-    margin: 10,
+    // margin: 10,
     // borderRadius:5,
     // borderRadius:5,
     // paddingHorizontal: 10,
     // position: 'relative',
+    marginTop: 10,
   },
   FirstImage:{
     flex:1
@@ -127,7 +164,7 @@ const styles = StyleSheet.create({
     // height: hp('20%'),
     // borderStyle: 'solid',
     // borderWidth: 3,
-    backgroundColor:'#9EFF95'
+    backgroundColor:'#9EFF95',
   },
   Second2: {
     flex:1,
@@ -145,25 +182,29 @@ const styles = StyleSheet.create({
     flexDirection: 'row', 
     // marginTop: 10,
     // marginBottom:10,
-    position: 'relative',
+    // position: 'relative',
     // paddingHorizontal: 10,
     margin:10,
+    marginTop: 0,
+    // borderWidth: 1
   },
   Third2: {
     flex:1,
-    margin:5,
+    // margin:5,
     borderRadius: 5,
     backgroundColor: '#26A65B',
     // height: hp('30%'),
     // width: wp('46%'),
+    marginRight: 5
   },
   Third3: {
     flex:1,
-    margin:5,
+    // margin:5,
     borderRadius: 5,
     backgroundColor: '#26A65B',
     // height: hp('30%'),
     // width: wp('46%'),
+    marginLeft: 5
   },
   header: {
     // position: 'absolute',
@@ -226,7 +267,7 @@ const styles = StyleSheet.create({
 
     marginHorizontal: 10,
     borderStyle: 'dashed',
-    marginTop: 90,
+    // marginTop: 90,
     borderRadius: 1,
   },
   icon: {
@@ -251,59 +292,39 @@ const styles = StyleSheet.create({
     //width: 150,
     //height: 'auto'
   },
-  circle1: {
-    width: 18,
-    height: 18,
-    borderRadius: 18 / 2,
-    backgroundColor: '#F5E51B',
-    position: 'absolute',
-    borderWidth: 4,
-    borderColor: '#1E824C',
-    marginTop: 83,
-    marginLeft: 53,
+  scoreView: {
+    justifyContent: 'center',
+    flex: 1
   },
-  circle2: {
-    width: 18,
-    height: 18,
-    borderRadius: 18 / 2,
-    backgroundColor: '#F5E51B',
-    position: 'absolute',
-    borderWidth: 4,
-    borderColor: '#1E824C',
-    marginTop: 83,
-    marginLeft: 123,
+  noScoreText: {
+    fontSize: 16,
+    color: 'black',
+    fontWeight: 'bold',
+    textAlign: 'center'
   },
-  circle3: {
-    width: 18,
-    height: 18,
-    borderRadius: 18 / 2,
-    backgroundColor: '#F5E51B',
-    position: 'absolute',
-    borderWidth: 4,
-    borderColor: '#1E824C',
-    marginTop: 83,
-    marginLeft: 193,
+  circleItem: {
+    flexDirection: "row",
+    position: "absolute",
+    marginTop: 14
   },
-  circle4: {
-    width: 18,
-    height: 18,
-    borderRadius: 18 / 2,
-    backgroundColor: '#F5E51B',
-    position: 'absolute',
-    borderWidth: 4,
-    borderColor: '#1E824C',
-    marginTop: 83,
-    marginLeft: 263,
+  circleDetail: {
+    flex: 1,
+    alignItems: 'center'
   },
-  circle5: {
+  circle: {
     width: 18,
     height: 18,
-    borderRadius: 18 / 2,
+    borderRadius: 9,
     backgroundColor: '#F5E51B',
-    position: 'absolute',
     borderWidth: 4,
     borderColor: '#1E824C',
-    marginTop: 83,
-    marginLeft: 333,
+  },
+  circleCheck: {
+    width: 18,
+    height: 18,
+    borderRadius: 9,
+    backgroundColor: '#1E824C',
+    borderWidth: 4,
+    borderColor: '#1E824C',
   },
 });
