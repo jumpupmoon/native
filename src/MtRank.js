@@ -54,9 +54,9 @@ export default function Course({navigation}) {
         <ScrollView style={{paddingBottom:20}}>
           {mountain.map((m, idx) => (
             <TouchableOpacity style={styles.courses} onPress={() => navigation.navigate('Rank', idx)} key={idx}>
-              <Image
-                style={styles.img}
-                source={imgList[idx]}></Image>
+            <Image
+              style={styles.img}
+              source={imgList[idx]}></Image>
               <Text style={styles.title}>{m.name}({m.location})</Text>
               <Text style={styles.info}>{m.time}({m.distance}km)</Text>
               <Text style={styles.info2}>{m.discription}</Text>
@@ -79,25 +79,24 @@ const styles = StyleSheet.create({
   },
   courses: {
     alignItems: 'center',
-    marginRight: 20,
+    // marginRight: 20,
     marginHorizontal: 20,
     width: wp('91%'),
-    height: hp('22.5%'),
-
+    height: hp('25.5%'),
     marginTop: 20,
     // borderStyle: 'dotted',
-    borderColor: '#404040',
-    borderWidth: 3,
-    borderRadius: 10,
+    // borderColor: '#404040',
+    // borderWidth: 0.5,
+    // borderRadius: 10,
   },
   img: {
     width: wp('90%'),
-    height: hp('22%'),
+    height: hp('25%'),
     alignItems: 'center',
     padding: 10,
     resizeMode: 'stretch',
     alignItems: 'center',
-
+    borderRadius:10,
     opacity: 0.6,
   },
   title: {
@@ -112,7 +111,6 @@ const styles = StyleSheet.create({
   info: {
     marginTop: 70,
     position: 'absolute',
-
     padding: 0,
     fontFamily: 'DungGeunMo',
     fontSize: 20,
@@ -121,7 +119,7 @@ const styles = StyleSheet.create({
   info2: {
     marginTop: 110,
     position: 'absolute',
-
+    textAlign: 'center',
     padding: 0,
     fontFamily: 'DungGeunMo',
     fontSize: 16,

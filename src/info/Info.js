@@ -42,7 +42,6 @@ export default function Course({navigation}) {
         <View style={styles.header}>
           <Text
             style={{
-              
               fontSize: 30,
               textAlign: 'center',
               color: '#FFF',
@@ -54,10 +53,10 @@ export default function Course({navigation}) {
         {/* 코스 아이템 시작 */}
         <ScrollView style={{paddingBottom:20}}>
           {mountain.map((m, idx) => (
-            <TouchableOpacity style={styles.courses} onPress={() => navigation.navigate('Guide', idx)} key={idx}>
-              <Image
-                style={styles.img}
-                source={imgList[idx]}></Image>
+            <TouchableOpacity style={styles.courses} onPress={() => navigation.navigate('Prepare', idx)} key={idx}>
+            <Image
+              style={styles.img}
+              source={imgList[idx]}></Image>
               <Text style={styles.title}>{m.name}</Text>
               <Text style={styles.info}>{m.time}({m.distance}km)</Text>
               <Text style={styles.info2}>{m.discription}</Text>
@@ -80,16 +79,15 @@ const styles = StyleSheet.create({
   },
   courses: {
     alignItems: 'center',
-    marginRight: 20,
+    // marginRight: 20,
     marginHorizontal: 20,
     width: wp('91%'),
     height: hp('25.5%'),
-
     marginTop: 20,
     // borderStyle: 'dotted',
-    borderColor: '#404040',
-    borderWidth: 3,
-    borderRadius: 10,
+    // borderColor: '#404040',
+    // borderWidth: 0.5,
+    // borderRadius: 10,
   },
   img: {
     width: wp('90%'),
@@ -98,7 +96,7 @@ const styles = StyleSheet.create({
     padding: 10,
     resizeMode: 'stretch',
     alignItems: 'center',
-
+    borderRadius:10,
     opacity: 0.6,
   },
   title: {

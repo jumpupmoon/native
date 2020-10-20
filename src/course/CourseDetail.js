@@ -75,144 +75,170 @@ export default function CourseDetail({navigation, route}) {
 
   return (
     <Container>
-        <Content>
-          {course &&
-            <>
-              <View style={styles.course}>
-                <Text style={styles.title}>{course.name}</Text>
-              </View>
-              {/* <View style={styles.item}>
+      {course &&
+        <>
+        <View style={styles.container}>
+          <View style={styles.First}>
+            <Text style={styles.title}>{course.name}</Text>
+          </View>
+          {/* <View style={styles.item}>
+            <View style={styles.circleItem}>
+              {course.courseDetail.map(d => pointList(d))}
+            </View>
+          </View> */}
+          {/* <View style={styles.trailLine} /> */}
+          <View style={styles.Second}>
+            <View style={styles.scoreView}>
+              <Text style={styles.scoreIcon}>{course.courseDetail[point].name}</Text>
+            </View>
+            <View style={styles.scoreView2}>
+              <Text style={styles.scoreIcon}>▶</Text>
+            </View>
+            <View style={styles.scoreView}>
+              <Text style={styles.scoreIcon}>{course.courseDetail[point+1].name}</Text>
+            </View>
+          </View>
+            
+          <View style={styles.Third}>
+            {/* <View style={styles.circleItem}>
+              {course.courseDetail.map(d => pointList(d))}
+            </View> */}
+            <View style={styles.Third1}>
+              <View style={styles.item}>
                 <View style={styles.circleItem}>
                   {course.courseDetail.map(d => pointList(d))}
                 </View>
-              </View> */}
-              {/* <View style={styles.trailLine} /> */}
-              <View style={styles.scoreInfo}>
-                <View style={styles.scoreView}>
-                  <Text style={styles.scoreIcon}>{course.courseDetail[point].name}</Text>
-                </View>
-                <View style={styles.scoreView2}>
-                  <Text style={styles.scoreIcon}>▶</Text>
-                </View>
-                <View style={styles.scoreView}>
-                  <Text style={styles.scoreIcon}>{course.courseDetail[point+1].name}</Text>
-                </View>
               </View>
-                
-              <View style={styles.leftLine}>
-                {/* <View style={styles.circleItem}>
-                  {course.courseDetail.map(d => pointList(d))}
-                </View> */}
-                <View style={styles.info}>
-                  <View style={styles.infoContentTop}>
-                    <Text style={styles.time}>난이도</Text>
-                    <Text style={styles.scoreTitle}>{course.courseDetail[point].difficulty}</Text>
-                  </View>
-                  <View style={styles.infoContent}>
-                    <Text style={styles.time}>거리</Text>
-                    <Text style={styles.scoreTitle}>{course.courseDetail[point].distance}km</Text>
-                  </View>
-                  <View style={styles.infoContentBottom}>
-                    <Text style={styles.time} >예상 시간</Text>
-                    <Text style={styles.scoreTitle}>{course.courseDetail[point].time}</Text>
-                  </View>
-                </View>
+              <View style={styles.trailLine} />
+            </View>
+
+            <View style={styles.Third2}>
+              <View style={styles.infoContent}>
+                <Text style={styles.time}>난이도</Text>
+                <Text style={styles.scoreTitle}>{course.courseDetail[point].difficulty}</Text>
               </View>
+              <View style={styles.infoContent}>
+                <Text style={styles.time}>거리</Text>
+                <Text style={styles.scoreTitle}>{course.courseDetail[point].distance}km</Text>
+              </View>
+              <View style={styles.infoContent}>
+                <Text style={styles.time} >시간</Text>
+                <Text style={styles.scoreTitle}>{course.courseDetail[point].time}</Text>
+              </View>
+            </View>
+          </View>
+          <View stylle={styles.Fourth}>
+            <Button onPress={() => giveupCheck(score.idx)} style={styles.giveupBtn}>
+              <Text style={styles.giveupText}>그만두기</Text>
+            </Button>
+          </View>
+        </View>
 
-              <Button onPress={() => giveupCheck(score.idx)} style={styles.giveupBtn}>
-                <Text style={styles.giveupText}>그만두기</Text>
-              </Button>
-              
-
-              {/* {score[2] != 0 ?
-                  <Text>종료지점 : {score[2]}</Text>
-                <>
-                  <Text>종료시간 : {timeText(score[3])}</Text>
-                </>
-                :
-                  <Popup1 idx={route.params} />
-              } */}
+          {/* {score[2] != 0 ?
+              <Text>종료지점 : {score[2]}</Text>
+            <>
+              <Text>종료시간 : {timeText(score[3])}</Text>
             </>
-          }
-          
-        </Content>
-        
-        <Footer navigation={navigation} value='3' />
+            :
+              <Popup1 idx={route.params} />
+          } */}
+        </>
+      }
+      <Footer navigation={navigation} value='3' />
     </Container>
   );
 };
 
 const styles = StyleSheet.create({
-  course: {
+  container:{
+    flex:1
+  },
+  First: {
     display: 'flex',
-    flex: 1,
+    flex: 0.5,
     margin: 40,
     padding: 20,
   },
-  leftLine : {
-    flexDirection:"column",
+  Second: {
+    flex:1,
+    justifyContent: 'space-around',
+    flexDirection: 'row',
+    textAlign:"center",
+    // alignSelf:"center",
+    // marginHorizontal: 20,
+    marginBottom: 20,
+    marginRight:20,
+    marginLeft:20,
+    backgroundColor:"#C3FFDE",
+  },
+  Third : {
+    flex:5,
+    flexDirection:"row",
     // position: "absolute",
     // flex:10,
-    marginLeft:25,
-    borderLeftWidth : 12,
-    borderLeftColor : "#1E824C",
-    paddingLeft:25,
+
   },
-  // leftLine2 : {
-  //   flexDirection:"column",
+  Third1:{
+    flex:2,
+    flexDirection:"column",
+    borderLeftColor: '#1E824C',
+    // borderWidth: 5,
+  },
+  Third2: {
+    flex:6,
+    flexDirection: 'column',
+    // backgroundColor : "#26A65B",
+    justifyContent: 'space-evenly',
+    // marginBottom: 20
+  },
+  // infoContentTop: {
+  //   flex:2,
+  //   // marginBottom: 20,
+  //   marginRight:20,
+  //   flexDirection:"row",
+  //   backgroundColor:"#74E0A4",    
+  //   // paddingVertical: 17.2,
+  //   alignItems: 'center',
+  //   // marginHorizontal: 5,
+  //   // fontStyle:"italic",
+  //   // justifyContent: 'center'
   // },
+  infoContent: {
+    flex:2,
+    // marginTop: 10,
+    // marginBottom: 10,
+    marginRight:20,
+    margin:10,
+    flexDirection:"row",
+    backgroundColor:"#74E0A4",    
+    // paddingVertical: 17.2,
+    alignItems: 'center',
+    // marginHorizontal: 5,
+    // fontStyle:"italic",
+
+    // justifyContent: 'center'
+  },
+  // infoContentBottom: {
+  //   flex:2,
+  //   // marginTop: 20,
+  //   marginRight:20,
+  //   flexDirection:"row",
+  //   backgroundColor:"#74E0A4",    
+  //   // paddingVertical: 17.2,
+  //   alignItems: 'center',
+  //   // marginHorizontal: 5,
+  //   // fontStyle:"italic",
+
+  //   // justifyContent: 'center'
+  // },
+  Fourth:{
+    flex:0.8
+  },
   title: {
     fontFamily: 'DungGeunMo',
     fontSize: 36,
     color: '#1E824C',
     textAlign: 'center'
-  },
-  info: {
-    flex:1,
-    flexDirection: 'column',
-    // backgroundColor : "#26A65B",
-    justifyContent: 'space-around',
-    // marginBottom: 20
-  },
-  infoContentTop: {
-    flex:2,
-    marginBottom: 20,
-    marginRight:20,
-    flexDirection:"row",
-    backgroundColor:"#74E0A4",    
-    // marginHorizontal: 5,
-    paddingVertical: 17.2,
-    alignItems: 'center',
-    // fontStyle:"italic",
-
-    // justifyContent: 'center'
-  },
-  infoContent: {
-    flex:2,
-    marginTop: 10,
-    marginBottom: 10,
-    marginRight:20,
-    flexDirection:"row",
-    backgroundColor:"#74E0A4",    
-    // marginHorizontal: 5,
-    paddingVertical: 17.2,
-    alignItems: 'center',
-    // fontStyle:"italic",
-
-    // justifyContent: 'center'
-  },
-  infoContentBottom: {
-    flex:2,
-    marginTop: 20,
-    marginRight:20,
-    flexDirection:"row",
-    backgroundColor:"#74E0A4",    
-    // marginHorizontal: 5,
-    paddingVertical: 17.2,
-    alignItems: 'center',
-    // fontStyle:"italic",
-
-    // justifyContent: 'center'
   },
   imglist: {
     flexDirection: 'row',
@@ -265,18 +291,7 @@ const styles = StyleSheet.create({
     resizeMode: 'cover',
     borderRadius: 10,
   },
-  scoreInfo: {
-    flex:1,
-    justifyContent: 'space-around',
-    flexDirection: 'row',
-    textAlign:"center",
-    // alignSelf:"center",
-    // marginHorizontal: 20,
-    marginBottom: 20,
-    marginRight:20,
-    marginLeft:20,
-    backgroundColor:"#C3FFDE",
-  },
+
   scoreTitle: {
     fontFamily: 'DungGeunMo',
     fontSize: 26,
@@ -290,8 +305,8 @@ const styles = StyleSheet.create({
   time: {
     // alignItems: 'flex-end',
     fontFamily: 'DungGeunMo',
-    fontSize: 26,
-    flex:4,
+    fontSize: 24,
+    flex:2,
     flexDirection:"column",
     textAlign:"center"
     // textAlign:"center",
@@ -311,15 +326,16 @@ const styles = StyleSheet.create({
   },
   item: {
     margin: 10,
-    marginBottom: 100,
+    // marginBottom: 100,
   },
   trailLine: {
-    borderBottomColor: '#1E824C',
-    borderBottomWidth: 5,
-    marginHorizontal: 10,
-    borderStyle: 'dashed',
-    marginTop: 20,
-    borderRadius: 1,
+    borderLeftColor: '#1E824C',
+    borderLeftWidth: 5,
+    position:"relative",
+    // marginHorizontal: 10,
+    // borderStyle: 'dashed',
+    // marginTop: 20,
+    // borderRadius: 1,
   },
   circle: {
     width: 18,
@@ -340,6 +356,8 @@ const styles = StyleSheet.create({
   circleItem: {
     flexDirection: "column",
     position: "absolute",
+    justifyContent:"space-evenly",
+    alignItems:"center"
     // marginTop: 14
   },
   circleDetail: {

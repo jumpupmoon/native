@@ -64,8 +64,8 @@ export default function Prepare({navigation, route}) {
                     marginVertical: 10,
                     padding: 10,
                   }}>
-                  <Text style={styles.itemTextDetail}>
-                    {course.toilet[0]},{course.toilet[1]}
+                  <Text style={styles.itemTextDetail}> for(var i, i=0 ,i++
+                    {course.toilet[i]},{course.toilet[1]}
                   </Text>
                 </View>
               </View>

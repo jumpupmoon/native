@@ -21,7 +21,7 @@ export default function Course({navigation, route}) {
   ]
 
   // 지갑 주소로 등산 기록 찾아오기
-  useEffect(() => {
+  useEffect(() => {                                                 
     AsyncStorage.getItem('address')
     .then(address => {
       axios.get(`https://whitedeer.herokuapp.com/list/${address}`)
