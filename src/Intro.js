@@ -3,6 +3,7 @@ import {Platform,Text,View, StyleSheet,TouchableOpacity} from 'react-native';
 import Styled from 'styled-components';
 import axios from 'axios';
 import AsyncStorage from '@react-native-community/async-storage';
+import { PacmanIndicator } from 'react-native-indicators';
 
 const ImageBackground = Styled.ImageBackground`
   flex: 1;
@@ -13,8 +14,6 @@ export default function Intro({setAddress}) {
   const [pendding, setPendding] = useState(false);
 
   const starting = () => {
-    // 이중 작동 방지
-    if(pendding) return;
     setPendding(true);
 
     // 지갑 주소 받아서 기기에 저장
@@ -26,7 +25,12 @@ export default function Intro({setAddress}) {
     .catch(err => alert(err));
   }
 
-  return (
+  return pendding ? (
+    <View style={{flex: 1}}>
+      <PacmanIndicator color='#1E824C' size={100} />
+    </View>
+  )
+  : (
     <View style={styles.container}>
       <ImageBackground source={require('./img/2.jpg')} style={styles.bg}>
         <View style={styles.title}>
