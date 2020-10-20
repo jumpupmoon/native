@@ -88,12 +88,11 @@ export default function CourseDetail({navigation, route}) {
                     {course.courseDetail.map(d => pointList(d))}
                   </View>
                 </View>
-              
                 <View style={styles.scoreInfo}>
                   <View style={styles.scoreView}>
                     <Text style={styles.scoreIcon}>{course.courseDetail[point].name}</Text>
                   </View>
-                  <View style={styles.scoreView}>
+                  <View style={styles.scoreView2}>
                     <Text style={styles.scoreIcon}>▶</Text>
                   </View>
                   <View style={styles.scoreView}>
@@ -106,13 +105,12 @@ export default function CourseDetail({navigation, route}) {
                     <Text style={styles.time}>난이도</Text>
                     <Text style={styles.scoreTitle}>{course.courseDetail[point].difficulty}</Text>
                   </View>
-                    
                   <View style={styles.infoContent}>
                     <Text style={styles.time}>거리</Text>
                     <Text style={styles.scoreTitle}>{course.courseDetail[point].distance}km</Text>
                   </View>
                   <View style={styles.infoContent}>
-                    <Text style={styles.time}>예상 시간</Text>
+                    <Text style={styles.time} >예상 시간</Text>
                     <Text style={styles.scoreTitle}>{course.courseDetail[point].time}</Text>
                   </View>
                 </View>
@@ -165,30 +163,24 @@ const styles = StyleSheet.create({
     color: '#1E824C',
     textAlign: 'center'
   },
-  time: {
-    alignItems: 'flex-end',
-    fontFamily: 'DungGeunMo',
-    fontSize: 16,
-    flex:1,
-    // textAlign:"center",
-    // paddingTop: 10
-  },
   info: {
     flex:1,
     flexDirection: 'column',
     // backgroundColor : "#26A65B",
     justifyContent: 'space-around',
-    marginBottom: 20
+    // marginBottom: 20
   },
   infoContent: {
     flex:2,
+    marginTop: 20,
     flexDirection:"row",
-    borderColor: '#404040',
-    borderWidth: 2,
-    borderRadius: 4,
-    marginHorizontal: 10,
-    paddingVertical: 20,
+    backgroundColor:"#2DC370",    
+    // marginHorizontal: 5,
+    paddingVertical: 17.2,
     alignItems: 'center',
+    marginRight:20,
+    // fontStyle:"italic",
+
     // justifyContent: 'center'
   },
   imglist: {
@@ -222,10 +214,19 @@ const styles = StyleSheet.create({
   },
   scoreView: {
     fontSize: 40,
-    flex: 1,
+    flex: 5,
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: 40
+    marginBottom: 40,
+    textAlign:"center"
+  },
+  scoreView2: {
+    fontSize: 40,
+    flex: 1.5,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 40,
+    textAlign:"center"
   },
   scoreImg: {
     flex: 1,
@@ -234,18 +235,35 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   scoreInfo: {
+    flex:1,
     justifyContent: 'space-around',
     flexDirection: 'row',
-    marginHorizontal: 20,
-    marginBottom: 20,
+    textAlign:"center",
+    // alignSelf:"center",
+    // marginHorizontal: 20,
+    marginTop: 20,
+    marginRight:20,
+    backgroundColor:"#2DC370",
   },
   scoreTitle: {
     fontFamily: 'DungGeunMo',
-    fontSize: 22.5,
+    fontSize: 26,
     color: '#181717',
     marginBottom: 10,
-    flex:1,
+    flex:3,
+    flexDirection:"column",
+    textAlign:"center"
     // textAlign:"center",
+  },
+  time: {
+    // alignItems: 'flex-end',
+    fontFamily: 'DungGeunMo',
+    fontSize: 26,
+    flex:4,
+    flexDirection:"column",
+    textAlign:"center"
+    // textAlign:"center",
+    // paddingTop: 10
   },
   giveupBtn: {
     textAlign: 'center',
@@ -261,7 +279,7 @@ const styles = StyleSheet.create({
   },
   item: {
     margin: 10,
-    marginBottom: 400,
+    marginBottom: 100,
   },
   trailLine: {
     borderBottomColor: '#1E824C',
