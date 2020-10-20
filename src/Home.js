@@ -11,10 +11,12 @@ import NfcManager, {NfcEvents} from 'react-native-nfc-manager';
 import EventEmitter from "react-native-eventemitter";
 import AsyncStorage from '@react-native-community/async-storage'
 import axios from 'axios';
+import { PacmanIndicator } from 'react-native-indicators';
 
 export default function Layout({navigation}) {
   const [currentIndex, setCurrentIndex] = useState(1);
   const [score, setScore] = useState();
+  const [loading, setLoading] = useState(true);
 
   const [imageList, setImageList] = useState([
     require('./img/1.jpg'),
@@ -35,12 +37,18 @@ export default function Layout({navigation}) {
       axios.get(`https://whitedeer.herokuapp.com/list/${address}`)
       .then(({data}) => {
         setScore(data.scores[0]);
+        setLoading(false);
       })
       .catch(err => console.log(err));
     })
   }, [])
 
-  return (
+  return loading ? (
+    <View style={{flex: 1}}>
+      <PacmanIndicator color='#1E824C' size={100} />
+    </View>
+  )
+  : (
     <Container>
       <View style={styles.container}>
         <View style={styles.First}>
@@ -326,5 +334,5 @@ const styles = StyleSheet.create({
     backgroundColor: '#1E824C',
     borderWidth: 4,
     borderColor: '#1E824C',
-  },
+  }
 });

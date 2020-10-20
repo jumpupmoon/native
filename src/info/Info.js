@@ -15,14 +15,17 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Icon2 from 'react-native-vector-icons/Fontisto';
 import axios from 'axios';
+import { PacmanIndicator } from 'react-native-indicators';
 
 export default function Course({navigation}) {
   const [mountain, setMountain] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     axios.get('https://whitedeer.herokuapp.com/course')
     .then(({data}) => {
       setMountain(data.list)
+      setLoading(false);
     })
   }, [])
 
@@ -36,7 +39,12 @@ export default function Course({navigation}) {
     require('../img/어승생악.jpg'),
   ]
 
-  return (
+  return loading ? (
+    <View style={{flex: 1}}>
+      <PacmanIndicator color='#1E824C' size={100} />
+    </View>
+  )
+  :  (
     <Container>
       <Content>
         <View style={styles.header}>

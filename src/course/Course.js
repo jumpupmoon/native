@@ -5,10 +5,12 @@ import AsyncStorage from '@react-native-community/async-storage';
 import Footer from '../Footer';
 import {StyleSheet, View, ImageBackground} from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import { PacmanIndicator } from 'react-native-indicators';
 
 export default function Course({navigation, route}) {
   const [score, setScore] = useState([]);
   const [count, setCount] = useState(0);
+  const [loading, setLoading] = useState(true);
 
   const imgList = [
     require('../img/돈내코.jpg'),
@@ -27,12 +29,18 @@ export default function Course({navigation, route}) {
       axios.get(`https://whitedeer.herokuapp.com/list/${address}`)
       .then(({data}) => {
         setScore(data.scores);
+        setLoading(false);
       })
       .catch(err => console.log(err));
     })
   }, [navigation])
 
-  return (
+  return loading ? (
+    <View style={{flex: 1}}>
+      <PacmanIndicator color='#1E824C' size={100} />
+    </View>
+  )
+  : (
     <Container>
         <Content>
           <View style={styles.header}>

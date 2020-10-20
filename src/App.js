@@ -4,7 +4,7 @@ import NfcManager, {NfcEvents} from 'react-native-nfc-manager';
 import AsyncStorage from '@react-native-community/async-storage';
 import EventEmitter from "react-native-eventemitter";
 import axios from 'axios';
-import {Alert} from 'react-native';
+import {Alert, View} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import Intro from './Intro';
