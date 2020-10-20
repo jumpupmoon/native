@@ -65,7 +65,7 @@ export default function Prepare({navigation, route}) {
                     padding: 10,
                   }}>
                   <Text style={styles.itemTextDetail}>
-                    {course.toilet}
+                    {course.toilet[0]},{course.toilet[1]}
                   </Text>
                 </View>
               </View>

@@ -28,76 +28,63 @@ export default function Layout({navigation}) {
 
   return (
     <Container>
-      <Content>
-        <View style={styles.container}>
-          {/* 상단바 */}
-          {/* <View style={styles.header}>
-            <Text style={styles.headerText}>산오쿠과</Text>
-          </View> */}
-          {/* 이미지 슬라이더 */}
-          <View style={styles.image}>
-            <SliderBox
-              autoplay={true} //자동 슬라이드 넘김
-              circleLoop={true} //맨끝 슬라이드에서 다시 첫슬라이드로
-              resizeMode="cover" // 이미지 사이즈 조절값
-              images={imageList} // 이미지 주소 리스트
-              dotColor="rgba(0,0,0,0)" // 아래 점 투명으로 안보이게 가림
-              inactiveDotColor="rgba(0,0,0,0)"
-              ImageComponentStyle={{
-                width: wp('100%') - 20,
-                height: hp('30%'),
-                borderRadius: 5,
-              }} // 이미지 Style 적용
-              currentImageEmitter={increment}
-            />
-          </View>
-          {/* 이미지 슬라이더 */}
-          <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Info')}>
-            <Text style={styles.buttonTitle}>탐방로</Text>
-          </TouchableOpacity>
+      <View style={styles.container}>
+        <View style={styles.First}>
+          {/* <Image style={styles.FirstImage}
+            source={require('./img/영실.jpg')}>
+          </Image> */}
+          <SliderBox 
+            autoplay={true} //자동 슬라이드 넘김
+            circleLoop={true} //맨끝 슬라이드에서 다시 첫슬라이드로
+            resizeMode="cover" // 이미지 사이즈 조절값
+            images={imageList} // 이미지 주소 리스트
+            dotColor="rgba(0,0,0,0)" // 아래 점 투명으로 안보이게 가림
+            inactiveDotColor="rgba(0,0,0,0)"
+            ImageComponentStyle={{
+              width: wp('100%')-20,
+              // height: hp('40%'),
+              borderRadius: 5,
+              margin:10,
+              // flex:1,
+            }} // 이미지 Style 적용
+            currentImageEmitter={increment}/>
+          <TouchableOpacity onPress={() => navigation.navigate('Info')}></TouchableOpacity>
+          <Text style={styles.trail1}>탐방로</Text>
+        </View>
 
-          <View style={styles.trailBar}>
-            <View style={styles.trailContent}>
-              <Text style={styles.trail1}>내 상태</Text>
-              <LottieView autoPlay loop source={require('./svg/run.json')} />
-              <View style={styles.trailLine} />
-              <View style={styles.circle1}></View>
-              <View style={styles.circle2}></View>
-              <View style={styles.circle3}></View>
-              <View style={styles.circle4}></View>
-              <View style={styles.circle5}></View>
-              <Icon name="flag" size={35} color="#1E824C" style={styles.icon} />
-            </View>
-            <View style={{flex: 1, flexDirection: 'row', marginTop: 10}}>
-              {/* <View style={styles.weather}>
-          <WeatherInfo />
-        </View> */}
-              <View style={styles.weather}>
-                <TouchableOpacity onPress={() => navigation.navigate('Course')}></TouchableOpacity>
-                <Image
-                  source={require('./img/note.png')}
-                  style={styles.weatherImage}></Image>
-                <Text style={styles.trail1}>내 등산수첩</Text>
-              </View>
-              <View style={styles.ranking}>
-                <TouchableOpacity
-                  style={{
-                    backgroundColor: '#1E824C',
-                    left: 150,
-                    width: wp('6%'),
-                  }}
-                  onPress={() => navigation.navigate('Rank')}>
-                  {/* <Icon name="plus" size={30} color="#fff" /> */}
-                </TouchableOpacity>
-                <Image
-                  source={require('./img/rank.png')}
-                  style={styles.rankImage}></Image>
-                <Text style={styles.trail1}>랭킹</Text>
-              </View>
-            </View>
+        <View style={styles.Second}>
+          <View style={styles.Second2}>
+            <Text style={styles.trail1}>내 상태</Text>
+            <LottieView autoPlay loop source={require('./svg/run.json')} />
+            <View style={styles.trailLine} />
+            <View style={styles.circle1}></View>
+            <View style={styles.circle2}></View>
+            <View style={styles.circle3}></View>
+            <View style={styles.circle4}></View>
+            <View style={styles.circle5}></View>
+            <Icon name="flag" size={35} color="#1E824C" style={styles.icon} />
           </View>
         </View>
-      </Content>
+        <View style={styles.Third}>
+          <View style={styles.Third2}>
+            <TouchableOpacity onPress={() => navigation.navigate('Course')}></TouchableOpacity>
+            <Image
+              source={require('./img/note.png')}
+              style={styles.noteImage}></Image>
+            <Text style={styles.trail1}>내 등산수첩</Text>
+          </View>
+          <View style={styles.Third3}>
+            <TouchableOpacity onPress={() => navigation.navigate('Course')}></TouchableOpacity>
+            <Image
+              source={require('./img/rank.png')}
+              style={styles.rankImage}></Image>
+            <Text style={styles.trail1}>랭킹</Text>
+          </View>
+        </View>
+
+              {/* <Icon name="plus" size={30} color="#fff" /> */}
+      {/* </View> */}
+      </View>
       <Footer navigation={navigation} value="1" />
     </Container>
   );
@@ -116,21 +103,83 @@ const styles = StyleSheet.create({
       },
     }),
   },
+
+  First: {
+    // position: 'absolute',
+    flex: 1,
+    // margin:10,
+    margin: 10,
+    // borderRadius:5,
+    // borderRadius:5,
+    // paddingHorizontal: 10,
+    // position: 'relative',
+  },
+  FirstImage:{
+    flex:1
+  },
+  Second: {
+    flex:1,
+    margin:10,
+    // marginTop: 20,
+    borderRadius: 5,
+    // backgroundColor: '#f4d03f',
+    // borderColor:'green',
+    // height: hp('20%'),
+    // borderStyle: 'solid',
+    // borderWidth: 3,
+    backgroundColor:'#9EFF95'
+  },
+  Second2: {
+    flex:1,
+    // marginBottom:10,
+    // marginTop:20,
+    position: 'relative',
+    paddingHorizontal: 10,
+    // borderStyle: 'solid',
+    // borderColor: '#76D46D',
+    // borderWidth: 1,    
+    // borderColor:'green',
+  },
+  Third:{
+    flex: 1, 
+    flexDirection: 'row', 
+    // marginTop: 10,
+    // marginBottom:10,
+    position: 'relative',
+    // paddingHorizontal: 10,
+    margin:10,
+  },
+  Third2: {
+    flex:1,
+    margin:5,
+    borderRadius: 5,
+    backgroundColor: '#26A65B',
+    // height: hp('30%'),
+    // width: wp('46%'),
+  },
+  Third3: {
+    flex:1,
+    margin:5,
+    borderRadius: 5,
+    backgroundColor: '#26A65B',
+    // height: hp('30%'),
+    // width: wp('46%'),
+  },
   header: {
-    position: 'absolute',
+    // position: 'absolute',
     height: 40,
     justifyContent: 'center',
     left: '43%',
+  },
+  seperate:{
+    flex: 1, 
+    flexDirection: 'row', 
+    marginTop: 10
   },
   headerText: {
     fontFamily: 'DungGeunMo',
     fontSize: 18,
     color: 'black',
-  },
-  image: {
-    position: 'absolute',
-    flex: 1,
-    marginTop: 40,
   },
   button: {
     position: 'absolute',
@@ -141,7 +190,7 @@ const styles = StyleSheet.create({
     // borderWidth: 1,
     padding: 5,
     marginHorizontal: 10,
-    marginTop: 50,
+    // marginTop: 50,
     fontSize: 25,
     // fontWeight: 'bold',
   },
@@ -155,14 +204,6 @@ const styles = StyleSheet.create({
     // borderColor: '#FFFFFF',
     // borderWidth: 1,
   },
-  trailBar: {
-    position: 'relative',
-    paddingHorizontal: 10,
-    borderStyle: 'solid',
-    borderColor: '#76D46D',
-    borderWidth: 1,    // borderColor:'green',
-  },
-
   trail1: {
     position: 'absolute',
     padding: 3,
@@ -179,17 +220,6 @@ const styles = StyleSheet.create({
     color: '#47525E',
     fontWeight: 'bold',
   },
-  trailContent: {
-    marginTop: 280,
-    borderRadius: 5,
-    // backgroundColor: '#f4d03f',
-    borderColor:'green',
-    height: hp('20%'),
-    borderStyle: 'solid',
-    // borderWidth: 3,
-    backgroundColor:'#9EFF95'
-    
-  },
   trailLine: {
     borderColor: '#1E824C',
     borderWidth: 2,
@@ -201,24 +231,9 @@ const styles = StyleSheet.create({
   },
   icon: {
     position: 'absolute',
-
     padding: 0,
     left: 340,
     marginTop: 60,
-  },
-  weather: {
-    borderRadius: 5,
-    backgroundColor: '#26A65B',
-    height: hp('30%'),
-    width: wp('46%'),
-    marginRight: 5,
-  },
-  ranking: {
-    borderRadius: 5,
-    backgroundColor: '#1E824C',
-    height: hp('30%'),
-    width: wp('46%'),
-    marginLeft: 5,
   },
   rankImage: {
     left: 48,
@@ -228,7 +243,7 @@ const styles = StyleSheet.create({
     //width: 150,
     //height: 'auto'
   },
-  weatherImage: {
+  noteImage: {
     left: 40,
     top: 65,
     width: wp('25%'),

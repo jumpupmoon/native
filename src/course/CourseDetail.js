@@ -81,27 +81,30 @@ export default function CourseDetail({navigation, route}) {
               <View style={styles.course}>
                 <Text style={styles.title}>{course.name}</Text>
               </View>
-              <View style={styles.leftLine}>
-                <View style={styles.item}>
-                  {/* <View style={styles.trailLine} /> */}
-                  <View style={styles.circleItem}>
-                    {course.courseDetail.map(d => pointList(d))}
-                  </View>
+              {/* <View style={styles.item}>
+                <View style={styles.circleItem}>
+                  {course.courseDetail.map(d => pointList(d))}
                 </View>
-                <View style={styles.scoreInfo}>
-                  <View style={styles.scoreView}>
-                    <Text style={styles.scoreIcon}>{course.courseDetail[point].name}</Text>
-                  </View>
-                  <View style={styles.scoreView2}>
-                    <Text style={styles.scoreIcon}>▶</Text>
-                  </View>
-                  <View style={styles.scoreView}>
-                    <Text style={styles.scoreIcon}>{course.courseDetail[point+1].name}</Text>
-                  </View>
+              </View> */}
+              {/* <View style={styles.trailLine} /> */}
+              <View style={styles.scoreInfo}>
+                <View style={styles.scoreView}>
+                  <Text style={styles.scoreIcon}>{course.courseDetail[point].name}</Text>
                 </View>
+                <View style={styles.scoreView2}>
+                  <Text style={styles.scoreIcon}>▶</Text>
+                </View>
+                <View style={styles.scoreView}>
+                  <Text style={styles.scoreIcon}>{course.courseDetail[point+1].name}</Text>
+                </View>
+              </View>
                 
+              <View style={styles.leftLine}>
+                {/* <View style={styles.circleItem}>
+                  {course.courseDetail.map(d => pointList(d))}
+                </View> */}
                 <View style={styles.info}>
-                  <View style={styles.infoContent}>
+                  <View style={styles.infoContentTop}>
                     <Text style={styles.time}>난이도</Text>
                     <Text style={styles.scoreTitle}>{course.courseDetail[point].difficulty}</Text>
                   </View>
@@ -109,7 +112,7 @@ export default function CourseDetail({navigation, route}) {
                     <Text style={styles.time}>거리</Text>
                     <Text style={styles.scoreTitle}>{course.courseDetail[point].distance}km</Text>
                   </View>
-                  <View style={styles.infoContent}>
+                  <View style={styles.infoContentBottom}>
                     <Text style={styles.time} >예상 시간</Text>
                     <Text style={styles.scoreTitle}>{course.courseDetail[point].time}</Text>
                   </View>
@@ -148,9 +151,10 @@ const styles = StyleSheet.create({
   },
   leftLine : {
     flexDirection:"column",
+    // position: "absolute",
     // flex:10,
     marginLeft:25,
-    borderLeftWidth : 13,
+    borderLeftWidth : 12,
     borderLeftColor : "#1E824C",
     paddingLeft:25,
   },
@@ -170,15 +174,42 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     // marginBottom: 20
   },
-  infoContent: {
+  infoContentTop: {
     flex:2,
-    marginTop: 20,
+    marginBottom: 20,
+    marginRight:20,
     flexDirection:"row",
-    backgroundColor:"#2DC370",    
+    backgroundColor:"#74E0A4",    
     // marginHorizontal: 5,
     paddingVertical: 17.2,
     alignItems: 'center',
+    // fontStyle:"italic",
+
+    // justifyContent: 'center'
+  },
+  infoContent: {
+    flex:2,
+    marginTop: 10,
+    marginBottom: 10,
     marginRight:20,
+    flexDirection:"row",
+    backgroundColor:"#74E0A4",    
+    // marginHorizontal: 5,
+    paddingVertical: 17.2,
+    alignItems: 'center',
+    // fontStyle:"italic",
+
+    // justifyContent: 'center'
+  },
+  infoContentBottom: {
+    flex:2,
+    marginTop: 20,
+    marginRight:20,
+    flexDirection:"row",
+    backgroundColor:"#74E0A4",    
+    // marginHorizontal: 5,
+    paddingVertical: 17.2,
+    alignItems: 'center',
     // fontStyle:"italic",
 
     // justifyContent: 'center'
@@ -217,7 +248,7 @@ const styles = StyleSheet.create({
     flex: 5,
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: 40,
+    // marginBottom: 40,
     textAlign:"center"
   },
   scoreView2: {
@@ -225,7 +256,7 @@ const styles = StyleSheet.create({
     flex: 1.5,
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: 40,
+    // marginBottom: 40,
     textAlign:"center"
   },
   scoreImg: {
@@ -241,9 +272,10 @@ const styles = StyleSheet.create({
     textAlign:"center",
     // alignSelf:"center",
     // marginHorizontal: 20,
-    marginTop: 20,
+    marginBottom: 20,
     marginRight:20,
-    backgroundColor:"#2DC370",
+    marginLeft:20,
+    backgroundColor:"#C3FFDE",
   },
   scoreTitle: {
     fontFamily: 'DungGeunMo',
@@ -306,9 +338,9 @@ const styles = StyleSheet.create({
     borderColor: '#1E824C',
   },
   circleItem: {
-    flexDirection: "row",
+    flexDirection: "column",
     position: "absolute",
-    marginTop: 14
+    // marginTop: 14
   },
   circleDetail: {
     flex: 1,
