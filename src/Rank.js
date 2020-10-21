@@ -34,7 +34,14 @@ export default function Course({navigation, route}){
         <Content>
           {course &&
           <ScrollView style={{paddingBottom:20}}>
-            <View style={styles.header}><Text>{course.name}({course.location})</Text></View>
+            <View style={styles.header}>
+              <Text style={{
+              fontSize: 30,
+              textAlign: 'center',
+              color: '#FFF',
+              fontFamily: 'DungGeunMo',
+            }}>{course.name}({course.location})</Text>
+            </View>
             {/* <TouchableOpacity hitSlop={{ top: 10, right: 10, bottom: 10, left: 10 }} style={styles.button}>
               <Text>버튼</Text><Text>버튼</Text>
             </TouchableOpacity> */}
@@ -48,6 +55,7 @@ export default function Course({navigation, route}){
                   onPress={() => Alert.alert('Right button pressed')}
                 />
               </View> */}
+              
             <View style={styles.content}>
               <Text style={styles.bla1}>순위</Text>
               <Text style={styles.bla2}>닉네임</Text>
@@ -102,13 +110,9 @@ const styles = StyleSheet.create({
   //   backgroundColor: 'white'
   // },
   header: {
-    width:'100%',
-    fontSize:22,
-    height:'5%',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'white',
-    fontWeight: "bold",
+    padding: 20,
+    backgroundColor: '#1E824C',
+    
   },
   title: {
     width:'100%',
@@ -132,7 +136,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   content: {
-    flex:1,
+    // flex:1,
     height: 88,
     flexDirection: 'row',
     justifyContent: 'space-evenly',
@@ -141,14 +145,16 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   content2: {
-    flex:1,
+    // flex:1,
     height: 88,
     flexDirection: 'row',
     justifyContent: 'space-evenly',
     // justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'white',
-    borderTopWidth : 1
+    borderTopWidth : 1.3,
+    borderTopRightRadius:20,
+    borderTopLeftRadius:20,
   },
   footer: {
     width:'100%',
