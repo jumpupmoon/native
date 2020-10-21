@@ -6,6 +6,7 @@ import Footer from '../Footer';
 import Popup1 from '../popup/Popup1';
 import Moment from 'react-moment';
 import 'moment-timezone';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 export default function CourseDetail({navigation, route}) {
   const [score, setScore] = useState([]);
@@ -100,17 +101,21 @@ export default function CourseDetail({navigation, route}) {
             </View>
               
             <View style={styles.Third}>
-              {/* <View style={styles.circleItem}>
-                {course.courseDetail.map(d => pointList(d))}
-              </View> */}
+              <View style={styles.ThirdOne}></View>
+              
               <View style={styles.Third1}>
                 <View style={styles.item}>
                   <View style={styles.circleItem}>
                     {course.courseDetail.map(d => pointList(d))}
                   </View>
                 </View>
-                <View style={styles.trailLine} />
+                {/* <View style={styles.trailLine} /> */}
               </View>
+
+              <View style={styles.ThirdSec}></View>
+              {/* <View style={styles.circleItem}>
+                {course.courseDetail.map(d => pointList(d))}
+              </View> */}
 
               <View style={styles.Third2}>
                 <View style={styles.infoContent}>
@@ -177,12 +182,23 @@ const styles = StyleSheet.create({
     flexDirection:"row",
     // position: "absolute",
     // flex:10,
-
+  },
+  ThirdOne:{
+    flex:1,
+    borderRightWidth:3,
+    borderColor:"#1E824C",
+  },
+  ThirdSec:{
+    flex:1,
+    borderLeftWidth:3,
+    borderColor:"#1E824C",
   },
   Third1:{
-    flex:2,
+    // flex:3,
+    flex:0.000000000000000000000000000000000001,
     flexDirection:"column",
     borderLeftColor: '#1E824C',
+    borderColor:'black',
     // borderWidth: 5,
   },
   Third2: {
@@ -326,7 +342,7 @@ const styles = StyleSheet.create({
     color: '#FFF',
   },
   item: {
-    margin: 10,
+    // margin: 10,
     // marginBottom: 100,
   },
   trailLine: {
@@ -343,22 +359,24 @@ const styles = StyleSheet.create({
     height: 18,
     borderRadius: 9,
     backgroundColor: '#F5E51B',
-    borderWidth: 4,
+    borderWidth: 3.5,
     borderColor: '#1E824C',
   },
   circleCheck: {
     width: 18,
     height: 18,
     borderRadius: 9,
-    backgroundColor: '#1E824C',
-    borderWidth: 4,
+    backgroundColor: '#F5E51B',
+    borderWidth: 3.5,
     borderColor: '#1E824C',
   },
   circleItem: {
     flexDirection: "column",
-    position: "absolute",
+    // position: "absolute",
     justifyContent:"space-evenly",
-    alignItems:"center"
+    height: hp('56%'),
+    
+    // alignItems:"center"
     // marginTop: 14
   },
   circleDetail: {
