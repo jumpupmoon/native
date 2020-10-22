@@ -4,7 +4,7 @@ import NfcManager, {NfcEvents} from 'react-native-nfc-manager';
 import AsyncStorage from '@react-native-community/async-storage';
 import EventEmitter from "react-native-eventemitter";
 import axios from 'axios';
-import {Alert, View} from 'react-native';
+import {Alert, View, LogBox} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import Intro from './Intro';
@@ -23,11 +23,16 @@ import PointHistory from './mypage/PointHistory';
 import Camera from './mypage/Camera';
 import Rank from './Rank';
 import MtRank from './MtRank';
+import { PacmanIndicator } from 'react-native-indicators';
 
 const Stack = createStackNavigator();
+// 경고창 보지 않기
+LogBox.ignoreAllLogs();
 
 export default function App() {
   const [address, setAddress] = useState();
+  const [pendding, setPendding] = useState(false);
+
   // 페이지 이동을 위한 객체 변수
   let nav;
 
@@ -41,9 +46,9 @@ export default function App() {
         course
       })
       .then(({data}) => {
-        if(data.result > 0) nav.reset({routes: [{ name: 'Map', params: data.id }]});
-        
-        NfcManager.registerTagEvent();
+        if(data.result > 0) {
+          nav.reset({routes: [{ name: 'Map', params: data.id }]});
+        };
       })
     })
   }
@@ -53,26 +58,50 @@ export default function App() {
     // nfc 설정
     NfcManager.start();
     NfcManager.setEventListener(NfcEvents.DiscoverTag, tag => {
+      if(pendding) return
+      setPendding(true);
       NfcManager.unregisterTagEvent().catch(() => 0);
-      
+
       // nfc id로 코스 정보 받아오기
       if(tag.id) {
         axios.get(`https://whitedeer.herokuapp.com/nfc/${tag.id}`)
         .then(({data}) => {
+          // 포인트 등록 여부 체크 함수
+          
           // 시작 포인트가 아닐 때 서버로 업데이트 요청
-          if(data.point.seq) {
-            courseStart(data.point.seq, data.point.course.seq);
-            return NfcManager.registerTagEvent();
+          data.point.map(p => {
+            if(p.seq) {
+              courseStart(p.seq, p.course.seq);
+            }
+          })
+
+          // 시작 포인트가 아닐 경우 함수 종료
+          if(data.point[0].seq > 0) {
+            NfcManager.registerTagEvent();
+            setPendding(false);
+            return;
           }
+
+          // 알럿창에 취소 버튼 추가
+          let alertBtn = [{ text: "취소", style: "cancel", onPress: () => {
+            setPendding(false);
+            NfcManager.registerTagEvent()
+          }}];
+          
+          // 탐방로 시작 버튼 추가
+          data.point.map(p => {
+            alertBtn.push({ text: p.course.name, onPress: () => {
+              courseStart(p.seq, p.course.seq);
+              NfcManager.registerTagEvent();
+              setPendding(false);
+            }})
+          })
 
           // 태깅 후 확인 알림창
           Alert.alert(
-            `${data.point.course.name}\n기록을 시작하시겠습니까?`,
-            "",
-            [
-              { text: "취소", style: "cancel", onPress: () => NfcManager.registerTagEvent() },
-              { text: "시작하기", onPress: () => courseStart(data.point.seq, data.point.course.seq) }
-            ],
+            '기록하실 탐방로를 선택해주세요',
+            '',
+            alertBtn,
             { cancelable: false }
           )
         })
@@ -90,6 +119,7 @@ export default function App() {
   }
 
   useEffect(() => {
+    
     // nfc 태깅 후 이동을 위해 home.js에서 navigation 받아오기
     EventEmitter.on('nfcNav', homeNav => {
       nav = homeNav;
@@ -113,7 +143,11 @@ export default function App() {
     return () => NfcManager.unregisterTagEvent().catch(() => 0);
   }, []);
 
-  return !address ? <Intro setAddress={setAddress} /> : (
+  return !address ? <Intro setAddress={setAddress} /> : pendding ? (
+    <View style={{flex: 1}}>
+      <PacmanIndicator color='#1E824C' size={100} />
+    </View>
+  ) : (
     <NavigationContainer>
       <Stack.Navigator headerMode="none" initialRouteName="Home">
         <Stack.Screen name="Home" component={Home} />
