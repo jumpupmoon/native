@@ -35,6 +35,8 @@ export default function App() {
 
   // 페이지 이동을 위한 객체 변수
   let nav;
+  // 등산기록 업데이트 체크 변수
+  let pointFlag = false;
 
   // 코스 정보 등록 및 페이지 이동
   const courseStart = (score, course) => {
@@ -47,8 +49,15 @@ export default function App() {
       })
       .then(({data}) => {
         if(data.result > 0) {
-          nav.reset({routes: [{ name: 'Map', params: data.id }]});
-        };
+          if(score > 0) pointFlag = true;
+          setPendding(false);
+          
+          // 화면 이동을 위해 강제 지연
+          setTimeout(() => {
+            nav.reset({routes: [{ name: 'Map', params: {id: data.id, token: data.token, finish: data.finish} }]});
+            NfcManager.registerTagEvent();
+          }, 50)
+        }
       })
     })
   }
@@ -65,11 +74,9 @@ export default function App() {
       // nfc id로 코스 정보 받아오기
       if(tag.id) {
         axios.get(`https://whitedeer.herokuapp.com/nfc/${tag.id}`)
-        .then(({data}) => {
-          // 포인트 등록 여부 체크 함수
-          
+        .then(async ({data}) => {          
           // 시작 포인트가 아닐 때 서버로 업데이트 요청
-          data.point.map(p => {
+          await data.point.map(p => {
             if(p.seq) {
               courseStart(p.seq, p.course.seq);
             }
@@ -77,8 +84,14 @@ export default function App() {
 
           // 시작 포인트가 아닐 경우 함수 종료
           if(data.point[0].seq > 0) {
-            NfcManager.registerTagEvent();
-            setPendding(false);
+            // 기록 업데이트를 했을 경우
+            if(pointFlag) {
+              pointFlag = false;
+            // 잘못된 포인트 NFC 태깅 시
+            } else {
+              NfcManager.registerTagEvent();
+              setPendding(false);
+            }
             return;
           }
 
@@ -90,11 +103,7 @@ export default function App() {
           
           // 탐방로 시작 버튼 추가
           data.point.map(p => {
-            alertBtn.push({ text: p.course.name, onPress: () => {
-              courseStart(p.seq, p.course.seq);
-              NfcManager.registerTagEvent();
-              setPendding(false);
-            }})
+            alertBtn.push({ text: p.course.name, onPress: () => courseStart(p.seq, p.course.seq)})
           })
 
           // 태깅 후 확인 알림창

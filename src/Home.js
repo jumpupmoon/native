@@ -81,7 +81,7 @@ export default function Layout({navigation}) {
 
             <View style={styles.scoreView}>
               {score ?
-                <TouchableOpacity style={styles.scoreView} onPress={() => navigation.navigate('Map', score._id)}>
+                <TouchableOpacity style={styles.scoreView} onPress={() => navigation.navigate('Map', {id: score._id})}>
                   <View style={styles.trailLine} />
                   <View style={styles.circleItem}>
                     {score.course.courseDetail.map((_, idx) => (

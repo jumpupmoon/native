@@ -61,7 +61,7 @@ export default function CourseDetail({navigation, route}) {
 
   useEffect(() => {
     // 내 등산기록 가져오기
-    axios.get(`https://whitedeer.herokuapp.com/score/${route.params}`)
+    axios.get(`https://whitedeer.herokuapp.com/score/${route.params.id}`)
     .then(({data}) => {
       setScore(data.score);
 

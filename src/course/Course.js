@@ -57,7 +57,7 @@ export default function Course({navigation, route}) {
 
           {score.map((s, idx) => (
             <ImageBackground style={styles.buttonView} key={idx} source={imgList[s.course.seq]}>
-              <Button style={styles.button} onPress={() => navigation.navigate('Map', s._id)}> 
+              <Button style={styles.button} onPress={() => navigation.navigate('Map', {id: s._id})}> 
                 <Text style={styles.buttonTitle}>등산 기록 {score.length - idx}</Text>
               </Button>
               {/* <View><Text style={styles.aaa}>등산 기록 {score}</Text></View> */}
