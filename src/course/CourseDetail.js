@@ -190,7 +190,7 @@ const styles = StyleSheet.create({
   },
   ThirdSec:{
     flex:1,
-    borderLeftWidth:3,
+    // borderLeftWidth:3,
     borderColor:"#1E824C",
   },
   Third1:{
