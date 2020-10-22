@@ -25,14 +25,17 @@ const Point = ({token,price}) => {
         }}>
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-      <Text style={styles.modalText}>선택하신 포인트 충전을 진행 하시겠습니까? 충전 포인트 : {token}백록      결제 금액 : {price}원</Text>
-
-            <PointYes onPress={() => {
-              setModalVisible(!modalVisible);
-            }}/>
-            <TouchableHighlight onPress={() => {
-              setModalVisible(!modalVisible);
-            }} ><Text>아니오</Text></TouchableHighlight>
+            <Text style={styles.modalText}>선택하신 포인트 충전을 진행 하시겠습니까?</Text>
+            <Text>{"\n"}충전 포인트 : {token}백록</Text>
+            <Text styles={[(price) && {color:'red'}]}>{"\n"}결제 금액 : {price}원</Text>
+            <View style={styles.button}>
+              <PointYes onPress={() => {
+                setModalVisible(!modalVisible);
+              }}/>
+              <TouchableHighlight onPress={() => {
+                setModalVisible(!modalVisible);
+              }} ><Text>아니오</Text></TouchableHighlight>
+            </View>
           </View>
         </View>
       </Modal>
@@ -76,6 +79,10 @@ const styles = StyleSheet.create({
     padding: 15,
     elevation: 2,
     marginTop:25,
+    // borderColor:'Black'
+  },
+  button:{
+    flex:2
   },
   textStyle: {
     color: 'white',

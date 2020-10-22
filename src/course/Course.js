@@ -60,6 +60,7 @@ export default function Course({navigation, route}) {
               <Button style={styles.button} onPress={() => navigation.navigate('Map', s._id)}> 
                 <Text style={styles.buttonTitle}>등산 기록 {score.length - idx}</Text>
               </Button>
+              {/* <View><Text style={styles.aaa}>등산 기록 {score}</Text></View> */}
             </ImageBackground>
           ))}
         </Content>
@@ -94,6 +95,15 @@ const styles = StyleSheet.create({
     fontFamily: 'DungGeunMo', 
     textAlign: 'center', 
     color: '#FFF',
+  },
+  aaa:{
+    // backgroundColor:"#C3FFDE",
+    justifyContent:"flex-start",
+    fontSize: 26,
+    fontFamily: 'DungGeunMo', 
+    color:"#FFF"
+    // height: hp('4%'),
+    
   },
   header: {
     padding: 20,
