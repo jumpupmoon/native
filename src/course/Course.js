@@ -82,15 +82,19 @@ const styles = StyleSheet.create({
     marginVertical: 20,
   },
   buttonView:{
+    borderRadius:20,
     alignSelf:'center',
     // alignContent:'center',
     // alignItems:'center',
     marginBottom: 20,
+    borderRadius:20,
     height: hp('20%'),
     width: wp('90%'),
   },
   button:{
-    backgroundColor:'#26A65B'
+    backgroundColor:'red',
+    borderBottomRightRadius:20,
+    borderRadius:0,
   },
   buttonTitle:{
     fontSize: 26,

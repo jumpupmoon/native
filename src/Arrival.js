@@ -11,7 +11,7 @@ import Icon from 'react-native-vector-icons/Foundation';
 export default function Arrival({navigation}) {
   return (
     <Container>
-      <Content style={{alignContent: 'center', flow: 1}}>
+      <Content style={{alignContent: 'center', flow: 1, flex:1}}>
         <View
           style={{
             height: hp('40%'),
@@ -43,7 +43,7 @@ export default function Arrival({navigation}) {
         </TouchableOpacity>
       </Content>
 
-      <Footer navigation={navigation} value="4" />
+      <Footer navigation={navigation} value="3" />
     </Container>
   );
 }
