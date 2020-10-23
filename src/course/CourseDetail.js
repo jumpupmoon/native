@@ -119,16 +119,16 @@ export default function CourseDetail({navigation, route}) {
 
               <View style={styles.Third2}>
                 <View style={styles.infoContent}>
-                  <Text style={styles.time}>난이도</Text>
-                  <Text style={styles.scoreTitle}>{course.courseDetail[point].difficulty}</Text>
+                  <Text style={styles.infoLeft}>난이도</Text>
+                  <Text style={styles.infoRight}>{course.courseDetail[point].difficulty}</Text>
                 </View>
                 <View style={styles.infoContent}>
-                  <Text style={styles.time}>거리</Text>
-                  <Text style={styles.scoreTitle}>{course.courseDetail[point].distance}km</Text>
+                  <Text style={styles.infoLeft}>거리</Text>
+                  <Text style={styles.infoRight}>{course.courseDetail[point].distance}km</Text>
                 </View>
                 <View style={styles.infoContent}>
-                  <Text style={styles.time} >시간</Text>
-                  <Text style={styles.scoreTitle}>{course.courseDetail[point].time}</Text>
+                  <Text style={styles.infoLeft} >시간</Text>
+                  <Text style={styles.infoRight}>{course.courseDetail[point].time}</Text>
                 </View>
               </View>
             </View>
@@ -308,24 +308,24 @@ const styles = StyleSheet.create({
     resizeMode: 'cover',
     borderRadius: 10,
   },
-
-  scoreTitle: {
-    fontFamily: 'DungGeunMo',
+  infoRight: {
     fontSize: 26,
     color: '#181717',
-    marginBottom: 10,
     flex:3,
     flexDirection:"column",
-    textAlign:"center"
+    textAlign:"center",
+    fontFamily: 'DungGeunMo',
+
     // textAlign:"center",
   },
-  time: {
+  infoLeft: {
     // alignItems: 'flex-end',
     fontFamily: 'DungGeunMo',
     fontSize: 24,
     flex:2,
     flexDirection:"column",
-    textAlign:"center"
+    textAlign:"center",
+
     // textAlign:"center",
     // paddingTop: 10
   },

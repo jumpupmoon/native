@@ -5,8 +5,7 @@ import {StyleSheet, Image, TouchableOpacity, Text} from 'react-native';
 import LottieView from 'lottie-react-native';
 import {
   widthPercentageToDP as wp,
-  heightPercentageToDP as hp,
-} from 'react-native-responsive-screen';
+  heightPercentageToDP as hp,} from 'react-native-responsive-screen';
 import Icon from 'react-native-vector-icons/Foundation';
 
 export default function Arrival({navigation}) {

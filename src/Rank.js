@@ -15,12 +15,14 @@ import {
   StatusBar,
 } from 'react-native';
 import axios from 'axios';
+import { PacmanIndicator } from 'react-native-indicators';
 
 
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 export default function Course({navigation, route}){
   const [course, setCourse] = useState();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     axios.get(`https://whitedeer.herokuapp.com/course/${route.params}`)
@@ -40,7 +42,12 @@ export default function Course({navigation, route}){
     require('./img/mountainnn.jpg')
   ]
 
-  return ( 
+  return loading ? (
+    <View style={{flex: 1}}>
+      <PacmanIndicator color='#1E824C' size={100} />
+    </View>
+  )
+  : (
     <><Container>
         <Content>
           {course &&
