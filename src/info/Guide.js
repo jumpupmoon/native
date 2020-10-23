@@ -20,73 +20,75 @@ export default function Prepare({navigation, route}) {
 
   return (
     <Container style={styles.container}>
-      {course &&
-        <>
-          <View style={styles.First}>
-            <Text style={styles.Title}>{course.name}</Text>
-            <Text style={styles.distance}>{course.distance}km(왕복 {course.distance * 2}km)</Text>
-            <Text style={styles.distance}>{course.time}</Text>
-          </View>
-          <View style={styles.Second}>
-            <View style={styles.List}>
-              <View style={styles.trailLine} />
-              <View style={styles.circleItem}>
-                {course.courseDetail.map((d) => (
-                    <View style={styles.circleDetail} key={d.seq}>
-                      <View style={styles.circle}></View>
-                      <Text style={styles.circleText}>{d.name.replace(' ', '\n')}</Text>
-                    </View>
-                ))}
+      <View style={{flex: 1}}>
+        {course &&
+          <>
+            <View style={styles.First}>
+              <Text style={styles.Title}>{course.name}</Text>
+              <Text style={styles.distance}>{course.distance}km(왕복 {course.distance * 2}km)</Text>
+              <Text style={styles.distance}>{course.time}</Text>
+            </View>
+            <View style={styles.Second}>
+              <View style={styles.List}>
+                <View style={styles.trailLine} />
+                <View style={styles.circleItem}>
+                  {course.courseDetail.map((d) => (
+                      <View style={styles.circleDetail} key={d.seq}>
+                        <View style={styles.circle}></View>
+                        <Text style={styles.circleText}>{d.name.replace(' ', '\n')}</Text>
+                      </View>
+                  ))}
+                </View>
               </View>
             </View>
-          </View>
 
-          <View stlye={styles.Third}>
-            <View style={styles.Third1}>
-              <View style={styles.item}>
-                <Text style={styles.itemText}>- 대 피 소 -</Text>
-                <View style={styles.itemDetail}>
-                  <Text style={styles.itemTextDetail}>
-                    {course.shelter.map((s, idx) => {
-                      if(idx != 0) return ' ' + s;
-                      else return s;
-                    })}
-                  </Text>
+            <View stlye={styles.Third}>
+              <View style={styles.Third1}>
+                <View style={styles.item}>
+                  <Text style={styles.itemText}>- 대 피 소 -</Text>
+                  <View style={styles.itemDetail}>
+                    <Text style={styles.itemTextDetail}>
+                      {course.shelter.map((s, idx) => {
+                        if(idx != 0) return ' ' + s;
+                        else return s;
+                      })}
+                    </Text>
+                  </View>
+                </View>
+              </View>
+              <View style={styles.Third2}>
+                <View style={styles.item}>
+                  <Text style={styles.itemText}>- 매 점 -</Text>
+                  <View style={styles.itemDetail}>
+                    <Text style={styles.itemTextDetail}>{course.store}</Text>
+                  </View>
+                </View>
+              </View>
+              <View style={styles.Third3}>
+                <View style={styles.item}>
+                  <Text style={styles.itemText}>- 화 장 실 -</Text>
+                  <View
+                    style={{
+                      borderWidth: 2,
+                      borderRadius: 3,
+                      marginVertical: 10,
+                      padding: 10,
+                    }}
+                    >
+                    <Text style={styles.itemTextDetail}>
+                      {course.toilet.map((t, idx) => {
+                        if(idx != 0) return ' ' + t;
+                        else return t;
+                      })}
+                    </Text>
+                  </View>
                 </View>
               </View>
             </View>
-            <View style={styles.Third2}>
-              <View style={styles.item}>
-                <Text style={styles.itemText}>- 매 점 -</Text>
-                <View style={styles.itemDetail}>
-                  <Text style={styles.itemTextDetail}>{course.store}</Text>
-                </View>
-              </View>
-            </View>
-            <View style={styles.Third3}>
-              <View style={styles.item}>
-                <Text style={styles.itemText}>- 화 장 실 -</Text>
-                <View
-                  style={{
-                    borderWidth: 2,
-                    borderRadius: 3,
-                    marginVertical: 10,
-                    padding: 10,
-                  }}
-                  >
-                  <Text style={styles.itemTextDetail}>
-                    {course.toilet.map((t, idx) => {
-                      if(idx != 0) return ' ' + t;
-                      else return t;
-                    })}
-                  </Text>
-                </View>
-              </View>
-            </View>
-          </View>
-        </>
-      }
-    <Footer navigation={navigation} value="2" />
+          </>
+        }
+      </View>
+      <Footer navigation={navigation} value="2" />
     </Container>
   );
 }
@@ -168,61 +170,6 @@ const styles = StyleSheet.create({
     color: '#181717',
     fontSize: 14,
     textAlign: 'center'
-  },
-  circle1: {
-    width: 18,
-    height: 18,
-    borderRadius: 18 / 2,
-    backgroundColor: '#F5E51B',
-    position: 'absolute',
-    borderWidth: 4,
-    borderColor: '#1E824C',
-    marginTop: 14,
-    marginLeft: 40,
-  },
-  circle2: {
-    width: 18,
-    height: 18,
-    borderRadius: 18 / 2,
-    backgroundColor: '#F5E51B',
-    position: 'absolute',
-    borderWidth: 4,
-    borderColor: '#1E824C',
-    marginTop: 14,
-    marginLeft: 100,
-  },
-  circle3: {
-    width: 18,
-    height: 18,
-    borderRadius: 18 / 2,
-    backgroundColor: '#F5E51B',
-    position: 'absolute',
-    borderWidth: 4,
-    borderColor: '#1E824C',
-    marginTop: 14,
-    marginLeft: 160,
-  },
-  circle4: {
-    width: 18,
-    height: 18,
-    borderRadius: 18 / 2,
-    backgroundColor: '#F5E51B',
-    position: 'absolute',
-    borderWidth: 4,
-    borderColor: '#1E824C',
-    marginTop: 14,
-    marginLeft: 220,
-  },
-  circle5: {
-    width: 18,
-    height: 18,
-    borderRadius: 18 / 2,
-    backgroundColor: '#F5E51B',
-    position: 'absolute',
-    borderWidth: 4,
-    borderColor: '#1E824C',
-    marginTop: 14,
-    marginLeft: 280,
   },
   circle: {
     width: 18,
