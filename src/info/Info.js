@@ -1,21 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import {Container, Content, Text, TextInput} from 'native-base';
+import {Container, Content, Text} from 'native-base';
 import Footer from '../Footer';
 import {
   StyleSheet,
   View,
   TouchableOpacity,
-  TouchableHighlight,
   Image,
-  ImageBackground,
   ScrollView,
 } from 'react-native';
 
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import Icon from 'react-native-vector-icons/MaterialIcons';
-import Icon2 from 'react-native-vector-icons/Fontisto';
 import axios from 'axios';
-import { PacmanIndicator } from 'react-native-indicators';
+import Loading from '../Loading';
 
 export default function Course({navigation}) {
   const [mountain, setMountain] = useState([]);
@@ -39,11 +35,8 @@ export default function Course({navigation}) {
     require('../img/어승생악.jpg'),
   ]
 
-  return loading ? (
-    <View style={{flex: 1}}>
-      <PacmanIndicator color='#1E824C' size={100} />
-    </View>
-  )
+  return loading ? 
+    <Loading navigation={navigation} value='2' />
   :  (
     <Container>
       <Content>

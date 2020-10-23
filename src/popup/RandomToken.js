@@ -1,26 +1,23 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {
   Alert,
   Modal,
   StyleSheet,
   Text,
-  TouchableHighlight,
   View,
-  Image,
+  Image
 } from 'react-native';
-import PointYes from './PointYes';
+
+import {Button } from 'native-base';
 
 
-const Point = ({token,price}) => {
-  const [modalVisible, setModalVisible] = useState(false);
-  
-
+const Point = ({modalView, setModalView}) => {
   return (
     <View style={styles.centeredView}>
       <Modal
         animationType="slide"
         transparent={true}
-        visible={modalVisible}
+        visible={modalView}
         onRequestClose={() => {
           Alert.alert('Modal has been closed.');
         }}>
@@ -33,24 +30,16 @@ const Point = ({token,price}) => {
               <View><Text style={styles.First}>태그 성공!</Text></View>
               <View><Text style={styles.Second}>1백록 증정!</Text></View>
 
-              <PointYes onPress={() => {
+              <Button onPress={() => setModalView(false)} style={styles.giveupBtn}>
+                <Text style={styles.giveupText}>닫기</Text>
+              </Button>
+              {/* <TouchableHighlight onPress={() => {
                 setModalVisible(!modalVisible);
-              }}/>
-              <TouchableHighlight onPress={() => {
-                setModalVisible(!modalVisible);
-              }} ><Text style={{textAlign:'center'}}>아니오</Text></TouchableHighlight>
+              }} ><Text style={{textAlign:'center'}}>아니오</Text></TouchableHighlight> */}
             </View>
           </View>
         </View>
       </Modal>
-
-      <TouchableHighlight
-        style={styles.openButton}
-        onPress={() => {
-          setModalVisible(true);
-        }}>
-        <Text style={styles.textStyle}>충전하기</Text>
-      </TouchableHighlight>
     </View>
   );
 };
@@ -111,6 +100,19 @@ const styles = StyleSheet.create({
   modalText: {
     marginBottom: 15,
     textAlign: 'center',
+  },
+  giveupBtn: {
+    textAlign: 'center',
+    backgroundColor: '#1E824C',
+    alignSelf: 'center',
+    marginVertical: 40,
+    paddingHorizontal: 20
+  },
+  giveupText: {
+    fontSize: 20,
+    fontFamily: 'DungGeunMo',
+    textAlign: 'center',
+    color: '#FFF',
   },
 });
 

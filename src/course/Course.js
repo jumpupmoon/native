@@ -5,7 +5,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import Footer from '../Footer';
 import {StyleSheet, View, ImageBackground} from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import { PacmanIndicator } from 'react-native-indicators';
+import Loading from '../Loading';
 
 export default function Course({navigation, route}) {
   const [score, setScore] = useState([]);
@@ -35,11 +35,8 @@ export default function Course({navigation, route}) {
     })
   }, [navigation])
 
-  return loading ? (
-    <View style={{flex: 1}}>
-      <PacmanIndicator color='#1E824C' size={100} />
-    </View>
-  )
+  return loading ? 
+    <Loading navigation={navigation} value='3' />
   : (
     <Container>
         <Content>

@@ -1,40 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import {Container, Content, Text, View, Button } from 'native-base';
-import {StyleSheet, Image, TouchableOpacity, Alert } from 'react-native';
+import {Container, Text, View, Button } from 'native-base';
+import {StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import axios from 'axios';
 import Footer from '../Footer';
-import Popup1 from '../popup/Popup1';
 import Moment from 'react-moment';
 import 'moment-timezone';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import Loading from '../Loading';
+import Point from '../popup/RandomToken'
 
 export default function CourseDetail({navigation, route}) {
   const [score, setScore] = useState([]);
   const [course, setCourse] = useState();
   const [point, setPoint] = useState(0);
-  
-  // 확인할 지점 변경
-  const pointList = d => {
-    if(d.seq == course.courseDetail.length-1) {
-      return (
-        <TouchableOpacity style={{flex:1}} key={d.seq}>
-          <View style={styles.circleDetail} key={d.seq}>
-            <View style={score.score >= d.seq ? styles.circleCheck : styles.circle}></View>
-            <Text style={styles.circleText} textBreakStrategy={'balanced'}>{d.name}</Text>
-          </View>
-        </TouchableOpacity>
-      )
-    } else {
-      return (
-        <TouchableOpacity style={{flex:1}} key={d.seq} onPress={() => setPoint(d.seq)}>
-          <View style={styles.circleDetail} key={d.seq}>
-            <View style={score.score >= d.seq ? styles.circleCheck : styles.circle}></View>
-            <Text style={styles.circleText} textBreakStrategy={'balanced'}>{d.name}</Text>
-          </View>
-        </TouchableOpacity>
-      )
-    }
-  }
+  const [loading, setLoading] = useState(true);
+  const [modalView, setModalView] = useState(false);
 
   // 시간 표기 컴포넌트
   const timeText = date => {
@@ -43,38 +23,31 @@ export default function CourseDetail({navigation, route}) {
     )
   }
 
-  // 포기하기 확인 창
-  const giveupCheck = idx => Alert.alert(
-    "정말 그만두시겠습니까?",
-    "",
-    [
-      { text: "취소", style: "cancel" },
-      { text: "그만두기", onPress: () => giveup(idx) }
-    ],
-    { cancelable: false }
-  );
-
-  // 포기하기 처리
-  const giveup = idx => {
-    console.log(idx);
-  }
-
   useEffect(() => {
     // 내 등산기록 가져오기
     axios.get(`https://whitedeer.herokuapp.com/score/${route.params.id}`)
     .then(({data}) => {
       setScore(data.score);
 
-      // 코스 정보 가져오기
-      axios.get(`https://whitedeer.herokuapp.com/course/${data.score.course.seq}`)
-      .then(({data}) => {
-        setCourse(data.course);
-      })
+      if(data.score.score == data.score.course.courseDetail.length-1) {
+        console.log('정상 도달')
+      } else {
+        // 코스 정보 가져오기
+        axios.get(`https://whitedeer.herokuapp.com/course/${data.score.course.seq}`)
+        .then(({data}) => {
+          setCourse(data.course);
+          setLoading(false);
+          // 랜덤 토큰을 받았을 경우 팝업 출력
+          if(route.params.token) setModalView(true);
+        })
+      }
     })
     .catch(err => console.log(err));
   }, [])
 
-  return (
+  return loading ? 
+    <Loading navigation={navigation} value='3' /> 
+  : (
     <Container>
       <View style={styles.container}>
         {course &&
@@ -90,29 +63,29 @@ export default function CourseDetail({navigation, route}) {
             {/* <View style={styles.trailLine} /> */}
             <View style={styles.Second}>
               <View style={styles.scoreView}>
-                <Text style={styles.scoreIcon}>{course.courseDetail[point].name.replace(' ', '\n')}</Text>
+                <Text style={styles.scoreIcon}>{course.courseDetail[score.score].name.replace(' ', '\n')}</Text>
               </View>
               <View style={styles.scoreView2}>
                 <Text style={styles.scoreIcon}>▶</Text>
               </View>
               <View style={styles.scoreView}>
-                <Text style={styles.scoreIcon}>{course.courseDetail[point+1].name.replace(' ', '\n')}</Text>
+                <Text style={styles.scoreIcon}>{course.courseDetail[score.score+1].name.replace(' ', '\n')}</Text>
               </View>
             </View>
               
             <View style={styles.Third}>
-              <View style={styles.ThirdOne}></View>
+              {/* <View style={styles.ThirdOne}></View>
               
               <View style={styles.Third1}>
                 <View style={styles.item}>
                   <View style={styles.circleItem}>
                     {course.courseDetail.map(d => pointList(d))}
                   </View>
-                </View>
+                </View> */}
                 {/* <View style={styles.trailLine} /> */}
-              </View>
+              {/* </View> */}
 
-              <View style={styles.ThirdSec}></View>
+              {/* <View style={styles.ThirdSec}></View> */}
               {/* <View style={styles.circleItem}>
                 {course.courseDetail.map(d => pointList(d))}
               </View> */}
@@ -120,23 +93,23 @@ export default function CourseDetail({navigation, route}) {
               <View style={styles.Third2}>
                 <View style={styles.infoContent}>
                   <Text style={styles.infoLeft}>난이도</Text>
-                  <Text style={styles.infoRight}>{course.courseDetail[point].difficulty}</Text>
+                  <Text style={styles.infoRight}>{course.courseDetail[score.score].difficulty}</Text>
                 </View>
                 <View style={styles.infoContent}>
                   <Text style={styles.infoLeft}>거리</Text>
-                  <Text style={styles.infoRight}>{course.courseDetail[point].distance}km</Text>
+                  <Text style={styles.infoRight}>{course.courseDetail[score.score].distance}km</Text>
                 </View>
                 <View style={styles.infoContent}>
                   <Text style={styles.infoLeft} >시간</Text>
-                  <Text style={styles.infoRight}>{course.courseDetail[point].time}</Text>
+                  <Text style={styles.infoRight}>{course.courseDetail[score.score].time}</Text>
                 </View>
               </View>
             </View>
-            <View stylle={styles.Fourth}>
+            {/* <View stylle={styles.Fourth}>
               <Button onPress={() => giveupCheck(score.idx)} style={styles.giveupBtn}>
                 <Text style={styles.giveupText}>그만두기</Text>
               </Button>
-            </View>
+            </View> */}
           
 
             {/* {score[2] != 0 ?
@@ -149,6 +122,7 @@ export default function CourseDetail({navigation, route}) {
             } */}
           </>
         }
+        <Point modalView={modalView} setModalView={setModalView} />
       </View>
       <Footer navigation={navigation} value='3' />
     </Container>
@@ -171,10 +145,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     textAlign:"center",
     // alignSelf:"center",
-    // marginHorizontal: 20,
+    marginHorizontal: 20,
     marginBottom: 20,
-    marginRight:20,
-    marginLeft:20,
+    // marginRight:20,
+    // marginLeft:20,
     backgroundColor:"#C3FFDE",
   },
   Third : {
@@ -223,9 +197,9 @@ const styles = StyleSheet.create({
   infoContent: {
     flex:2,
     // marginTop: 10,
-    // marginBottom: 10,
-    marginRight:20,
-    margin:10,
+    marginBottom: 20,
+    marginHorizontal: 20,
+    // margin:10,
     flexDirection:"row",
     backgroundColor:"#74E0A4",    
     // paddingVertical: 17.2,
