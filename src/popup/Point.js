@@ -7,12 +7,26 @@ import {
   TouchableHighlight,
   View,
 } from 'react-native';
+import axios from 'axios';
+import AsyncStorage from '@react-native-community/async-storage';
 import PointYes from './PointYes';
 
 
 const Point = ({token,price}) => {
   const [modalVisible, setModalVisible] = useState(false);
-  
+
+  const chargeToken =() => {
+    AsyncStorage.getItem('address')
+    .then(address => {
+      console.log(address)
+      axios.get(`https://whitedeer.herokuapp.com/charge?address=${address}&amount=${token}`)
+      .then(({data}) => {
+        console.log(token);
+        
+      })
+      .catch(err => console.log(err));
+    })
+  }
 
   return (
     <View style={styles.centeredView}>
@@ -29,10 +43,11 @@ const Point = ({token,price}) => {
             <Text>{"\n"}충전 포인트 : {token}백록</Text>
             <Text styles={[(price) && {color:'red'}]}>{"\n"}결제 금액 : {price}원</Text>
             <View style={styles.button}>
-              <PointYes onPress={() => {
+              <TouchableHighlight style={styles.openButton} onPress={() => {
+                chargeToken();
                 setModalVisible(!modalVisible);
-              }}/>
-              <TouchableHighlight onPress={() => {
+              }} ><Text>예</Text></TouchableHighlight>
+              <TouchableHighlight style={styles.openButton} onPress={() => {
                 setModalVisible(!modalVisible);
               }} ><Text>아니오</Text></TouchableHighlight>
             </View>

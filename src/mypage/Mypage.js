@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container, Content, Text, View } from 'native-base';
 import Footer from '../Footer';
 import {
@@ -7,15 +7,33 @@ import {
   TouchableHighlight,
   ImageBackground,
 } from 'react-native';
+import axios from 'axios';
+import AsyncStorage from '@react-native-community/async-storage';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import Camera from './Camera';
 
 export default function Mypage({ navigation }) {
+
+  const [amount, setAmount]= useState();
+
+  useEffect(() => {                                                 
+    AsyncStorage.getItem('address')
+    .then(address => {
+      console.log(address)
+      axios.get(`https://whitedeer.herokuapp.com/token/${address}`)
+      .then(({data}) => {
+        console.log(data.token);
+        setAmount(data.token);
+      })
+      .catch(err => console.log(err));
+    })
+  }, [])
+
   return (
     <Container>
       <Content>
         <View style={styles.header}>
-          <Text style={styles.headerText}>마이페이지</Text>
+          <Text style={styles.headerText}>토큰 개수 : {amount} </Text>
         </View>
         <View style={styles.profile}><Camera /></View>
         <View style={styles.list}><Text style={styles.text} >개인 정보 관리</Text></View>
