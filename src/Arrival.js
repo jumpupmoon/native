@@ -28,17 +28,18 @@ export default function Arrival({navigation}) {
           <Text style={styles.text2}>완행을 축하드립니다!</Text>
         </View>
 
-        <View style={styles.imgView}>
-          <Icon name="plus" size={30} color="#1E824C" />
+        <View style={styles.WhiteDeer}>
+          <Text style={{fontSize:24}}>지급 백록 : ~~</Text>
+          {/* <Icon name="plus" size={30} color="#1E824C" />
           <Image
             source={require('./img/present1.png')}
-            style={styles.img}></Image>
+            style={styles.img}></Image> */}
         </View>
 
         <TouchableOpacity
           style={styles.button}
           onPress={() => navigation.navigate('Info')}>
-          <Text style={styles.buttonTitle}>등산 후기 작성</Text>
+          <Text style={styles.buttonTitle}>인증서 발급</Text>
         </TouchableOpacity>
       </Content>
 
@@ -63,12 +64,14 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 
-  imgView: {
+  WhiteDeer: {
     alignSelf: 'center',
-    margin: 60,
-    height: hp('5%'),
-    width: wp('20%'),
+    // borderWidth:1,
+    margin: 50,
+    paddingBottom:20,
+    // height: hp('5%'),
     justifyContent: 'center',
+    fontSize:24
   },
   img: {
     position: 'absolute',

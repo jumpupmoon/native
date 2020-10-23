@@ -7,7 +7,7 @@ import Moment from 'react-moment';
 import 'moment-timezone';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import Loading from '../Loading';
-import Point from '../popup/RandomToken'
+import RandomToken from '../popup/RandomToken'
 
 export default function CourseDetail({navigation, route}) {
   const [score, setScore] = useState([]);
@@ -30,7 +30,7 @@ export default function CourseDetail({navigation, route}) {
       setScore(data.score);
 
       if(data.score.score == data.score.course.courseDetail.length-1) {
-        console.log('정상 도달')
+        navigation.navigate('Arrival');
       } else {
         // 코스 정보 가져오기
         axios.get(`https://whitedeer.herokuapp.com/course/${data.score.course.seq}`)
@@ -122,7 +122,7 @@ export default function CourseDetail({navigation, route}) {
             } */}
           </>
         }
-        <Point modalView={modalView} setModalView={setModalView} />
+        <RandomToken modalView={modalView} setModalView={setModalView} />
       </View>
       <Footer navigation={navigation} value='3' />
     </Container>

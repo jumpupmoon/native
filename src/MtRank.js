@@ -24,7 +24,8 @@ export default function Course({navigation}) {
   useEffect(() => {
     axios.get('https://whitedeer.herokuapp.com/course')
     .then(({data}) => {
-      setMountain(data.list)
+      setMountain(data.list);
+      setLoading(false);
     })
   }, [])
 

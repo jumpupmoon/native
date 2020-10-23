@@ -11,7 +11,7 @@ import {
 import {Button } from 'native-base';
 
 
-const Point = ({modalView, setModalView}) => {
+export default function RandomToken({modalView, setModalView}) {
   return (
     <View style={styles.centeredView}>
       <Modal
@@ -66,6 +66,11 @@ const styles = StyleSheet.create({
     marginTop:50,
     // fontStyle:'bold'
   },
+  yes:{
+    textAlign:'center', 
+    margin:50, 
+    backgroundColor:'green',
+  },
   modalView: {
     margin: 20,
     backgroundColor: 'white',
@@ -115,5 +120,3 @@ const styles = StyleSheet.create({
     color: '#FFF',
   },
 });
-
-export default Point;

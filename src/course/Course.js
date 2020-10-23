@@ -7,9 +7,8 @@ import {StyleSheet, View, ImageBackground} from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import Loading from '../Loading';
 
-export default function Course({navigation, route}) {
+export default function Course({navigation}) {
   const [score, setScore] = useState([]);
-  const [count, setCount] = useState(0);
   const [loading, setLoading] = useState(true);
 
   const imgList = [
@@ -55,6 +54,7 @@ export default function Course({navigation, route}) {
           {score.map((s, idx) => (
             <ImageBackground style={styles.buttonView} key={idx} source={imgList[s.course.seq]}>
               <Button style={styles.button} onPress={() => navigation.navigate('Map', {id: s._id})}> 
+
                 <Text style={styles.buttonTitle}>등산 기록 {score.length - idx}</Text>
               </Button>
               {/* <View><Text style={styles.aaa}>등산 기록 {score}</Text></View> */}

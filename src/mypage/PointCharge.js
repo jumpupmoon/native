@@ -7,7 +7,7 @@ import {
     
 } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import Point from '../popup/RandomToken'
+import Point from '../popup/Point'
 
 export default function PointCharge({ navigation }) {
     const [price,setPrice] = useState({token:0,won:"0"});
