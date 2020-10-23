@@ -37,7 +37,7 @@ const RandomToken = ({token,price}) => {
               <View><Text style={styles.Second}>1백록 증정!</Text></View>
               <TouchableHighlight onPress={() => {
                 setModalVisible(!modalVisible);
-              }} ><Text style={{textAlign:'center', margin:50, backgroundColor:'green'}}>아니오</Text></TouchableHighlight>
+              }} ><Text style={styles.yes}>확인</Text></TouchableHighlight>
               {/* <Button>asdasd</Button> */}
               {/* <PointYes onPress={() => {setModalVisible(!modalVisible);``}}/>
               <NfcTag onPress={() => {setModalVisible(!modalVisible);``}}/> */}
@@ -78,6 +78,11 @@ const styles = StyleSheet.create({
     fontSize:30,
     marginTop:50,
     // fontStyle:'bold'
+  },
+  yes:{
+    textAlign:'center', 
+    margin:50, 
+    backgroundColor:'green',
   },
   modalView: {
     margin: 20,
