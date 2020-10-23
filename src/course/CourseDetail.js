@@ -7,12 +7,14 @@ import Popup1 from '../popup/Popup1';
 import Moment from 'react-moment';
 import 'moment-timezone';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import RandomToken from '../popup/RandomToken';
 
 export default function CourseDetail({navigation, route}) {
   const [score, setScore] = useState([]);
   const [course, setCourse] = useState();
   const [point, setPoint] = useState(0);
-  
+  const [price,setPrice] = useState({token:0,won:"0"});
+
   // 확인할 지점 변경
   const pointList = d => {
     if(d.seq == course.courseDetail.length-1) {
@@ -133,6 +135,7 @@ export default function CourseDetail({navigation, route}) {
               </View>
             </View>
             <View stylle={styles.Fourth}>
+              <RandomToken token={price.token} price={price.won}/>
               <Button onPress={() => giveupCheck(score.idx)} style={styles.giveupBtn}>
                 <Text style={styles.giveupText}>그만두기</Text>
               </Button>

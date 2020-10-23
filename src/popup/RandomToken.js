@@ -7,13 +7,16 @@ import {
   TouchableHighlight,
   View,
   Image,
+  Button,
 } from 'react-native';
 import PointYes from './PointYes';
+import NfcTag from './NfcTag';
 
 
-const Point = ({token,price}) => {
+const RandomToken = ({token,price}) => {
+  // const [modalVisible, setModalVisible] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
-  
+  const [nfcSuccess, setNfcSuccess] = useState(false)
 
   return (
     <View style={styles.centeredView}>
@@ -32,13 +35,12 @@ const Point = ({token,price}) => {
               
               <View><Text style={styles.First}>태그 성공!</Text></View>
               <View><Text style={styles.Second}>1백록 증정!</Text></View>
-
-              <PointYes onPress={() => {
-                setModalVisible(!modalVisible);
-              }}/>
               <TouchableHighlight onPress={() => {
                 setModalVisible(!modalVisible);
-              }} ><Text style={{textAlign:'center'}}>아니오</Text></TouchableHighlight>
+              }} ><Text style={{textAlign:'center', margin:50, backgroundColor:'green'}}>아니오</Text></TouchableHighlight>
+              {/* <Button>asdasd</Button> */}
+              {/* <PointYes onPress={() => {setModalVisible(!modalVisible);``}}/>
+              <NfcTag onPress={() => {setModalVisible(!modalVisible);``}}/> */}
             </View>
           </View>
         </View>
@@ -114,4 +116,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Point;
+export default RandomToken;
