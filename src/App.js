@@ -23,7 +23,7 @@ import PointHistory from './mypage/PointHistory';
 import Camera from './mypage/Camera';
 import Rank from './Rank';
 import MtRank from './MtRank';
-import { PacmanIndicator } from 'react-native-indicators';
+import Loading from './Loading';
 
 const Stack = createStackNavigator();
 // 경고창 보지 않기
@@ -56,7 +56,7 @@ export default function App() {
           setTimeout(() => {
             nav.reset({routes: [{ name: 'Map', params: {id: data.id, token: data.token, finish: data.finish} }]});
             NfcManager.registerTagEvent();
-          }, 50)
+          }, 10)
         }
       })
     })
@@ -89,6 +89,7 @@ export default function App() {
               pointFlag = false;
             // 잘못된 포인트 NFC 태깅 시
             } else {
+              alert('현재 기록 중인 경로가 아닙니다')
               NfcManager.registerTagEvent();
               setPendding(false);
             }
@@ -152,11 +153,9 @@ export default function App() {
     return () => NfcManager.unregisterTagEvent().catch(() => 0);
   }, []);
 
-  return !address ? <Intro setAddress={setAddress} /> : pendding ? (
-    <View style={{flex: 1}}>
-      <PacmanIndicator color='#1E824C' size={100} />
-    </View>
-  ) : (
+  return !address ? <Intro setAddress={setAddress} /> : pendding ? 
+    <Loading />
+  : (
     <NavigationContainer>
       <Stack.Navigator headerMode="none" initialRouteName="Home">
         <Stack.Screen name="Home" component={Home} />
