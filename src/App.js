@@ -39,81 +39,82 @@ export default function App() {
   let pointFlag = false;
 
   // 코스 정보 등록 및 페이지 이동
-  const courseStart = (score, course) => {
-    AsyncStorage.getItem('address')
-    .then(address => {
-      axios.post('https://whitedeer.herokuapp.com/score', {
-        address,
-        score,
-        course
-      })
-      .then(({data}) => {
-        if(data.result > 0) {
-          if(score > 0) pointFlag = true;
-          setPendding(false);
-          
-          // 화면 이동을 위해 강제 지연
-          setTimeout(() => {
-            nav.reset({routes: [{ name: 'Map', params: {id: data.id, token: data.token, finish: data.finish} }]});
-            NfcManager.registerTagEvent();
-          }, 10)
-        }
-      })
+  const courseStart = async (score, course, addr) => {
+    const {data} = await axios.post('https://whitedeer.herokuapp.com/score', {
+      address: addr,
+      score,
+      course
     })
+
+    if(data.result > 0) {
+      // 기록 업데이트가 되었을 경우 변경
+      if(score > 0) pointFlag = true;
+      setPendding(false);
+      
+      // 화면 이동을 위해 강제 지연
+      setTimeout(() => {
+        nav.reset({routes: [{ name: 'Map', params: {id: data.id, token: data.token, finish: data.finish} }]});
+        NfcManager.registerTagEvent();
+      }, 1)
+    } 
   }
 
   // nfc 관련 함수
-  const nfcSetting = () => {
+  const nfcSetting = addr => {
     // nfc 설정
     NfcManager.start();
     NfcManager.setEventListener(NfcEvents.DiscoverTag, tag => {
-      if(pendding) return
       setPendding(true);
       NfcManager.unregisterTagEvent().catch(() => 0);
-
+      pointFlag = false;
+      
       // nfc id로 코스 정보 받아오기
       if(tag.id) {
         axios.get(`https://whitedeer.herokuapp.com/nfc/${tag.id}`)
         .then(async ({data}) => {          
-          // 시작 포인트가 아닐 때 서버로 업데이트 요청
-          await data.point.map(p => {
-            if(p.seq) {
-              courseStart(p.seq, p.course.seq);
-            }
-          })
-
-          // 시작 포인트가 아닐 경우 함수 종료
+          // 시작점이 아닐 경우
           if(data.point[0].seq > 0) {
-            // 기록 업데이트를 했을 경우
-            if(pointFlag) {
-              pointFlag = false;
-            // 잘못된 포인트 NFC 태깅 시
-            } else {
-              alert('현재 기록 중인 경로가 아닙니다')
-              NfcManager.registerTagEvent();
-              setPendding(false);
+            // 서버로 업데이트 요청
+            for(const p of data.point) {
+              if(p.seq) {                
+                await courseStart(p.seq, p.course.seq, addr);
+              }
             }
-            return;
+
+            // 잘못된 위치일 경우 알림창
+            if(!pointFlag) {
+              Alert.alert(
+                '현재 기록 중인 경로가 아닙니다',
+                '',
+                [{ text: "확인", style: "cancel", onPress: () => {
+                  setPendding(false);
+                  NfcManager.registerTagEvent()
+                }}],
+                { cancelable: false }
+              )
+            }
+
+          // 시작점일 경우
+          } else {
+            // 알럿창에 취소 버튼 추가
+            let alertBtn = [{ text: "취소", style: "cancel", onPress: () => {
+              setPendding(false);
+              NfcManager.registerTagEvent()
+            }}];
+            
+            // 탐방로 시작 버튼 추가
+            data.point.map(p => {
+              alertBtn.push({ text: p.course.name, onPress: () => courseStart(p.seq, p.course.seq, addr)})
+            })
+
+            // 태깅 후 확인 알림창
+            Alert.alert(
+              '기록하실 탐방로를 선택해주세요',
+              '',
+              alertBtn,
+              { cancelable: false }
+            )
           }
-
-          // 알럿창에 취소 버튼 추가
-          let alertBtn = [{ text: "취소", style: "cancel", onPress: () => {
-            setPendding(false);
-            NfcManager.registerTagEvent()
-          }}];
-          
-          // 탐방로 시작 버튼 추가
-          data.point.map(p => {
-            alertBtn.push({ text: p.course.name, onPress: () => courseStart(p.seq, p.course.seq)})
-          })
-
-          // 태깅 후 확인 알림창
-          Alert.alert(
-            '기록하실 탐방로를 선택해주세요',
-            '',
-            alertBtn,
-            { cancelable: false }
-          )
         })
         .catch(err => alert(err));
       }
@@ -129,7 +130,6 @@ export default function App() {
   }
 
   useEffect(() => {
-    
     // nfc 태깅 후 이동을 위해 home.js에서 navigation 받아오기
     EventEmitter.on('nfcNav', homeNav => {
       nav = homeNav;
@@ -141,7 +141,7 @@ export default function App() {
       if(address) {
         setAddress(address);
         // 지갑 주소가 있을 경우 nfc 관련 함수 실행
-        nfcSetting();
+        nfcSetting(address);
       }
     })
 
