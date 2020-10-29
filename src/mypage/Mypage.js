@@ -33,9 +33,12 @@ export default function Mypage({ navigation }) {
     <Container>
       <Content>
         <View style={styles.header}>
-          <Text style={styles.headerText}>토큰 개수 : {amount} </Text>
+          <Text style={styles.headerText}>마이 페이지 </Text>
         </View>
-        <View style={styles.profile}><Camera /></View>
+        <View style={styles.profile}>
+          <Text style={styles.headerText}>토큰 개수 : {amount} </Text>
+          <Text style={styles.headerText}>닉네임 : </Text>
+        </View>
         <View style={styles.list}><Text style={styles.text} >개인 정보 관리</Text></View>
         <View style={styles.lineT} />
         <TouchableHighlight style={styles.list} onPressOut={() => navigation.navigate('Camera')} underlayColor="green"><Text style={styles.text}>프로필 사진 변경</Text></TouchableHighlight>

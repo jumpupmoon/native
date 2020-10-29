@@ -10,12 +10,13 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import Point from '../popup/Point'
 
 export default function PointCharge({ navigation }) {
-    const [price,setPrice] = useState({token:0,won:"0"});
+    const [state,setState] = useState({token:0,won:"0",color:0});
     return (
         <Container>
             <Content style={{flex:1}}>
                 <View style={styles.header}><Text style={styles.headerText}>포인트 충전</Text></View>
-                <TouchableOpacity style={styles.list} onPress={() => setPrice({token:10,won:"1,000"})}>
+                <TouchableOpacity  style={state.color === 1? styles.select : styles.button} 
+                onPress={() => setState({token:10,won:"1,000",color:1})}>
                     <View style={styles.listPoint}>
                         <Text style={styles.listText}>10 백록</Text>
                     </View>
@@ -24,7 +25,8 @@ export default function PointCharge({ navigation }) {
                     </View>
                 </TouchableOpacity>
                 <View style={styles.lineT} />
-                <TouchableOpacity style={styles.list}onPress={() => setPrice({token:30,won:"3,000"})}>
+                <TouchableOpacity  style={state.color === 2? styles.select : styles.button} 
+                onPress={() => setState({token:30,won:"3,000",color:2})}>
                     <View style={styles.listPoint}>
                         <Text style={styles.listText}>30 백록</Text>
                     </View>
@@ -33,7 +35,8 @@ export default function PointCharge({ navigation }) {
                     </View>
                 </TouchableOpacity>
                 <View style={styles.lineT} />
-                <TouchableOpacity style={styles.list} onPress={() => setPrice({ token: 50, won: "5,000" })}>
+                <TouchableOpacity  style={state.color === 3? styles.select : styles.button} 
+                onPress={() => setState({token:50,won:"5,000",color:3})}>
                     <View style={styles.listPoint}>
                         <Text style={styles.listText}>50 백록</Text>
                     </View>
@@ -42,7 +45,8 @@ export default function PointCharge({ navigation }) {
                     </View>
                 </TouchableOpacity>
                 <View style={styles.lineT} />
-                <TouchableOpacity style={styles.list} onPress={() => setPrice({ token: 110, won: "10,000" })}>
+                <TouchableOpacity  style={state.color === 4? styles.select : styles.button} 
+                onPress={() => setState({token:110,won:"10,000",color:4})}>
                     <View style={styles.listPoint}>
                         <Text style={styles.listText}>110 백록</Text>
                     </View>
@@ -51,7 +55,8 @@ export default function PointCharge({ navigation }) {
                     </View>
                 </TouchableOpacity>
                 <View style={styles.lineT} />
-                <TouchableOpacity style={styles.list} onPress={() => setPrice({ token: 600, won: "50,000" })}>
+                <TouchableOpacity  style={state.color === 5? styles.select : styles.button} 
+                onPress={() => setState({token:600,won:"50,000",color:5})}>
                     <View style={styles.listPoint}>
                         <Text style={styles.listText}>600 백록</Text>
                     </View>
@@ -60,17 +65,20 @@ export default function PointCharge({ navigation }) {
                     </View>
                 </TouchableOpacity>
                 <View style={styles.lineT} />
-                <TouchableOpacity style={styles.list} onPress={() => setPrice({ token: 1300, won: "100,000" })} >
+                <TouchableOpacity  style={state.color === 6? styles.select : styles.button} 
+                onPress={() => setState({token:1300,won:"100,000",color:6})}>
                     <View style={styles.listPoint}>
                         <Text style={styles.listText}>1300 백록</Text>
                     </View>
                     <View>
                         <Text style={styles.price}>100,000원</Text>
                     </View>
+                    
+                    
                 </TouchableOpacity>
                 
                 <View style={styles.lineT} />
-                <Point token={price.token} price={price.won} />
+                <Point token={state.token} price={state.won} />
             </Content>
             
             <Footer navigation={navigation} value="5"/>
@@ -125,5 +133,16 @@ const styles = StyleSheet.create({
     price:{
         color:'red',
         fontFamily: 'DungGeunMo'
-    }
+    },
+    select: {
+        backgroundColor: '#66FFCC',
+        flexDirection : 'row',
+        justifyContent: 'space-between',
+        padding: 20,
+      },
+    button: {
+        justifyContent: 'space-between',
+        flexDirection : 'row',
+        padding: 20,
+    },
 })
