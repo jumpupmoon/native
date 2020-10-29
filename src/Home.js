@@ -1,17 +1,13 @@
 import React, {useState, useEffect} from 'react';
 import {Image, Platform,Text,View, StyleSheet,TouchableOpacity} from 'react-native';
-import {Container, Content} from 'native-base';
+import {Container } from 'native-base';
 import { SliderBox } from 'react-native-image-slider-box';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import Footer from './Footer';
-import LottieView from 'lottie-react-native';
-import Icon from 'react-native-vector-icons/Foundation';
-import WeatherInfo from './WeatherInfo';
-import NfcManager, {NfcEvents} from 'react-native-nfc-manager';
 import EventEmitter from "react-native-eventemitter";
 import AsyncStorage from '@react-native-community/async-storage'
 import axios from 'axios';
-import { PacmanIndicator } from 'react-native-indicators';
+import Loading from './Loading';
 
 export default function Layout({navigation}) {
   const [currentIndex, setCurrentIndex] = useState(1);
@@ -43,11 +39,8 @@ export default function Layout({navigation}) {
     })
   }, [])
 
-  return loading ? (
-    <View style={{flex: 1}}>
-      <PacmanIndicator color='#1E824C' size={100} />
-    </View>
-  )
+  return loading ? 
+    <Loading navigation={navigation} value='1' />
   : (
     <Container>
       <View style={styles.container}>

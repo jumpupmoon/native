@@ -6,7 +6,7 @@ import Footer from '../Footer';
 
 import AsyncStorage from '@react-native-community/async-storage';
 import axios from 'axios';
-
+import Arrival from '../Arrival';
 
 export default function Prepare({navigation, route}) {
   const [course, setCourse] = useState();
@@ -41,47 +41,37 @@ export default function Prepare({navigation, route}) {
                 </View>
               </View>
             </View>
+            
 
             <View stlye={styles.Third}>
               <View style={styles.Third1}>
-                <View style={styles.item}>
-                  <Text style={styles.itemText}>- 대 피 소 -</Text>
-                  <View style={styles.itemDetail}>
-                    <Text style={styles.itemTextDetail}>
-                      {course.shelter.map((s, idx) => {
-                        if(idx != 0) return ' ' + s;
-                        else return s;
-                      })}
-                    </Text>
-                  </View>
+                <Text style={styles.itemText}>- 대 피 소 -</Text>
+                <View style={styles.itemDetail}>
+                  <Text style={styles.itemTextDetail}>
+                    {course.shelter.map((s, idx) => {
+                      if(idx != 0) return ' ' + s;
+                      else return s;
+                    })}
+                  </Text>
                 </View>
               </View>
+              
               <View style={styles.Third2}>
-                <View style={styles.item}>
-                  <Text style={styles.itemText}>- 매 점 -</Text>
-                  <View style={styles.itemDetail}>
-                    <Text style={styles.itemTextDetail}>{course.store}</Text>
-                  </View>
+                <Text style={styles.itemText}>- 매 점 -</Text>
+                <View style={styles.itemDetail}>
+                  <Text style={styles.itemTextDetail}>{course.store}</Text>
                 </View>
               </View>
+              
               <View style={styles.Third3}>
-                <View style={styles.item}>
-                  <Text style={styles.itemText}>- 화 장 실 -</Text>
-                  <View
-                    style={{
-                      borderWidth: 2,
-                      borderRadius: 3,
-                      marginVertical: 10,
-                      padding: 10,
-                    }}
-                    >
-                    <Text style={styles.itemTextDetail}>
-                      {course.toilet.map((t, idx) => {
-                        if(idx != 0) return ' ' + t;
-                        else return t;
-                      })}
-                    </Text>
-                  </View>
+                <Text style={styles.itemText}>- 화 장 실 -</Text>
+                <View style={styles.itemDetail}>
+                  <Text style={styles.itemTextDetail}>
+                    {course.toilet.map((t, idx) => {
+                      if(idx != 0) return  ' ' + t;
+                      else return t;
+                    })}
+                  </Text>
                 </View>
               </View>
             </View>
@@ -107,14 +97,27 @@ const styles = StyleSheet.create({
     }),
   },
   First:{
-    flex:1
+    flex:1,
+    textAlign:'center',
+    justifyContent:'center',
+
   },
   Second:{
-    flex:1
+    flex:0.8
   },
   Third:{
-    flex:1
+    flex:1.4,
+    paddingBottom:20
   },
+  // Third1:{
+  //   flex:0.25,
+  // },
+  // Third2:{
+  //   flex:0.25
+  // },
+  // Third3:{
+  //   flex:0.25
+  // },
   Title: {
     fontSize: 36,
     fontFamily: 'DungGeunMo',
@@ -142,19 +145,21 @@ const styles = StyleSheet.create({
   itemText: {
     fontFamily: 'DungGeunMo',
     color: '#181717',
-    fontSize: 20,
+    fontSize: 30,
     textAlign: 'center',
   },
   itemDetail: {
-    borderWidth: 2,
-    borderRadius: 3,
-    marginTop: 10,
-    padding: 10,
+    // borderWidth: 2,
+    borderRadius: 100,
+    // marginTop: ,
+    padding: 15,
+    marginBottom:10,
+    backgroundColor:'#C3FFDE'
   },
   itemTextDetail: {
     fontFamily: 'DungGeunMo',
     color: '#47525E',
-    fontSize: 16,
+    fontSize: 19,
     textAlign: 'center',
   },
   trailLine: {
