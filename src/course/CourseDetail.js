@@ -29,8 +29,10 @@ export default function CourseDetail({navigation, route}) {
     .then(({data}) => {
       setScore(data.score);
 
+      //console.log(data.score.course.seq);
+
       if(data.score.score == data.score.course.courseDetail.length-1) {
-        navigation.navigate('Arrival', {name: data.score.course.name, finish: route.params.finish});
+        navigation.navigate('Arrival', {course: data.score.course.seq, id : data.score._id,name: data.score.course.name, finish: route.params.finish});
       } else {
         // 코스 정보 가져오기
         axios.get(`https://whitedeer.herokuapp.com/course/${data.score.course.seq}`)

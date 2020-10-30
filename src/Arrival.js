@@ -1,14 +1,36 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {Container, Content, View} from 'native-base';
 import Footer from './Footer';
 import {StyleSheet, Image, TouchableOpacity, Text} from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
+import axios from 'axios';
 import LottieView from 'lottie-react-native';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,} from 'react-native-responsive-screen';
-import Icon from 'react-native-vector-icons/Foundation';
+  
 
 export default function Arrival({navigation, route}) {
+  const [on,setOn] = useState(true);
+  // console.log(route);
+  // console.log(route.params.id);
+  // console.log(route.params.course);
+  
+
+  const cert=() =>{
+    AsyncStorage.getItem('address')
+    .then(address => {
+      console.log(address);
+      console.log(route.params.course);
+      axios.get(`https://whitedeer.herokuapp.com/cert?address=${address}&course=${route.params.course}`)
+      .then(({data}) => {
+        setOn(false)
+        console.log("ok");
+      })
+      .catch(err => console.log(err));
+    })
+  }
+
   return (
     <Container>
       <Content style={{alignContent: 'center', flow: 1, flex:1}}>
@@ -23,9 +45,13 @@ export default function Arrival({navigation, route}) {
           }}>
           <LottieView autoPlay loop source={require('./svg/mountain.json')} />
         </View>
-        <View style={styles.textView}>
+        
+          <View style={styles.textView}>
           <Text style={styles.text}>{route.params.name}</Text>
+        {!on?<View/>
+        :
           <Text style={styles.text2}>등산을 완료했습니다.</Text>
+        }
         </View>
         
         {route.params?.finish &&
@@ -39,12 +65,16 @@ export default function Arrival({navigation, route}) {
               style={styles.img}></Image> */}
           </View>
         }
-
-        <TouchableOpacity
+        {on?
+          <TouchableOpacity
           style={styles.button}
-          onPress={() => navigation.navigate('Info')}>
+          onPress={() => cert()}>
           <Text style={styles.buttonTitle}>인증서 발급</Text>
         </TouchableOpacity>
+        :<View><Text style={styles.text3}>인증서 발급이</Text>
+        <Text style={styles.text4}>완료되었습니다.</Text></View>
+
+        }
       </Content>
 
       <Footer navigation={navigation} value="3" />
@@ -68,6 +98,23 @@ const styles = StyleSheet.create({
     fontFamily: 'DungGeunMo',
     fontSize: 24,
     textAlign: 'center',
+  },
+  text3: {
+    marginTop:30,
+    textAlign : 'center',
+    padding: 3,
+    fontSize: 32,
+    color: 'black',
+    fontFamily: 'DungGeunMo',
+  },
+  text4: {
+    marginTop:30,
+    marginLeft : 10,
+    textAlign : 'center',
+    padding: 3,
+    fontSize: 32,
+    color: 'black',
+    fontFamily: 'DungGeunMo',
   },
 
   WhiteDeer: {

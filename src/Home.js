@@ -44,14 +44,13 @@ export default function Layout({navigation}) {
   : (
     <Container>
       <View style={styles.container}>
-        <View style={styles.title}>
+        {/* <View style={styles.title}>
           <Text style={styles.title1}>산 오쿠과</Text>
-        </View>
+        </View> */}
         <View style={styles.First}>
           {/* <Image style={styles.FirstImage}
             source={require('./img/영실.jpg')}>
           </Image> */}
-          
           
           <SliderBox 
             autoplay={true} //자동 슬라이드 넘김
@@ -69,8 +68,9 @@ export default function Layout({navigation}) {
             }} // 이미지 Style 적용
             currentImageEmitter={increment}
           />
-          {/* <TouchableOpacity onPress={() => navigation.navigate('Info')}></TouchableOpacity> */}
-          {/* <Text style={styles.trail1}>탐방로</Text> */}
+
+          {/* <TouchableOpacity onPres0s={() => navigation.navigate('Info')}></TouchableOpacity> */}
+          <Text style={styles.a}>산 오쿠과</Text>
         </View>
 
         <View style={styles.Second}>
@@ -268,6 +268,20 @@ const styles = StyleSheet.create({
     fontSize: 24,
     color: '#FFF',
     fontWeight: 'bold',
+  },
+  a:{
+    textAlign:'center',
+    justifyContent:'center',
+    position: 'absolute',
+    padding: 3,
+    margin: 10,
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#fff',
+    textShadowOffset: { width: 2, height: 2},
+    textShadowRadius: 1,
+    textShadowColor: '#000',
+    alignItems: 'center',
   },
   trail2: {
     position: 'absolute',

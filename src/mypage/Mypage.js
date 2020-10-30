@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import React, {useState, useEffect} from 'react';
+=======
+import React, { useEffect, useState } from 'react';
+>>>>>>> 7701a4a9ecd9e8d935c19a7c45a84141f33d5c6b
 import { Container, Content, Text, View } from 'native-base';
 import Footer from '../Footer';
 import {
@@ -7,12 +11,15 @@ import {
   TouchableHighlight,
   ImageBackground,
 } from 'react-native';
+import axios from 'axios';
+import AsyncStorage from '@react-native-community/async-storage';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import Camera from './Camera';
 import Loading from '../Loading';
 import axios from 'axios';
 
 export default function Mypage({ navigation }) {
+<<<<<<< HEAD
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -25,12 +32,34 @@ export default function Mypage({ navigation }) {
   return loading ? 
   <Loading navigation={navigation} value='5'/>
 : (
+=======
+
+  const [amount, setAmount]= useState();
+
+  useEffect(() => {                                                 
+    AsyncStorage.getItem('address')
+    .then(address => {
+      console.log(address)
+      axios.get(`https://whitedeer.herokuapp.com/token/${address}`)
+      .then(({data}) => {
+        console.log(data.token);
+        setAmount(data.token);
+      })
+      .catch(err => console.log(err));
+    })
+  }, [])
+
+  return (
+>>>>>>> 7701a4a9ecd9e8d935c19a7c45a84141f33d5c6b
     <Container>
       <Content>
         <View style={styles.header}>
-          <Text style={styles.headerText}>마이페이지</Text>
+          <Text style={styles.headerText}>마이 페이지 </Text>
         </View>
-        <View style={styles.profile}><Camera /></View>
+        <View style={styles.profile}>
+          <Text style={styles.headerText}>토큰 개수 : {amount} </Text>
+          <Text style={styles.headerText}>닉네임 : </Text>
+        </View>
         <View style={styles.list}><Text style={styles.text} >개인 정보 관리</Text></View>
         <View style={styles.lineT} />
         <TouchableHighlight style={styles.list} onPressOut={() => navigation.navigate('Camera')} underlayColor="green"><Text style={styles.text}>프로필 사진 변경</Text></TouchableHighlight>
