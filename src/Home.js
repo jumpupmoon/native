@@ -40,14 +40,19 @@ export default function Layout({navigation}) {
   }, [])
 
   return loading ? 
-    <Loading navigation={navigation} value='1' />
+    <Loading navigation={navigation} value='1'/>
   : (
     <Container>
       <View style={styles.container}>
+        <View style={styles.title}>
+          <Text style={styles.title1}>산 오쿠과</Text>
+        </View>
         <View style={styles.First}>
           {/* <Image style={styles.FirstImage}
             source={require('./img/영실.jpg')}>
           </Image> */}
+          
+          
           <SliderBox 
             autoplay={true} //자동 슬라이드 넘김
             circleLoop={true} //맨끝 슬라이드에서 다시 첫슬라이드로
@@ -141,6 +146,16 @@ const styles = StyleSheet.create({
     }),
   },
 
+  title:{
+    flex:0.2,
+  },
+  title1:{
+    // justifyContent:'center',
+    textAlign:'center',
+    fontSize:40,
+    fontFamily: 'DungGeunMo',
+    // backgroundColor:'green'
+  },
   First: {
     // position: 'absolute',
     flex: 1,

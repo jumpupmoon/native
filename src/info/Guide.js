@@ -7,18 +7,23 @@ import Footer from '../Footer';
 import AsyncStorage from '@react-native-community/async-storage';
 import axios from 'axios';
 import Arrival from '../Arrival';
+import Loading from '../Loading';
 
 export default function Prepare({navigation, route}) {
   const [course, setCourse] = useState();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     axios.get(`https://whitedeer.herokuapp.com/course/${route.params}`)
     .then(({data}) => {
       setCourse(data.course)
+      setLoading(false);
     })
   }, [])
-
-  return (
+  
+  return loading ? 
+    <Loading navigation={navigation} value='2'/>
+  : (
     <Container style={styles.container}>
       <View style={{flex: 1}}>
         {course &&

@@ -15,7 +15,7 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Icon2 from 'react-native-vector-icons/Fontisto';
 import axios from 'axios';
-import { PacmanIndicator } from 'react-native-indicators';
+import Loading from './Loading';
 
 export default function Course({navigation}) {
   const [mountain, setMountain] = useState([]);
@@ -38,11 +38,9 @@ export default function Course({navigation}) {
     require('./img/석굴암.png'),
     require('./img/어승생악.jpg'),
   ]
-  return loading ? (
-    <View style={{flex: 1}}>
-      <PacmanIndicator color='#1E824C' size={100} />
-    </View>
-  )
+
+  return loading ? 
+    <Loading navigation={navigation} value='4'/>
   : (
     <Container>
       <Content>

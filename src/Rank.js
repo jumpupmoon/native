@@ -16,6 +16,7 @@ import {
 } from 'react-native';
 import axios from 'axios';
 import { PacmanIndicator } from 'react-native-indicators';
+import Loading from './Loading';
 
 
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
@@ -31,6 +32,7 @@ export default function Course({navigation, route}){
       setLoading(false);
     })
   }, [])
+
   
   const imgList = [
     require('./img/돈내코.jpg'),
@@ -43,11 +45,8 @@ export default function Course({navigation, route}){
     require('./img/mountainnn.jpg')
   ]
 
-  return loading ? (
-    <View style={{flex: 1}}>
-      <PacmanIndicator color='#1E824C' size={100} />
-    </View>
-  )
+  return loading ? 
+    <Loading navigation={navigation} value='4'/>
   : (
     <><Container>
         <Content>

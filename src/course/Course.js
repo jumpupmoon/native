@@ -3,7 +3,7 @@ import {Container, Content, Text, Button} from 'native-base';
 import axios from 'axios';
 import AsyncStorage from '@react-native-community/async-storage';
 import Footer from '../Footer';
-import {StyleSheet, View, ImageBackground} from 'react-native';
+import {StyleSheet, View, ImageBackground, TouchableOpacity, Ima} from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import Loading from '../Loading';
 
@@ -53,12 +53,20 @@ export default function Course({navigation}) {
 
           {score.map((s, idx) => (
             <ImageBackground style={styles.buttonView} key={idx} source={imgList[s.course.seq]}>
-              <Button style={styles.button} onPress={() => navigation.navigate('Map', {id: s._id})}> 
-
+              <Button style={styles.button} onPress={() => navigation.navigate('Map', {id: s._id})}>
                 <Text style={styles.buttonTitle}>등산 기록 {score.length - idx}</Text>
               </Button>
               {/* <View><Text style={styles.aaa}>등산 기록 {score}</Text></View> */}
             </ImageBackground>
+          //   <ScrollView style={{paddingBottom:20}}>
+          //   {score.map((s, idx) => (
+          //     <TouchableOpacity style={styles.courses} onPress={() => navigation.navigate('Map', {id: s._id})} key={idx} source={imgList[s.course.seq]}>
+          //       <Image style={styles.img} source={imgList[idx]}/>
+          //         <Text style={styles.buttonTitle}>등산 기록 {score.length - idx}</Text>
+          //       {/* <View><Text style={styles.aaa}>등산 기록 {score}</Text></View> */}
+          //     </TouchableOpacity>
+          //   ))}
+          // </ScrollView>
           ))}
         </Content>
         
@@ -87,9 +95,12 @@ const styles = StyleSheet.create({
     width: wp('90%'),
   },
   button:{
-    backgroundColor:'red',
+    backgroundColor:'green',
     borderBottomRightRadius:20,
     borderRadius:0,
+    justifyContent:'center',
+    alignItems:'center',
+    
   },
   buttonTitle:{
     fontSize: 26,

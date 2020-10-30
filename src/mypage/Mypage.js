@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { Container, Content, Text, View } from 'native-base';
 import Footer from '../Footer';
 import {
@@ -9,9 +9,22 @@ import {
 } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import Camera from './Camera';
+import Loading from '../Loading';
+import axios from 'axios';
 
 export default function Mypage({ navigation }) {
-  return (
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    axios.get('https://whitedeer.herokuapp.com/course')
+    .then(({data}) => {
+      setLoading(false);
+    })
+  }, [])
+
+  return loading ? 
+  <Loading navigation={navigation} value='5'/>
+: (
     <Container>
       <Content>
         <View style={styles.header}>
