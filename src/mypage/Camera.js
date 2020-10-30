@@ -10,6 +10,7 @@ import {
   Image
 } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import Axios from 'axios';
 
 export default function Camera({navigation}){
   const options = {
@@ -44,6 +45,9 @@ export default function Camera({navigation}){
       } else {
         let src = response;
         setImageSource(src);
+        axios.post('https://whitedeer.herokuapp.com/upload',{
+          file: src
+        })
       }
     });
   }
@@ -74,14 +78,14 @@ export default function Camera({navigation}){
 
   return (
   <TouchableOpacity onPress={showImagePicker}>
-          <View style={[styles.avatar, styles.avatarContainer, { marginBottom: 20 }]} >
-            {ImageSource === null ? (
-              <Text>이미지 가져오기</Text>
-            ) : (
-                <Image style={styles.avatar}  source={ImageSource} />
-              )}
-          </View>
-        </TouchableOpacity>
+    <View style={[styles.avatar, styles.avatarContainer, { marginBottom: 20 }]} >
+      {ImageSource === null ? (
+        <Text>이미지 가져오기</Text>
+      ) : (
+          <Image style={styles.avatar}  source={ImageSource} />
+        )}
+    </View>
+  </TouchableOpacity>
   );
 }
 
