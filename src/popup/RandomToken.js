@@ -13,7 +13,7 @@ import {Button } from 'native-base';
 
 export default function RandomToken({modalView, setModalView}) {
   return (
-    <View style={styles.centeredView}>
+    <View>
       <Modal
         animationType="slide"
         transparent={true}
@@ -23,20 +23,17 @@ export default function RandomToken({modalView, setModalView}) {
         }}>
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-            <View style={styles.button}>
+            <Image style={{width:160,height:160}} source={require('../img/gift.jpg')}></Image>
+            
+            <View><Text style={styles.First}>태그 성공!</Text></View>
+            {/* <View><Text style={styles.Second}>1백록 증정!</Text></View> */}
 
-              <Image source={require('../img/gift.jpg')}></Image>
-              
-              <View><Text style={styles.First}>태그 성공!</Text></View>
-              <View><Text style={styles.Second}>1백록 증정!</Text></View>
-
-              <Button onPress={() => setModalView(false)} style={styles.giveupBtn}>
-                <Text style={styles.giveupText}>닫기</Text>
-              </Button>
-              {/* <TouchableHighlight onPress={() => {
-                setModalVisible(!modalVisible);
-              }} ><Text style={{textAlign:'center'}}>아니오</Text></TouchableHighlight> */}
-            </View>
+            <Button onPress={() => setModalView(false)} style={styles.giveupBtn}>
+              <Text style={styles.giveupText}>1백록 받기</Text>
+            </Button>
+            {/* <TouchableHighlight onPress={() => {
+              setModalVisible(!modalVisible);
+            }} ><Text style={{textAlign:'center'}}>아니오</Text></TouchableHighlight> */}
           </View>
         </View>
       </Modal>
@@ -49,7 +46,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 0,
+    // marginTop: 0,
   },
   First:{
     justifyContent:'center',
@@ -75,13 +72,14 @@ const styles = StyleSheet.create({
     margin: 20,
     backgroundColor: 'white',
     borderRadius: 20,
-    padding: 35,
+    padding: 50,
     alignItems: 'center',
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
-      height: 2,
+      height: 1,
     },
+    // marginBottom:200,
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
